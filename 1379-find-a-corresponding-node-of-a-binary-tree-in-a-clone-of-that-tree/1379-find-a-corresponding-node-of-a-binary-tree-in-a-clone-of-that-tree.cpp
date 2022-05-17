@@ -17,13 +17,15 @@ public:
         if(!original)
             return;
         
+ 
+        dfs(original->left, cloned->left, target);
+        
         if(original == target)
         {
             clonedNode = cloned;
             return;
         }
-            
-        dfs(original->left, cloned->left, target);
+           
         dfs(original->right, cloned->right, target);
     }
     
