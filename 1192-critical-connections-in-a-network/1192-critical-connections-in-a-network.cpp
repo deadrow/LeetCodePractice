@@ -8,9 +8,8 @@ public:
         if(disc[idx] >= 0)
             return;
         
-        disc[idx] = time++;
-        low[idx] = disc[idx];
-        
+        disc[idx] = low[idx] = time++;
+
         for (auto it : edges[idx])
         {
             if (it == parent)
