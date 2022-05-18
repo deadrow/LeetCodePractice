@@ -1,57 +1,61 @@
 class Solution {
 public:
     vector<int> disc, low;
-    vector<bool> visited;
     vector<vector<int>> result;
     
     void dfs(int idx, int parent, vector<vector<int>> &edges, int &time)
     {
-        disc[idx] = low[idx] = time;
-        time++;
-        visited[idx] = true;
-
+        if(disc[idx] > 0)
+            return;
+        
+        disc[idx] = time++;
+        low[idx] = disc[idx];
+        
         for (auto it : edges[idx])
         {
             if (it == parent)
                 continue;
-            if (visited[it] == true)
+
+            dfs(it, idx, edges, time);
+            low[idx] = min(low[idx], low[it]);
+            if (low[it] > disc[idx])
             {
-                low[idx] = min(low[idx], disc[it]);
-            }
-            else
-            {
-                dfs(it, idx, edges, time);
-                low[idx] = min(low[idx], low[it]);
-                if (low[it] > disc[idx])
-                {
-                    result.push_back({idx, it});
-                }
+                result.push_back({idx, it});
             }
         }
     }
     
     vector<vector<int>> criticalConnections(int n, vector<vector<int>>& connections) {
 
-        vector<vector<int>> edges(n);
-        for(auto it : connections)
+        // build adjacency list
+        vector<vector<int>> adj(n);
+        for(auto c: connections)
         {
-            edges[it[0]].push_back(it[1]);
-            edges[it[1]].push_back(it[0]);
+            adj[c[0]].push_back(c[1]);
+            adj[c[1]].push_back(c[0]);
         }
-        
-        disc.resize(n);
-        low.resize(n);
-        visited.resize(n);
-            
-        int time = 0;
-        for (int i = 0; i < n; i++)
+        int t=0;
+        vector<int> id(n,-1), low(n,-1);
+        vector<vector<int>> critical;
+        function<void(int,int)> dfs_targen = [&](int v,int parent)
         {
-            if (!visited[i])
+            if(id[v]>=0)
+                return;
+            id[v] = t++;
+            low[v] = id[v];
+            for(auto n: adj[v])
             {
-                dfs(i, -1, edges, time);
+                if(n==parent)
+                    continue;
+                dfs_targen(n,v);
+                
+                low[v] = min(low[v],low[n]);
+                if(id[v] < low[n])     // important as child was never able to reach back i.e. new SSC and count it ( no back link )
+                    critical.push_back({v,n});
             }
-        }
-        
-        return result;
+        };
+
+        dfs_targen(0,-1);
+        return critical;
     }
 };
