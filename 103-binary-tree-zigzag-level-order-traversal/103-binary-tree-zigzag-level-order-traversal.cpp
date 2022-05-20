@@ -26,28 +26,30 @@ public:
         {
             int size = bfs.size();
             
-            vector<int> cur_res;
+            list<int> cur_res;
             for(int i=0;i<size;i++)
             {
                 TreeNode* cur = bfs.front();
                 bfs.pop();
-                
-                cur_res.push_back(cur->val);
                 
                 if(cur->left)
                     bfs.push(cur->left);
                 
                 if(cur->right)
                     bfs.push(cur->right);
-            }
-            
-            if(direction)
-            {
-                reverse(cur_res.begin(), cur_res.end());
+                
+                if(direction)
+                {
+                    cur_res.push_front(cur->val);
+                }
+                else
+                    cur_res.push_back(cur->val);
             }
             
             direction = !direction;
-            res.push_back(cur_res);
+            
+            vector<int> cur_arr(cur_res.begin(), cur_res.end());
+            res.push_back(cur_arr);
         }
         
         return res;
