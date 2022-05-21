@@ -10,11 +10,9 @@ public:
         {
             if(primes[i])
             {
-                for(int j=i, k=2;j*k<=n;)
+                for(int j=i+i;j<=n; j+=i)
                 {
-                    if(j*k % i == 0)
-                        primes[j*k] = false;
-                    k++;
+                    primes[j] = false;
                 }
             }
         }
