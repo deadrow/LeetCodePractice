@@ -6,7 +6,8 @@ public:
         primes[0] = false;
         primes[1] = false;
         
-        for(int i=2;i<=sqrt(n);i++)
+        int count = 0;
+        for(int i=2;i<n;i++)
         {
             if(primes[i])
             {
@@ -14,15 +15,16 @@ public:
                 {
                     primes[j] = false;
                 }
+                count++;
             }
         }
         
-        int count = 0;
-        for(int i=0;i<n;i++)
-        {
-            if(primes[i])
-                count++;
-        }
+        // int count = 0;
+        // for(int i=0;i<n;i++)
+        // {
+        //     if(primes[i])
+        //         count++;
+        // }
         
         return count;
     }
