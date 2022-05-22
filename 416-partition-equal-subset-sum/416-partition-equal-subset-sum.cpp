@@ -19,7 +19,7 @@ public:
             return memo[i][target] = (take || leave);
         }
 
-        // weg
+        // number greater than target so leave it
         return memo[i][target] = dp(nums, i-1, target);
     }
     
@@ -28,7 +28,8 @@ public:
         
         int sum = accumulate(nums.begin(), nums.end(), 0);
         
-        if(sum % 2 != 0)
+        // if sum is odd then we can't partition
+        if(sum & 1)
             return false;
         
         int target = sum/2;
