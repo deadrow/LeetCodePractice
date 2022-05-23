@@ -18,13 +18,8 @@ public:
     
     int dp(vector<string>& strs, int i, int m, int n)
     {
-        if(m == 0 && n == 0)
+        if(i< 0 || (m == 0 && n == 0))
             return 0;
-        
-        if(i < 0)
-        {
-            return 0;
-        }
 
         if(memo[i][m][n] != -1)
             return memo[i][m][n];
