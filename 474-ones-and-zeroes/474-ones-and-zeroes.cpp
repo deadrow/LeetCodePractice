@@ -26,14 +26,14 @@ public:
         
         pair<int, int> counts = count(strs[i]);
         
-        int sum1 = 0;
+        int take = 0;
         if(counts.first <= m && counts.second <= n)
         {
-            sum1 += dp(strs, i-1, m-counts.first, n-counts.second)+1;
+            take = dp(strs, i-1, m-counts.first, n-counts.second)+1;
         }
 
-        int sum2 = dp(strs, i-1, m, n);
-        return memo[i][m][n] = max(sum1, sum2);
+        int leave = dp(strs, i-1, m, n);
+        return memo[i][m][n] = max(take, leave);
     }
     
     int findMaxForm(vector<string>& strs, int m, int n)
