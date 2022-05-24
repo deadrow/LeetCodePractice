@@ -9,6 +9,8 @@ public:
         if(memo[i][curSum] != -1)
             return memo[i][curSum];
         
+        // 0/1 knapsack
+        // Find min of taking stone and leaving stone
         int take = dp(stones, i-1, curSum + stones[i], totalSum);
         int leave = dp(stones, i-1, curSum, totalSum);
         
