@@ -1,7 +1,6 @@
 class Solution {
 public:
     vector<vector<int>> memo;
-    vector<vector<optional<bool>>> memoPalindrome;
     
     bool isPalindrome(string &s, int i, int j) {
         while (i < j) {
@@ -35,8 +34,6 @@ public:
     
     int minCut(string s) {
         int size = s.size();
-
-        memoPalindrome.resize(size, vector<optional<bool>>(size, nullopt));
         memo.resize(size+1, vector<int>(size+1, -1));
         return solve(s, 0, s.size()-1);
     }
