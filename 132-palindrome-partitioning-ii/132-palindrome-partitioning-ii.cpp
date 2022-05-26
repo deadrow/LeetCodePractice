@@ -3,14 +3,13 @@ public:
     vector<vector<int>> memo;
     vector<vector<optional<bool>>> memoPalindrome;
     
-    bool isPalindrome(string &s, int start, int end) {
-        if (start >= end) return true;
-        // check for results in memoPalindrome
-        if (memoPalindrome[start][end] != nullopt)
-            return (memoPalindrome[start][end] == true);
-        memoPalindrome[start][end] =
-            (s[start] == s[end]) && isPalindrome(s, start + 1, end - 1);
-        return (memoPalindrome[start][end] == true);
+    bool isPalindrome(string &s, int i, int j) {
+        while (i < j) {
+            if (s[i++] != s[j--]) {
+                return false;
+            }
+        }
+        return true;
     }
     
     // matrix chain multiplication solution
