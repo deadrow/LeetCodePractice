@@ -19,10 +19,10 @@ public:
         int left = solve(root->left, res);
         int right = solve(root->right, res);
         
-        int temp = max(max(left, right) + root->val, root->val);
-        int ans = max(temp, left+right+root->val);
-        res = max(res, ans);
-        return temp;
+        int ansFromRoot = max(max(left, right) + root->val, root->val);
+        int ansWithoutRoot = max(ansFromRoot, left+right+root->val);
+        res = max(res, ansWithoutRoot);
+        return ansFromRoot;
     }
     
     int maxPathSum(TreeNode* root) {
