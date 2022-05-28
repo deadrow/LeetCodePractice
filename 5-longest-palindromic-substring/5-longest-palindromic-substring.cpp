@@ -1,7 +1,7 @@
 class Solution {
 public:
     string longestPalindrome(string s) {
-                int n = s.size();
+        int n = s.size();
         vector<vector<int>>dp(n+1, vector<int>(n+1));
         
         string first = s;
