@@ -2,36 +2,42 @@ class Solution {
 public:
     string longestPalindrome(string s) {
         int n = s.size();
-        vector<vector<int>>dp(n+1, vector<int>(n+1));
         
-        string first = s;
-        string second = s;
-        reverse(second.begin(), second.end());
-        
+        // expand around center solution
         string res;
         int maxLength = 0;
-        int end = -1;
-        for(int i=1;i<=n;i++)
+        
+        for(int i=0;i<n;i++)
         {
-            for(int j=1;j<=n;j++)
+            // odd case 'aba'
+            int left = i;
+            int right = i;
+            while(left >= 0 && right < n && s[left] == s[right])
             {
-                if(first[i-1] == second[j-1])
+                if(right-left+1 > maxLength)
                 {
-                    dp[i][j] = 1 + dp[i-1][j-1];
-                    if(maxLength < dp[i][j])
-                    {
-                        if(i-dp[i][j] == n-j)
-                        {
-                            maxLength = dp[i][j];
-                            end = i;
-                        }
-                    }
+                    maxLength = right-left+1;
+                    res = s.substr(left, maxLength);
                 }
-                else
-                    dp[i][j] = 0;
+                left--;
+                right++;
+            }
+            
+            // even case like 'aa'
+            left = i;
+            right = i+1;
+            while(left >= 0 && right < n && s[left] == s[right])
+            {
+                if(right-left+1 > maxLength)
+                {
+                    maxLength = right-left+1;
+                    res = s.substr(left, maxLength);
+                }
+                left--;
+                right++;
             }
         }
         
-        return s.substr(end-maxLength, maxLength);
+        return res;
     }
 };
