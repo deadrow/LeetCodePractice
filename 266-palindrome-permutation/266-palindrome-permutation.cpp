@@ -8,12 +8,9 @@ public:
         }
         
         int odd = 0;
-        int even = 0;
         for(auto it : cache)
         {
-            if(it.second % 2 == 0)
-                even++;
-            else
+            if(it.second & 1)
                 odd++;
         }
         
