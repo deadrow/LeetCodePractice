@@ -30,7 +30,7 @@ public:
                 
         // for length > 2
         // set i = 0 and j to offset at 2
-        for(int len=2;len<=n;len++)
+        for(int len=3;len<=n;len++)
         {
             for(int i=0;i<n-len+1;i++)
             {
