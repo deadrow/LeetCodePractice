@@ -4,8 +4,7 @@ public:
         int maxProduct = 0;
         
         vector<int> bitMasks;
-        vector<int> lengths;
-        
+
         for(int i=0;i<words.size();i++)
         {
             int bitMask = 0;
@@ -14,7 +13,6 @@ public:
                 bitMask |= (1 << (it-97));
             }
             bitMasks.push_back(bitMask);
-            lengths.push_back(words[i].length());
         }
         
         
