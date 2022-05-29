@@ -24,7 +24,9 @@ public:
             {
                 if((bitMasks[i] & bitMasks[j]) == 0)
                 {
-                    maxProduct = max(maxProduct, lengths[i]* lengths[j]);
+                    int length1 = words[i].length();
+                    int length2 = words[j].length();
+                    maxProduct = max(maxProduct, length1* length2);
                 }
             }
         }
