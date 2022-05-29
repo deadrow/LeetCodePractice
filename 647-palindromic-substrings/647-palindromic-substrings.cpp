@@ -1,37 +1,48 @@
 class Solution {
 public:
-    vector<vector<int>> dp;
-    int solve(string& s, int start, int end)
-    {
-        if(start == end)
-            return 1;
-        if(start > end)
-            return 1;
-        
-        if(dp[start][end] != -1)
-            return dp[start][end];
-        
-        int ans = 0;
-        if(s[start] == s[end])
-            ans = solve(s, start+1, end-1);
-        
-        return dp[start][end] = ans;
-    }
-    
     int countSubstrings(string s) {
         int n = s.size();
+        int count = 0;
         
-        dp.resize(n, vector<int>(n, -1));
+        vector<vector<bool>> dp(n, vector<bool>(n));
         
-        int ans = 0;
+        // each letter is itself palindrome
+        // so all dp[i][i]  would be true
+        // for 2 letters we need to check if
+        // i and i+1 is equal
+        
         for(int i=0;i<n;i++)
         {
-            for(int j=i;j<n;j++)
+            count++;
+            dp[i][i] = true;
+        }
+            
+        
+        // for length =2 like "aa"
+        for(int i=0;i<n-1;i++)
+        {
+            if(s[i] == s[i+1])
             {
-                ans += solve(s, i, j);
+                dp[i][i+1] = true;
+                count++;
+            }
+        }
+                
+        // for length > 2
+        // set i = 0 and j to offset at 2
+        for(int len=3;len<=n;len++)
+        {
+            for(int i=0;i<n-len+1;i++)
+            {
+                int j = i+len-1;
+                if(s[i] == s[j] && dp[i+1][j-1])
+                {
+                    dp[i][j] = true;
+                    count++;
+                }  
             }
         }
         
-        return ans;
+        return count;
     }
 };
