@@ -16,7 +16,7 @@ public:
     vector<string> decode(string s) {
         vector<string> res;
         
-        unsigned idx = 0;
+        unsigned int idx = 0;
         while(idx < s.length())
         {
             uint8_t curSize = s[idx++];
