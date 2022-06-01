@@ -3,19 +3,31 @@ public:
     vector<vector<int>> insert(vector<vector<int>>& intervals, vector<int>& newInterval) {
         vector<vector<int>> res;
         
-        intervals.push_back(newInterval);
+        int i = 0;
+        int n = intervals.size();
         
-        sort(intervals.begin(), intervals.end());
-        
-        res.push_back(intervals[0]);
-        for(int j=1;j<intervals.size();j++)
+        while(i < n && newInterval[0] > intervals[i][0])
         {
-            if(intervals[j][0] <= res.back()[1])
+            res.push_back(intervals[i++]);
+        }
+        
+        if(res.empty() || res.back()[1] < newInterval[0])
+        {
+            res.push_back(newInterval);
+        }
+        else
+        {
+            res.back()[1] = max(res.back()[1], newInterval[1]);
+        }
+
+        for(;i<n;i++)
+        {
+            if(intervals[i][0] <= res.back()[1])
             {
-                res.back()[1] = max(intervals[j][1],res.back()[1]);
+                res.back()[1] = max(intervals[i][1],res.back()[1]);
             }
             else
-                res.push_back(intervals[j]);
+                res.push_back(intervals[i]);  
         }
         
         return res;
