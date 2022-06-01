@@ -10,7 +10,7 @@ public:
         {
             if(intervals[j][0] <= res.back()[1])
             {
-                res.back() = {res.back()[0], max(intervals[j][1],res.back()[1])};
+                res.back()[1] = max(intervals[j][1],res.back()[1]);
             }
             else
                 res.push_back(intervals[j]);
