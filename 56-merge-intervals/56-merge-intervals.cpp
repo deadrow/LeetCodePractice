@@ -10,9 +10,7 @@ public:
         {
             if(intervals[j][0] <= res.back()[1])
             {
-                vector<int> top = res.back();
-                res.pop_back();
-                res.push_back({top[0], max(intervals[j][1], top[1])});
+                res.back() = {res.back()[0], max(intervals[j][1],res.back()[1])};
             }
             else
                 res.push_back(intervals[j]);
