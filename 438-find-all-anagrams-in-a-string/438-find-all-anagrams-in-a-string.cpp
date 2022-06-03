@@ -8,15 +8,9 @@ public:
         
         for(int i=0;i<p.size();i++)
         {
-            int sVal = s[i] - 'a' + 1;
             int pVal = p[i] - 'a' + 1;
-            
-            // sHash += sVal*sVal*sVal;
             pHash += pVal*pVal*pVal;
         }
-        
-        // if(sHash == pHash)
-        //     ret.push_back(0);
         
         int i=0;
         int j=0;
@@ -33,6 +27,8 @@ public:
                 if(sHash == pHash)
                     ret.push_back(i);
                 
+                // calculate rolling hash
+                // start removing last element
                 int iVal = s[i] - 'a' + 1;
                 sHash -= iVal*iVal*iVal;
                 
