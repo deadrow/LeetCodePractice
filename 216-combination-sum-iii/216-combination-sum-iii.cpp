@@ -4,14 +4,14 @@ public:
     
     void helper(vector<int>& cur, int cur_i, int k, int target)
     {
-        if(cur.size() > k || target < 0)
-            return;
-        
         if(cur.size() == k && target == 0)
         {
             ret.push_back(cur);
             return;
         }
+        
+        if(cur.size() > k || target < 0)
+            return;
         
         for(int i=cur_i;i<=9;i++)
         {
