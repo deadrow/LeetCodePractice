@@ -6,14 +6,16 @@ public:
         int i=0;
         int j=0;
         int maxLen = 0;
+        int maxKeyCount = 0;
         while(j < s.size())
         {
             cache[s[j]]++;
+            maxKeyCount = max(maxKeyCount, cache[s[j]]);
             
-            auto maxKey = max_element(cache.begin(), cache.end(), [](auto& a, auto& b)
-                                     {
-                                        return a.second < b.second; 
-                                     });
+            // auto maxKey = max_element(cache.begin(), cache.end(), [](auto& a, auto& b)
+            //                          {
+            //                             return a.second < b.second; 
+            //                          });
             
             // LOGIC Find the key with max count in map
             // and remove that from window size. The
@@ -21,7 +23,7 @@ public:
             // we can change to make the key with max count
             // more bigger.
             int windowSize = j-i+1;
-            if(windowSize - maxKey->second <= k)
+            if(windowSize - maxKeyCount <= k)
             {
                 j++;
                 maxLen = max(maxLen, windowSize);
