@@ -2,7 +2,7 @@ class Solution {
 public:
     vector<vector<int>> ret;
     
-    void helper(vector<int> cur, int cur_i, int k, int target)
+    void helper(vector<int>& cur, int cur_i, int k, int target)
     {
         if(cur.size() > k || target < 0)
             return;
