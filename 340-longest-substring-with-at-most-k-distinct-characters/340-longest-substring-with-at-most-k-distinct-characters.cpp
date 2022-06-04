@@ -5,7 +5,7 @@ public:
         if(k > s.size())
             return s.size();
         
-        unordered_map<char, int> cache;
+        map<char, int> cache;
         
         int i=0;
         int j=0;
