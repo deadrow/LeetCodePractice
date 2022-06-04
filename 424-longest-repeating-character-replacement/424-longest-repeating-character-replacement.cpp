@@ -15,6 +15,11 @@ public:
                                         return a.second < b.second; 
                                      });
             
+            // LOGIC Find the key with max count in map
+            // and remove that from window size. The
+            // remaining value should be the chars which
+            // we can change to make the key with max count
+            // more bigger.
             int windowSize = j-i+1;
             if(windowSize - maxKey->second <= k)
             {
