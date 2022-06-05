@@ -1,28 +1,32 @@
 class Solution {
 public:
+    int distance(vector<int>& point)
+    {
+        return point[0]*point[0] + point[1]*point[1];
+    }
     vector<vector<int>> kClosest(vector<vector<int>>& points, int k) {
-        auto compare = [](const auto& a, const auto& b){
-            return sqrt(abs(a[0]*a[0]) + abs(a[1]*a[1])) < sqrt(abs(b[0]*b[0]) + abs(b[1]*b[1]));
-        };
-        
-        priority_queue<vector<int>, vector<vector<int>>, decltype(compare)> pq(compare);
-        
-        // sort(points.begin(), points.end(), [](const auto& a, const auto& b){
-        //     return sqrt(abs(a[0]*a[0]) + abs(a[1]*a[1])) < sqrt(abs(b[0]*b[0]) + abs(b[1]*b[1]));
-        // });
-        
+
+        priority_queue<pair<int,int>> pq;
+
         vector<vector<int>> ret;
         for(int i=0;i<points.size();i++)
         {
-            pq.push(points[i]);
-            
-            if(pq.size() > k)
-                pq.pop();
+            pair<int,int> curPoint = {distance(points[i]),i};
+            if(pq.size() < k)
+                pq.push(curPoint);
+            else
+            {
+                if(curPoint.first < pq.top().first)
+                {
+                    pq.pop();
+                    pq.push(curPoint);
+                }
+            }
         }
         
         while(!pq.empty())
         {
-            ret.push_back(pq.top());
+            ret.push_back(points[pq.top().second]);
             pq.pop();
         }
         
