@@ -2,7 +2,7 @@ class Solution {
 public:
     vector<vector<int>>memo;
     
-    int lcs(string s, string t, int i, int j)
+    int lcs(string& s, string& t, int i, int j)
     {
         if(i < 0 || j < 0)
             return 0;
