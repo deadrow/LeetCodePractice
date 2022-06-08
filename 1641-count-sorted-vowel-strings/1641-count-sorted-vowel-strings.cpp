@@ -7,8 +7,8 @@ public:
         if(n == 0)
             return 1;
         
-        if(memo[n][last] != -1)
-            return memo[n][last];
+        if(memo[n][(int)last] != -1)
+            return memo[n][(int)last];
         
         int ans = 0;
         for(auto it : vowels)
@@ -16,11 +16,12 @@ public:
             if(it >= last)
                 ans += count(n-1, it);
         }
-        return memo[n][last] = ans;
+        return memo[n][(int)last] = ans;
     }
     
     int countVowelStrings(int n) {
-        memo.resize(n+1, vector<int>('u'+1,-1));
+        char last = 'u';
+        memo.resize(n+1, vector<int>((int)'u'+1,-1));
         
         int ans = 0;
         for(auto it : vowels)
