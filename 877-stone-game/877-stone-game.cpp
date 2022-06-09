@@ -9,9 +9,7 @@ public:
         if(memo[low][high] != -1)
             return memo[low][high];
         
-        int fromStart = piles[low] + dp(piles, low+2, high, n);
-        int fromEnd = piles[high] + dp(piles, low, high-2, n);
-        int ans = max(fromStart , fromEnd);
+        int ans = max(piles[low] + dp(piles, low+2, high, n) , piles[high] + dp(piles, low, high-2, n));
         return memo[low][high] = ans;
     }
     bool stoneGame(vector<int>& piles) {
