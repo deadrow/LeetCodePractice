@@ -1,0 +1,28 @@
+class Solution {
+public:
+    vector<int>memo;
+    bool dp(vector<int>& nums, int cur_i, int n)
+    {
+        if(cur_i >= n)
+            return true;
+        
+        if(memo[cur_i] !=-1)
+            return memo[cur_i];
+        for(int pos=cur_i+1;pos<=cur_i+nums[cur_i];pos++)
+        {
+            if(dp(nums, pos, n))
+                return memo[cur_i] = true;
+        }
+        
+        return memo[cur_i] = false;
+    }
+    bool canJump(vector<int>& nums)
+    {
+        int n = nums.size();
+        if(n == 1)
+            return true;
+        
+        memo.resize(n,-1);
+        return dp(nums, 0, n-1);
+    }
+};
