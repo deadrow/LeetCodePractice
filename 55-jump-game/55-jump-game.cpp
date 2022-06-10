@@ -8,7 +8,9 @@ public:
         
         if(memo[cur_i] !=-1)
             return memo[cur_i];
-        for(int pos=cur_i+1;pos<=cur_i+nums[cur_i];pos++)
+        
+        int farthest = min(cur_i+nums[cur_i], n);
+        for(int pos=cur_i+1;pos<=farthest;pos++)
         {
             if(dp(nums, pos, n))
                 return memo[cur_i] = true;
