@@ -31,10 +31,8 @@ public:
         return result;
     }
     
-    ListNode* sortList(ListNode* head) {
-        if(!head || !head->next)
-            return head;
-        
+    ListNode* findMid(ListNode* head)
+    {    
         // Find out mid and last
         ListNode* fast = head->next;
         ListNode* slow = head;
@@ -45,12 +43,20 @@ public:
         }
         
         // Break the list in 2 halves
-        ListNode* second = slow->next;
+        ListNode* mid = slow->next;
         slow->next = nullptr;
+        return mid;
+    }
+    
+    ListNode* sortList(ListNode* head) {
+        if(!head || !head->next)
+            return head;
+
+        ListNode* mid = findMid(head);
         
         // Now merge
-        ListNode* ret1 = sortList(head);
-        ListNode* ret2 = sortList(second);
-        return mergeTwoLists(ret1, ret2);
+        ListNode* left = sortList(head);
+        ListNode* right = sortList(mid);
+        return mergeTwoLists(left, right);
     }
 };
