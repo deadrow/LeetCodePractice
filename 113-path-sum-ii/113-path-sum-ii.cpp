@@ -28,6 +28,7 @@ public:
         
         traverse(root->left, curSet, targetSum-root->val);
         traverse(root->right, curSet, targetSum-root->val);
+        curSet.pop_back();
     }
     
     vector<vector<int>> pathSum(TreeNode* root, int targetSum) {
