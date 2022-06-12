@@ -18,17 +18,19 @@ public:
         if(!root)
             return;
         
+        if(ret.empty() || height > (ret.size()-1))
+            ret.push_back(vector<int>());
+        
+        ret[height].push_back(root->val);
+        
         traverse(root->left, height+1);
         traverse(root->right, height+1);
-        
-        map[height].push_back(root->val);
     }
+    
     vector<vector<int>> levelOrderBottom(TreeNode* root) {
         traverse(root, 0);
         
-        for(auto it : map)
-            ret.push_back(it.second);
-        
+        reverse(ret.begin(), ret.end());
         return ret;
     }
 };
