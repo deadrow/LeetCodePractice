@@ -11,28 +11,26 @@
  */
 class Solution {
 public:
-    vector<string> ret;
-    void traverse(TreeNode* root, string cur)
+    vector<int> ret;
+    void traverse(TreeNode* root, int cur)
     {
         if(!root)
             return;
 
-        cur += to_string(root->val);
+        cur = cur*10 + root->val;
         
         if(!root->left && !root->right)
             ret.push_back(cur);
         
         traverse(root->left, cur);
         traverse(root->right, cur);
-        cur.pop_back();
     }
     
     int sumNumbers(TreeNode* root) {
-        string cur;
-        traverse(root, cur);
+        traverse(root, 0);
         int ans = 0;
         for(auto it : ret)
-            ans += stoi(it);
+            ans += it;
         
         return ans;
     }
