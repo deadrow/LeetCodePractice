@@ -16,11 +16,7 @@ public:
     void traverse(TreeNode* root, vector<int> curSet, int targetSum)
     {
         if(!root)
-        {
-            // if(targetSum == 0)
-            //     ret.push_back(curSet);
             return;
-        }
         
         curSet.push_back(root->val);
         
@@ -28,8 +24,8 @@ public:
         {
             if(targetSum-root->val == 0)
                 ret.push_back(curSet);
-                
         }
+        
         traverse(root->left, curSet, targetSum-root->val);
         traverse(root->right, curSet, targetSum-root->val);
     }
