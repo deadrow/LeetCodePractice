@@ -4,6 +4,8 @@ public:
         
         int count = 0;
         int candidate = -1;
+        
+        // boyer moore algorithm
         for(auto it : nums)
         {
             if(count == 0)
