@@ -2,13 +2,14 @@ class Solution {
 public:
     void rotate(vector<int>& nums, int k) {
         int n = nums.size();
+        
+        vector<int> newArr(n);
+        
+        for(int i=0;i<n;i++)
+        {
+            newArr[(i+k)%n] = nums[i];
+        }
     
-        k %= n;
-        
-        reverse(nums.begin(), nums.end());
-        
-        // reverse k and then next n-k
-        reverse(nums.begin(), nums.begin()+k);
-        reverse(nums.begin()+k, nums.end());
+        nums = newArr;
     }
 };
