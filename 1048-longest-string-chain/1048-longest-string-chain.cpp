@@ -13,8 +13,8 @@ public:
         {
             if(word1[i] == word2[j])
                 i++;
-            if(i == m)
-                return true;
+            // if(i == m)
+            //     return true;
             j++;
         }
         
