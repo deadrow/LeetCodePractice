@@ -13,8 +13,6 @@ public:
         {
             if(word1[i] == word2[j])
                 i++;
-            // if(i == m)
-            //     return true;
             j++;
         }
         
@@ -23,6 +21,9 @@ public:
     
     int longestStrChain(vector<string>& words) {
         
+        // LOGIC
+        // sort in increasing order of size
+        // then apply LIS with one condition of subsequence check
         sort(words.begin(), words.end(), [](const string& a, const string& b){
             return a.size() < b.size();
         });
