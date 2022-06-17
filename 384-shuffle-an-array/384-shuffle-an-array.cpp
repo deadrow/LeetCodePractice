@@ -3,7 +3,7 @@ public:
     vector<int> nums;
     Solution(vector<int>& nums) {
         this->nums = nums;
-        srand(time(nullptr));
+        // srand(time(nullptr));
     }
     
     vector<int> reset() {
