@@ -1,6 +1,7 @@
 class RandomizedSet {
 public:
-    unordered_set<int> data;
+    unordered_map<int, int> data;
+    vector<int> store;
     RandomizedSet() {
         srand(time(nullptr));
     }
@@ -9,7 +10,8 @@ public:
         auto it = data.find(val);
         if(it == data.end())
         {
-            data.insert(val);
+            store.push_back(val);
+            data[val] = store.size()-1;
             return true;
         }
 
@@ -20,6 +22,11 @@ public:
         auto it = data.find(val);
         if(it != data.end())
         {
+            int lastElem = store[store.size()-1];
+            int idx = data[val];
+            store[idx] = lastElem;
+            data[lastElem] = idx;
+            store.pop_back();
             data.erase(it);
             return true;
         }
@@ -28,11 +35,7 @@ public:
     }
     
     int getRandom() {
-        int n = data.size();
-        int randIndex = rand()%n;
-        auto it = data.begin();
-        advance(it, randIndex);
-        return *it;
+        return store[rand()%store.size()];
     }
 };
 
