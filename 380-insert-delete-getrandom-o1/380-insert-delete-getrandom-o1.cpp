@@ -1,15 +1,15 @@
 class RandomizedSet {
 public:
-    list<int>data;
+    unordered_set<int> data;
     RandomizedSet() {
         srand(time(nullptr));
     }
     
     bool insert(int val) {
-        auto it = find(data.begin(), data.end(), val);
+        auto it = data.find(val);
         if(it == data.end())
         {
-            data.push_back(val);
+            data.insert(val);
             return true;
         }
 
@@ -17,7 +17,7 @@ public:
     }
 
     bool remove(int val) {
-        auto it = find(data.begin(), data.end(), val);
+        auto it = data.find(val);
         if(it != data.end())
         {
             data.erase(it);
