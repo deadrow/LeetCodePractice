@@ -4,18 +4,13 @@ public:
         if(n <= 0)
             return false;
         
-        if(n == 1)
-            return true;
-        
-        while(n % 2 == 0)
-            n /= 2;
-        
-        while(n % 3 == 0)
-            n /= 3;
-        
-        while(n % 5 == 0)
-            n /= 5;
-        
+        vector<int> divisors{2,3,5};
+        for(auto it : divisors)
+        {
+            while(n % it == 0)
+                n /= it;
+        }
+
         if(n == 1)
             return true;
         
