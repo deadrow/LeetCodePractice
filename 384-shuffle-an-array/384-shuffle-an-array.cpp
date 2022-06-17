@@ -13,10 +13,13 @@ public:
     vector<int> shuffle() {
         vector<int> res = nums;
 
-        for(int i=0;i< nums.size();i++)
+        int n = res.size();
+        int remaining = res.size();
+        for(int i=n-1;i>=0;i--)
         {
-            int newIndex = rand()% (nums.size());
+            int newIndex = rand()% remaining;
             swap(res[i], res[newIndex]);
+            remaining--;
         }
         
         return res;
