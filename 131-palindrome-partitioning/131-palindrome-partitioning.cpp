@@ -23,7 +23,6 @@ public:
         
         for(int k=i;k<=j-1;k++)
         {
-            // if(k-i+1 == 1 || isPalindrome(s, i, k))
             string temp = s.substr(i, k-i+1);
             if(isPalindrome(temp))
             {
