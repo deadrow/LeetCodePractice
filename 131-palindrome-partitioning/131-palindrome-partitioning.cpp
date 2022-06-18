@@ -12,22 +12,21 @@ public:
         return true;
     }
     
-    // matrix chain multiplication solution
-    void solve(string& s, int i, int j, vector<string> cur)
+    void solve(string& s, int i, vector<string> cur)
     {
-        if(i >= j) // i == j because single string is itself palindrome
+        if(i >= s.length())
         {
             ret.push_back(cur);
             return;
         }
         
-        for(int k=i;k<=j-1;k++)
+        for(int k=i;k<s.length();k++)
         {
             string temp = s.substr(i, k-i+1);
             if(isPalindrome(temp))
             {
                 cur.push_back(temp);
-                solve(s, k+1, j, cur);
+                solve(s, k+1, cur);
                 cur.pop_back();
             }
         }
@@ -35,7 +34,7 @@ public:
     
     vector<vector<string>> partition(string s) {
         vector<string> cur;
-        solve(s, 0, s.size(), cur);
+        solve(s, 0, cur);
         return ret;
     }
 };
