@@ -29,12 +29,17 @@ public:
         if(!head || !head->next)
             return head;
         
-        ListNode* prev = head;
-        ListNode* next = head->next;
-        ListNode* remain = reverseList(next);
-        next->next = prev;
-        prev->next = nullptr;
-        return remain;
+        ListNode* prev = nullptr;
+        ListNode* cur = head;
+        while(cur)
+        {
+            ListNode* temp = cur->next;
+            cur->next = prev;
+            prev = cur;
+            cur = temp;
+        }
+        
+        return prev;
     }
     
     bool isPalindrome(ListNode* head) {
