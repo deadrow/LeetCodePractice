@@ -12,7 +12,7 @@ public:
         return true;
     }
     
-    void solve(string& s, int i, vector<string> cur)
+    void solve(string& s, int i, vector<string>& cur)
     {
         if(i >= s.length())
         {
