@@ -8,23 +8,66 @@
  */
 class Solution {
 public:
-    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
-        unordered_set<ListNode*> dict;
-        
-        ListNode* cur = headA;
+    int getLength(ListNode *head)
+    {
+        int len = 0;
+        ListNode* cur = head;
         while(cur)
         {
-            dict.insert(cur);
+            len++;
             cur = cur->next;
         }
         
-        cur = headB;
-        while(cur)
+        return len;
+    }
+    
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        int lenA = getLength(headA);
+        int lenB = getLength(headB);
+        
+        int diff = abs(lenA-lenB);
+        if(lenA > lenB)
         {
-            auto it = dict.find(cur);
-            if(it != dict.end())
-                return *it;
-            cur = cur->next;
+            ListNode* curA = headA;
+            while(curA && diff--)
+                curA = curA->next;
+            
+            ListNode* curB = headB;
+            while(curA && curB)
+            {
+                if(curA == curB)
+                    return curA;
+                curA = curA->next;
+                curB = curB->next;
+            }
+            
+        }
+        else if(lenA < lenB)
+        {
+            ListNode* curB = headB;
+            while(curB && diff--)
+                curB = curB->next;
+            
+            ListNode* curA = headA;
+            while(curA && curB)
+            {
+                if(curA == curB)
+                    return curA;
+                curA = curA->next;
+                curB = curB->next;
+            }
+        }
+        else
+        {
+            ListNode* curA = headA;
+            ListNode* curB = headB;
+            while(curA && curB)
+            {
+                if(curA == curB)
+                    return curA;
+                curA = curA->next;
+                curB = curB->next;
+            }
         }
         
         return nullptr;
