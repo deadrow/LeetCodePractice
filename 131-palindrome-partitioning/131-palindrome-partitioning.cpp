@@ -23,10 +23,10 @@ public:
         
         for(int end=start;end<s.length();end++)
         {
-            string temp = s.substr(start, end-start+1);
             if(s[start] == s[end] && (end-start <= 2 || memo[start+1][end-1]))
             {
                 memo[start][end] = true;
+                string temp = s.substr(start, end-start+1);
                 cur.push_back(temp);
                 solve(s, end+1, cur);
                 cur.pop_back();
