@@ -2,79 +2,30 @@ class TicTacToe {
 public:
     vector<vector<int>>board;
     int n;
+    vector<int>rows;
+    vector<int>cols;
+    int diagonal{0};
+    int antidiagonal{0};
     TicTacToe(int n) {
         board.resize(n, vector<int>(n,-1));
         this->n = n;
+        rows.resize(n);
+        cols.resize(n);
     }
-    
-    bool checkWin(int row, int col, int player)
-    {
-        // check row
-        bool winning = true;
-        for(int i=0;i<n;i++)
-        {
-            if(board[row][i] != player)
-            {
-                winning = false;
-                break;
-            }     
-        }
-        
-        if(winning)
-            return true;
-        
-        winning = true;
-        
-        // check column
-        for(int i=0;i<n;i++)
-        {
-            if(board[i][col] != player)
-            {
-                winning = false;
-                break;
-            } 
-        }
-        
-        if(winning)
-            return true;
-        
-        winning = true;
-        
-        // check diags
-        for(int i=0;i<n;i++)
-        {
-            if(board[i][i] != player)
-            {
-                winning = false;
-                break;
-            } 
-        }
-        
-        if(winning)
-            return true;
-        
-        winning = true;
-        // check anti diags
-        for(int i=0;i<n;i++)
-        {
-            if(board[i][n-i-1] != player)
-            {
-                winning = false;
-                break;
-            } 
-        }
-        
-        if(winning)
-            return true;
-        
-        return false;
-    }
-    
+
     int move(int row, int col, int player) {
-        board[row][col] = player;
+        int currentPlayer = (player == 1) ? 1 : -1;
         
-        // check win
-        if(checkWin(row, col, player))
+        rows[row] += currentPlayer;
+        cols[col] += currentPlayer;
+        
+        if(row == col)
+            diagonal += currentPlayer;
+        
+        if(col == n-row-1)
+            antidiagonal += currentPlayer;
+        
+        if(abs(rows[row]) == n || abs(cols[col]) == n || abs(diagonal) == n || abs(antidiagonal) == n)
             return player;
         
         return 0;
