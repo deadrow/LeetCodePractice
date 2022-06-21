@@ -1,26 +1,26 @@
 class Solution {
 public:
-    vector<int>memo;
-    int dp(vector<int>& nums, int cur_i, int prev, int n)
-    {
-        if(cur_i >= n)
-            return 0;
-        
-        if(memo[prev+1] != -1)
-            return memo[prev+1];
-        
-        int take = 0;
-        if(prev == -1 || nums[cur_i] > nums[prev])
-            take = 1 + dp(nums, cur_i+1, cur_i, n);
-        
-        int leave = dp(nums, cur_i+1, prev, n);
-        
-        return memo[prev+1] = max(take, leave);
-    }
-    
     int lengthOfLIS(vector<int>& nums) {
         int n = nums.size();
-        memo.resize(n+1,-1);
-        return dp(nums, 0, -1, n);
+        
+        vector<int> subSet;
+        subSet.push_back(nums[0]);
+        
+        for(int i=1;i<n;i++)
+        {
+            int num = nums[i];
+            if(num > subSet[subSet.size()-1])
+                subSet.push_back(num);
+            else
+            {
+                int j=0;
+                while(num > subSet[j])
+                    j++;
+                
+                subSet[j] = num;
+            }
+        }
+        
+        return subSet.size();
     }
 };
