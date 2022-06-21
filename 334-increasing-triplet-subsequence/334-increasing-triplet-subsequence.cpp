@@ -1,26 +1,19 @@
 class Solution {
 public:
     bool increasingTriplet(vector<int>& nums) {
-        int n = nums.size();
+        int firstMin = INT_MAX;
+        int secondMin = INT_MAX;
         
-        vector<int> subSet;
-        subSet.push_back(nums[0]);
-        
-        for(int i=1;i<n;i++)
+        for(auto it : nums)
         {
-            int num = nums[i];
-            if(num > subSet[subSet.size()-1])
-                subSet.push_back(num);
+            if(it <= firstMin)
+                firstMin = it;
+            else if(it <= secondMin)
+                secondMin = it;
             else
-            {
-                int j=0;
-                while(num > subSet[j])
-                    j++;
-                
-                subSet[j] = num;
-            }
+                return true;
         }
         
-        return subSet.size() >= 3;
+        return false;
     }
 };
