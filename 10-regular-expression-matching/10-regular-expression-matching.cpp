@@ -1,7 +1,7 @@
 class Solution {
 public:
     vector<vector<int>> memo;
-    bool dp(string s, string p, int i, int j)
+    bool dp(string& s, string& p, int i, int j)
     {
         int sn = s.size();
         int pn = p.size();
