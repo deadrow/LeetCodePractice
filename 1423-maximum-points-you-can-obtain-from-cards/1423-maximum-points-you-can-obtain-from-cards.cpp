@@ -8,26 +8,22 @@ public:
         if(k == n)
             return totalSum;
         
-        // find min sum of n-k in sliding window
-        int i=0;
-        int j=0;
-        int curSum = 0;
-        int minSum = totalSum;
-        int windowSize = n-k;
-        while(j < n)
+        vector<int> prefixLeft(n+1);
+        vector<int> prefixRight(n+1);
+        
+        for(int i=0;i<n;i++)
         {
-            curSum += cardPoints[j];
-            if(j-i+1 < windowSize)
-                j++;
-            else if(j-i+1 == windowSize)
-            {
-                minSum = min(minSum, curSum);
-                curSum -= cardPoints[i];
-                i++;
-                j++;
-            }
+            prefixLeft[i+1] = cardPoints[i] + prefixLeft[i];
+            prefixRight[i+1] = cardPoints[n-i-1] + prefixRight[i];
         }
         
-        return totalSum - minSum;
+        int maxSum = 0;
+        for(int i=0;i<=k;i++)
+        {
+            int curSum = prefixLeft[i] + prefixRight[k-i];
+            maxSum = max(maxSum, curSum);
+        }
+        
+        return maxSum;
     }
 };
