@@ -1,46 +1,38 @@
 class Solution {
 public:
-    vector<string> ret;
     unordered_set<string> dict;
-    
-    string join(const vector<string>& strings)
-    {
-        string ret;
-        int n = strings.size();
-        for(int i=0;i<n;i++)
-        {
-            ret += strings[i];
-            if(i != n-1)
-                ret += " ";
-        }
+    unordered_map<int, vector<string>> memo;
         
-        return ret;
-    }
-    
-    void dp(string& s, int start, vector<string>& cur)
+    vector<string> dp(string& s, int start)
     {
+        vector<string> res;
         if(start == s.size())
         {
-            ret.push_back(join(cur));
+            res.push_back("");
+            return res;
         }
 
+        if(memo.find(start) != memo.end())
+            return memo[start];
+            
         for(int i=start+1;i<=s.size();i++)
         {
-            string first = s.substr(start,i-start);
+            string first = s.substr(start, i-start);
             if(dict.find(first) != dict.end())
             {
-                cur.push_back(first);
-                dp(s, i, cur);
-                cur.pop_back();
+                vector<string> sentences = dp(s, i);
+                for(auto it : sentences)
+                {
+                    res.push_back(first + (it == "" ? "" : " ") + it);
+                }
             }
-        }        
+        }
+        
+        return memo[start] = res;
     }
     
     vector<string> wordBreak(string s, vector<string>& wordDict) {
         dict.insert(wordDict.begin(), wordDict.end());
-        
-        vector<string> cur;
-        dp(s, 0, cur);
-        return ret;
+        return dp(s, 0);
     }
 };
