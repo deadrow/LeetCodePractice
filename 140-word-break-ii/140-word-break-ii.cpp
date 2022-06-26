@@ -29,10 +29,8 @@ public:
             string first = s.substr(start,i-start);
             if(dict.find(first) != dict.end())
             {
-                // string newString = first + " ";
                 cur.push_back(first);
                 dp(s, i, cur);
-                // cur -= first + " ";
                 cur.pop_back();
             }
         }        
