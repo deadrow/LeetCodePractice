@@ -29,17 +29,6 @@ public:
                 ans = ans + cur;
         }
         
-//             int right_max = 0;
-            
-//             for(int j=0;j<=i;j++)
-//                 left_max = max(left_max, height[j]);
-            
-//             for(int j=i;j<n;j++)
-//                 right_max = max(right_max, height[j]);
-            
-//             ans = ans + min(right_max, left_max) - height[i];
-        // }
-        
         return ans;
     }
 };
