@@ -1,35 +1,33 @@
 class Solution {
 public:
-    double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
-        int m = nums1.size(), n = nums2.size();
-        if(m > n)   return findMedianSortedArrays(nums2, nums1);
-        
-        int low = 0, high = m;
-        while(low <= high) {
-            int i = low + (high - low) / 2;
-            int j = (m + n) / 2 - i;
-            
-            int left1  = (i == 0)? INT_MIN : nums1[i - 1];
-            int right1 = (i == m)? INT_MAX : nums1[i];
-            int left2  = (j == 0)? INT_MIN : nums2[j - 1];
-            int right2 = (j == n)? INT_MAX : nums2[j];
-            
-            if(left1 > right2) {
-                high = i - 1;	// decrease i
-            }
-            else if(left2 > right1) {
-                low = i + 1;	// increase i
-            }
-            else {
-                if((m + n) & 1)
-                    return (i == m)? (double)right2 : (j == n)? (double)right1 : (double)min(right1, right2);
-                
-                double l = (i == 0)? (double)left2 : (j == 0)? double(left1) : (double)max(left1, left2);
-                double r = (i == m)? (double)right2 : (j == n)? (double)right1 : (double)min(right1, right2);
-                return (l + r) / 2;
-            }
+    double mediann(vector<int>&a,vector<int>&b){
+        int m=a.size();
+        int n=b.size();
+        if(m>n)
+            return mediann(b,a);
+        int l=0,r=m;
+        while(l<=r){
+            int partx=l+(r-l)/2;
+            int party=(m+n+1)/2-partx;
+            int maxlx=(partx==0)?INT_MIN:a[partx-1];
+            int minrx=(partx==m)?INT_MAX:a[partx];
+            int maxly=(party==0)?INT_MIN:b[party-1];
+            int minry=(party==n)?INT_MAX:b[party];
+            if(maxlx<=minry&&maxly<=minrx){
+                if((m+n)%2==0)
+                    return (double)(max(maxlx,maxly)+min(minrx,minry))/2;
+                else
+                    return (double)(max(maxlx,maxly));
+            }else if(maxlx>minry)
+                r=partx-1;
+            else
+                l=partx+1;
         }
-        
-        return double(-1);
+        return -1.0;
+    }
+    double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
+        double ans;
+        ans=mediann(nums1,nums2);
+        return ans;   
     }
 };
