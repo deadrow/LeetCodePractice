@@ -11,45 +11,22 @@ public:
             if(it != 0)
                 pq.push(it);
         }
-            
         
-        int res = 0;
-        int prev = pq.top();
-        pq.pop();
-        
-        while(!pq.empty())
-        {
-            if(pq.top() == prev)
-            {
-                res++;
-                prev = pq.top()-1;
-                pq.pop();
-            }
-            else if(prev < pq.top()) // remaining entry greater than prev
-            {
-                if(prev == 0)
-                {
-                    while(!pq.empty())
-                    {
-                        res += pq.top();
-                        pq.pop();
-                    }
-                }
-                else
-                {
-                    res += abs(prev-pq.top())+1;
-                    prev -= 1;
-                    pq.pop();
-                }
+        int ans = 0;
 
-            }
-            else
+        while(pq.size() > 1)
+        {
+            int top = pq.top();
+            pq.pop();
+            
+            if(pq.top() == top)
             {
-                prev = pq.top();
-                pq.pop();
+                ans++;
+                if(top-1>0)
+                    pq.push(top-1);
             }
         }
         
-        return res;
+        return ans;
     }
 };
