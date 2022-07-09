@@ -1,13 +1,17 @@
 class Solution {
 public:
     int minDeletions(string s) {
-        unordered_map<char, int> dict;
+        vector<int>freq(26);
         for(auto it : s)
-            dict[it]++;
+            freq[it-'a']++;
         
         priority_queue<int> pq;
-        for(auto it : dict)
-            pq.push(it.second);
+        for(auto it : freq)
+        {
+            if(it != 0)
+                pq.push(it);
+        }
+            
         
         int res = 0;
         int prev = pq.top();
