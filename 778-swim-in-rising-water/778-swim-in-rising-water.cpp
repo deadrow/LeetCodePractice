@@ -6,13 +6,8 @@ public:
         int n = grid[0].size();
         
         vector<vector<bool>> visited(m, vector<bool>(n));
-        
-        auto compare = [](const vector<int>& a, const vector<int>& b)
-        {
-            return a[0] > b[0];
-        };
-        
-        priority_queue<vector<int>, vector<vector<int>>, decltype(compare)> pq(compare);
+
+        priority_queue<vector<int>, vector<vector<int>>, greater<vector<int>>> pq;
         
         int ans = max(grid[0][0], grid[m-1][n-1]);
         pq.push({ans, 0, 0});
