@@ -36,8 +36,7 @@ public:
         if(!root) return res;
         
         dfs(root, 0);
-        
-        // reverse(res.begin(), res.end());
+
         return res;
     }
 };
