@@ -12,6 +12,32 @@
 class Solution {
 public:
     vector<int> res;
+    
+    void bfs(TreeNode* root)
+    {
+        queue<TreeNode*> bfs;
+        bfs.push(root);
+        
+        while(!bfs.empty())
+        {
+            int size = bfs.size();
+            for(int i=0;i<size;i++)
+            {
+                TreeNode* node = bfs.front();
+                bfs.pop();
+                
+                if(i == size-1)
+                    res.push_back(node->val);
+                
+                if(node->left)
+                    bfs.push(node->left);
+                
+                if(node->right)
+                    bfs.push(node->right);
+            }
+        }
+    }
+    
     void dfs(TreeNode* root, int height)
     {
         if(!root)
