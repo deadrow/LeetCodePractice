@@ -12,25 +12,23 @@
 class Solution {
 public:
     vector<int> res;
-    vector<vector<int>> levels;
     void dfs(TreeNode* root, int height)
     {
         if(!root)
             return;
   
-        if(levels.size() == height)
+        if(res.size() == height)
         {
-            levels.push_back({});
-            res.push_back(-1);
+            res.push_back(root->val);
         }
          
         dfs(root->right, height+1);
         dfs(root->left, height+1);
    
-        levels[height].push_back(root->val);
+//         levels[height].push_back(root->val);
         
-        if(res[height] == -1)
-            res[height] = levels[height].front();
+//         if(res[height] == -1)
+//             res[height] = levels[height].front();
     }
     vector<int> rightSideView(TreeNode* root) {
         if(!root) return res;
