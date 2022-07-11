@@ -24,11 +24,6 @@ public:
          
         dfs(root->right, height+1);
         dfs(root->left, height+1);
-   
-//         levels[height].push_back(root->val);
-        
-//         if(res[height] == -1)
-//             res[height] = levels[height].front();
     }
     vector<int> rightSideView(TreeNode* root) {
         if(!root) return res;
