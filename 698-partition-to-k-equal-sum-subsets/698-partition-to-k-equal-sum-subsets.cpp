@@ -1,33 +1,33 @@
 class Solution {
 public:
     int targetSum;
-    unordered_map<string, bool> memo;
-    bool dfs(vector<int>& nums, int k, int cur_i, string& visited, int target)
+    unordered_map<int, bool> memo;
+    bool dfs(vector<int>& nums, int k, int cur_i, int& mask, int target)
     {
         if(k == 1)
             return true;
 
-        if(memo.find(visited) != memo.end())
-            return memo[visited];
+        if(memo.find(mask) != memo.end())
+            return memo[mask];
         
         if(target == 0)
-            return memo[visited] = dfs(nums, k-1, 0, visited, targetSum);
+            return memo[mask] = dfs(nums, k-1, 0, mask, targetSum);
 
         for(int i=cur_i;i< nums.size();i++)
         {
             if(target - nums[i] < 0)
                 continue;
             
-            if(visited[i] == '0')
+            if(((mask >> i) & 1) == 0)
             {
-                visited[i] = '1';
-                if(dfs(nums, k, i+1, visited, target - nums[i]))
+                mask = (mask | (1 << i));
+                if(dfs(nums, k, i+1, mask, target - nums[i]))
                     return true;
-                visited[i] = '0';
+                mask = (mask ^ (1 << i));
             }
         }
         
-        return memo[visited] = false;
+        return memo[mask] = false;
     }
     
     bool canPartitionKSubsets(vector<int>& nums, int k) {
@@ -42,8 +42,8 @@ public:
         
         sort(nums.begin(), nums.end(), greater<>());
         
-        string visited(n, '0');
+        int mask = 0;
         
-        return dfs(nums, k, 0, visited, targetSum);
+        return dfs(nums, k, 0, mask, targetSum);
     }
 };
