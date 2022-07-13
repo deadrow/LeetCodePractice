@@ -33,6 +33,9 @@ public:
         int totalSum = accumulate(matchsticks.begin(), matchsticks.end(), 0);
         int targetSum = totalSum/4;
         
+        if(totalSum % 4  != 0)
+            return false;
+        
         sort(matchsticks.begin(), matchsticks.end(), greater<int>());
         knapsackLength.resize(4, 0);
         return dfs(matchsticks, 0, targetSum);
