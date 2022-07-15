@@ -1,28 +1,88 @@
+class UnionFind
+{
+public:
+    UnionFind(int n)
+        : parent(n)
+        , rank(n)
+        , size(n)
+    {
+        for(int i=0;i<n;i++)
+        {
+            parent[i] = i;
+            rank[i] = 1;
+            size[i] = 1;
+        }
+    }
+    
+    int find(int x)
+    {
+        if(x == parent[x])
+            return x;
+        
+        return parent[x] = find(parent[x]);
+    }
+    
+    void unionSet(int x, int y)
+    {
+        int rootX = find(x);
+        int rootY = find(y);
+        if(rootX != rootY)
+        {
+            if(rank[rootX] > rank[rootY])
+            {
+                parent[rootY] = rootX;
+                size[rootX] += size[rootY];
+            }
+            else if(rank[rootX] < rank[rootY])
+            {
+                parent[rootX] = rootY;
+                size[rootY] += size[rootX];
+            }
+            else
+            {
+                parent[rootY] = rootX;
+                size[rootX] += size[rootY];
+                rank[rootX] += 1;
+            }
+        }
+    }
+    
+    int getLargetSize()
+    {
+        int maxSize = 0;
+        for(auto it : size)
+        {
+            maxSize = max(maxSize, it);
+        }
+        return maxSize;
+    }
+private:
+    vector<int>parent;
+    vector<int>rank;
+    vector<int>size;
+};
+
 class Solution {
 public:
     int longestConsecutive(vector<int>& nums) {
-        if(nums.empty()) return 0;
-        unordered_set<int>cache;
-        for(auto it : nums)
-            cache.insert(it);
+        unordered_map<int, int> dict;
         
-        int ans = 0;
-        for(auto it : cache)
+        UnionFind uf(nums.size());
+
+        for(int i=0;i<nums.size();i++)
         {
-            int cur = it;
-            if(cache.find(cur-1) != cache.end())
-               continue;
+            if(dict.find(nums[i]) != dict.end())
+                continue;
             
-            int cur_max = 1;
-            while(cache.find(cur+1) != cache.end())
-            {
-                cur_max++;
-                cur++;
-            }
+            if(dict.find(nums[i]-1) != dict.end())
+                uf.unionSet(i, dict[nums[i]-1]);
             
-            ans = max(ans, cur_max);
+            if(dict.find(nums[i]+1) != dict.end())
+                uf.unionSet(i, dict[nums[i]+1]);
+            
+            dict[nums[i]] = i;
         }
             
-        return ans;
+        return uf.getLargetSize();
     }
 };
