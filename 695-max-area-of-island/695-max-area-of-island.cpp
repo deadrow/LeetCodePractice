@@ -80,25 +80,36 @@ public:
         return count;
     }
 
+    /* dfs solution */
     int maxAreaOfIsland(vector<vector<int>>& grid)
     {
-        /* dfs solution */
+        
         int m = grid.size();
         int n = grid[0].size();
         
         int max_area = 0;
-        // for(int i=0;i<m;i++)
-        // {
-        //     for(int j=0;j<n;j++)
-        //     {
-        //         if(grid[i][j] == 1)
-        //         {
-        //             int cur_area = dfs(grid, i, j, m, n);
-        //             max_area = max(max_area, cur_area);
-        //         }
-        //     }
-        // }
+        for(int i=0;i<m;i++)
+        {
+            for(int j=0;j<n;j++)
+            {
+                if(grid[i][j] == 1)
+                {
+                    int cur_area = dfs(grid, i, j, m, n);
+                    max_area = max(max_area, cur_area);
+                }
+            }
+        }
         
+        return max_area;
+    }
+    
+    /* union find solution */
+    int maxAreaOfIsland1(vector<vector<int>>& grid)
+    {
+        int m = grid.size();
+        int n = grid[0].size();
+        
+        int max_area = 0;
         UnionFind uf(m*n);
         for(int i=0;i<m;i++)
         {
