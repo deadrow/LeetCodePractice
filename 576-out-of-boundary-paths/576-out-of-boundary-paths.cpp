@@ -34,9 +34,7 @@ public:
             int nCol = col + it.second;
             
             if(nRow >= 0 && nRow < m && nCol >= 0 && nCol < n)
-            {
                 count = (count + dfs(m, n, k-1, nRow, nCol)) % MOD;
-            }
         }
         
         return memo[row][col][k] = count;
