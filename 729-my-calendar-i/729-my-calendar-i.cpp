@@ -12,7 +12,7 @@ public:
             return true;
         }
         
-        // less than all range
+        // less than all ranges or greater than all ranges
         auto first = *intervals.begin();
         auto last = *intervals.rbegin();
         if(end <= first.first || start >= last.second)
