@@ -1,6 +1,6 @@
 class MyCalendar {
 public:
-    set<vector<int>> intervals;
+    set<pair<int,int>> intervals;
     MyCalendar() {
         
     }
@@ -13,9 +13,9 @@ public:
         }
         
         // less than all range
-        vector<int> first = *intervals.begin();
-        vector<int> last = *intervals.rbegin();
-        if(end <= first[0] || start >= last[1])
+        auto first = *intervals.begin();
+        auto last = *intervals.rbegin();
+        if(end <= first.first || start >= last.second)
         {
             intervals.insert({start, end});
             return true;
@@ -23,7 +23,7 @@ public:
         
         for(auto itr = intervals.begin();itr!= intervals.end();++itr)
         {
-            if(start >= (*itr)[1] && end <= (*std::next(itr))[0])
+            if(start >= (*itr).second && end <= (*std::next(itr)).first)
             {
                 intervals.insert({start, end});
                 return true;
