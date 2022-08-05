@@ -6,31 +6,16 @@ public:
     }
     
     bool book(int start, int end) {
-        if(intervals.empty())
-        {
-            intervals.insert({start, end});
-            return true;
-        }
+        auto iter = intervals.upper_bound({start,end});
         
-        // less than all ranges or greater than all ranges
-        auto first = *intervals.begin();
-        auto last = *intervals.rbegin();
-        if(end <= first.first || start >= last.second)
-        {
-            intervals.insert({start, end});
-            return true;
-        }
+        if(iter != intervals.end() && iter->first < end)
+            return false;
         
-        for(auto itr = intervals.begin();itr!= intervals.end();++itr)
-        {
-            if(start >= (*itr).second && end <= (*std::next(itr)).first)
-            {
-                intervals.insert({start, end});
-                return true;
-            }
-        }
+        if(iter != intervals.begin() && start < (--iter)->second)
+            return false;
         
-        return false;
+        intervals.insert({start, end});
+        return true;
     }
 };
 
