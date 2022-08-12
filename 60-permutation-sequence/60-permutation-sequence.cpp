@@ -17,8 +17,6 @@ public:
         {
             swap(num[i], num[cur]);
             permute(num, cur+1);
-            if(k == 0)
-                return;
             swap(num[i], num[cur]);
         }
         
