@@ -1,76 +1,42 @@
 class Solution {
 public:
     vector<int> findDiagonalOrder(vector<vector<int>>& mat) {
-        vector<int> ret;
-        
-        // put 1st half
         int m = mat.size();
         int n = mat[0].size();
         
-        bool flip = false;
-        for(int i=0;i<m;i++)
+        vector<int> ret(m*n);
+        
+        int row = 0;
+        int col = 0;
+        for(int i=0;i<ret.size();i++)
         {
-            int k = i;
-            int j = 0;
-            vector<int>temp;
-            while(true)
-            {
-                if(k >= 0 && k < m && j >=0 && j < n)
-                {
-                    temp.push_back(mat[k][j]);
-                    k--;
-                    j++;
-                }
-                else
-                    break;
-            }
+            ret[i] = mat[row][col];
             
-            if(flip)
+            if((row+col) % 2 == 0)
             {
-                for(auto it = temp.rbegin();it!=temp.rend();++it)
-                    ret.push_back(*it);
+                if(col == n-1)
+                    row++;
+                else if(row == 0)
+                    col++;
+                else
+                {
+                    row--;
+                    col++;
+                }
             }
             else
             {
-                for(auto it : temp)
-                    ret.push_back(it);
-            }
-            
-            flip = !flip;
-        }
-        
-        // 2half
-        for(int j=1;j<n;j++)
-        {
-            int i = m-1;
-            int k = j;
-            vector<int>temp;
-            while(true)
-            {
-                if(i >= 0 && i < m && k >=0 && k < n)
-                {
-                    temp.push_back(mat[i][k]);
-                    i--;
-                    k++;
-                }
+                if(row == m-1)
+                    col++;
+                else if(col == 0)
+                    row++;
                 else
-                    break;
+                {
+                    row++;
+                    col--;
+                }
             }
-            
-            if(flip)
-            {
-                for(auto it = temp.rbegin();it!=temp.rend();++it)
-                    ret.push_back(*it);
-            }
-            else
-            {
-                for(auto it : temp)
-                    ret.push_back(it);
-            }
-            
-            flip = !flip;
         }
-        
         return ret;
     }
 };
