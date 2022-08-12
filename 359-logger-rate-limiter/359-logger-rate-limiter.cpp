@@ -6,22 +6,38 @@ public:
     }
     
     bool shouldPrintMessage(int timestamp, string message) {
-        if(record.find(message) == record.end())
-        {
-            record[message] = timestamp;
-            return true;
-        }
-        else
+        auto it = record.find(message);
+        if(it != record.end())
         {
             int lastTimestamp = record[message];
-            if(timestamp-lastTimestamp >= 10)
+            if(timestamp-lastTimestamp < 10)
             {
+                return false;
+            }
+            else
                 record[message] = timestamp;
-                return true;
-            }  
         }
+        else
+            record[message] = timestamp;
         
-        return false;
+        return true;
+        
+//         if(record.find(message) == record.end())
+//         {
+//             record[message] = timestamp;
+//             return true;
+//         }
+//         else
+//         {
+//             int lastTimestamp = record[message];
+//             if(timestamp-lastTimestamp >= 10)
+//             {
+//                 record[message] = timestamp;
+//                 return true;
+//             }  
+//         }
+        
+//         return false;
     }
 };
 
