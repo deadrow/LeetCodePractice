@@ -10,12 +10,10 @@ public:
         
         int n = chars.size();
         int count = 1;
-        char lastChar;
         for(int i=1;i<n;i++)
         {
             if(chars[i] != chars[i-1])
             {
-                lastChar = chars[i];
                 if(count != 1)
                     res += chars[i-1] + to_string(count);
                 else
