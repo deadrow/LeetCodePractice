@@ -1,30 +1,37 @@
 class Solution {
 public:
+    string ans;
+    int k;
+    void permute(string num, int cur)
+    {
+        if(cur == num.size()-1)
+        {
+            k--;
+            if(k == 0)
+                ans = num;
+            return;
+        }
+
+        sort(num.begin()+cur, num.end());
+        for(int i=cur;i<num.size();i++)
+        {
+            swap(num[i], num[cur]);
+            permute(num, cur+1);
+            if(k == 0)
+                return;
+            swap(num[i], num[cur]);
+        }
+        
+    }
+    
     string getPermutation(int n, int k)
     {
-        int fact = 1;
-        vector<int>nums;
-        for(int i=1;i<n;i++)
-        {
-            nums.push_back(i);
-            fact *= i;
-        }
+        this->k = k;
+        string num;
+        for(int i=1;i<=n;i++)
+            num += i + '0';
         
-        nums.push_back(n); // For eg. if n = 4 and nums would be {1,2,3,4} and factorial would be 6
-        
-        k--; // because of 0 index array
-        
-        string ans;
-        while(nums.size() > 0)
-        {
-            ans += to_string(nums[k/fact]);
-            nums.erase(nums.begin() + k/fact);
-            k = k % fact;
-            
-            if(nums.size() > 0)
-                fact /= nums.size();
-        }
-        
+        permute(num, 0);
         return ans;
     }
 };
