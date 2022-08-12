@@ -10,9 +10,9 @@ public:
             fact *= i;
         }
         
-        nums.push_back(n);
+        nums.push_back(n); // For eg. if n = 4 and nums would be {1,2,3,4} and factorial would be 6
         
-        k--;
+        k--; // because of 0 index array
         
         string ans;
         while(nums.size() > 0)
