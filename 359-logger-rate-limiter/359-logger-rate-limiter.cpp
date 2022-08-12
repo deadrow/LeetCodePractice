@@ -21,23 +21,6 @@ public:
             record[message] = timestamp;
         
         return true;
-        
-//         if(record.find(message) == record.end())
-//         {
-//             record[message] = timestamp;
-//             return true;
-//         }
-//         else
-//         {
-//             int lastTimestamp = record[message];
-//             if(timestamp-lastTimestamp >= 10)
-//             {
-//                 record[message] = timestamp;
-//                 return true;
-//             }  
-//         }
-        
-//         return false;
     }
 };
 
