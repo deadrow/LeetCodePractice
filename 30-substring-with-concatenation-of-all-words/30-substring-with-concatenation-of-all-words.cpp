@@ -7,7 +7,7 @@ public:
     
     void slidingWindowSubstring(int start, string s)
     {
-        unordered_map<string,int> curDict = dict;
+        unordered_map<string,int> curDict(dict);
         
         int i = start;
         int j = i+wordSize;
@@ -25,12 +25,17 @@ public:
                     curWordCount--;
             }
             
+            // if current word is small, increase word size
             if(j-i < windowSize)
             {
                 j += wordSize;
             }
             else if(j-i == windowSize)
             {
+                // word is equal to window size. If all the entries
+                // in curDict becomes 0 that means we have found the match
+                // curWordCount is tracking that. If not, remove the word
+                // from our sliding window and increment its count in dict
                 if(curWordCount == 0)
                 {
                     ret.push_back(i);
@@ -58,6 +63,8 @@ public:
         wordSize = words[0].size();
         totalWordCount = words.size();
         
+        // We have to check till wordsize to handle cases like
+        // s = "afoobar" words = ["foo", "bar"]
         for(int i=0;i<wordSize;i++)
         {
             slidingWindowSubstring(i, s);
