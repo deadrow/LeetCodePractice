@@ -26,6 +26,6 @@ public:
         if(!root)
             return 0;
         
-        return dfs(root, INT_MIN);
+        return dfs(root, -100006);
     }
 };
