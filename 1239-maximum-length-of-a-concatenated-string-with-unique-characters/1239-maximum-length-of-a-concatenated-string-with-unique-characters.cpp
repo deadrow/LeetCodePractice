@@ -1,55 +1,36 @@
 class Solution {
 public:
-    int maxLen = 0;
-    int count[26] = {0};
-    void dfs(vector<string>& arr, string cur, int cur_i)
+    int dfs(vector<string>& arr, int mask, int cur_i)
     {
         if(cur_i >= arr.size())
-            return;
+            return 0;
         
-        for(int i=cur_i;i<arr.size();i++)
+        int take = 0;
+        bool unique = true;
+        int curMask = mask;
+        for(auto it : arr[cur_i])
         {
-            bool present = false;
-            for(auto it : arr[i])
+            int i = it-'a';
+            if((curMask >> i) & 1)
             {
-                if(count[it-'a'] > 0)
-                {
-                    present = true;
-                }
-
-                count[it-'a']++;
+                unique = false;
+                break;
             }
             
-            if(!present)
-            {
-                int wordSize = arr[i].size();
-                cur += arr[i];
-                maxLen = max(maxLen, (int)cur.size());
-                dfs(arr, cur, i+1);
-                
-                // backtrack
-                cur.erase(cur.size()-wordSize);
-                
-                for(auto it : arr[i])
-                {
-                    count[it-'a']--;
-                }
-            }
-            else
-            {
-                for(auto it : arr[i])
-                {
-                    count[it-'a']--;
-                }
-                
-                dfs(arr, cur, i+1);
-            }
+            curMask = (curMask | (1 << i));
         }
+        
+        if(unique)
+        {
+            take = (int)arr[cur_i].size() + dfs(arr, curMask, cur_i+1);
+        }
+            
+        int leave = dfs(arr, mask, cur_i+1);
+        return max(take, leave);
     }
     
     int maxLength(vector<string>& arr) {
-        string cur;
-        dfs(arr, cur, 0);
-        return maxLen;
+        int mask = 0;
+        return dfs(arr, mask, 0);
     }
 };
