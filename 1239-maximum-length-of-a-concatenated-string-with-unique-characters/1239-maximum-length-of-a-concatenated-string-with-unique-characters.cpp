@@ -7,22 +7,22 @@ public:
         
         int take = 0;
         bool unique = true;
-        int curMask = mask;
+        int newMask = mask;
         for(auto it : arr[cur_i])
         {
             int i = it-'a';
-            if((curMask >> i) & 1)
+            if((newMask >> i) & 1)
             {
                 unique = false;
                 break;
             }
             
-            curMask = (curMask | (1 << i));
+            newMask = (newMask | (1 << i));
         }
         
         if(unique)
         {
-            take = (int)arr[cur_i].size() + dfs(arr, curMask, cur_i+1);
+            take = (int)arr[cur_i].size() + dfs(arr, newMask, cur_i+1);
         }
             
         int leave = dfs(arr, mask, cur_i+1);
