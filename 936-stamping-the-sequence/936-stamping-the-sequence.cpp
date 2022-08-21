@@ -33,7 +33,7 @@ public:
         
         while(true)
         {
-            // Find atleaset 1 match
+            // Find atleaset 1 match otherwise break the loop
             bool matchFound = false;
             for(int i=0;i<n-m+1;i++)
             {
@@ -56,6 +56,7 @@ public:
                 break;
         }
         
+        // still some char left
         if(!allWildCards(target)) return vector<int>();
         
         reverse(ret.begin(), ret.end());
