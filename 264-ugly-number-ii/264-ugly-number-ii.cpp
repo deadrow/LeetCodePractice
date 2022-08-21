@@ -1,22 +1,22 @@
 class Solution {
 public:
     int nthUglyNumber(int n) {
-        set<long>st;
+        priority_queue<long, vector<long>, greater<>>pq;
         
-        st.insert(1);
+        pq.push(1);
         
         while(--n)
         {
-            auto first = st.begin();
-            long top = *first;
-            st.erase(first);
+            long top = pq.top();
             
-            st.insert(top*2);
-            st.insert(top*3);
-            st.insert(top*5);
+            while(!pq.empty() && top == pq.top())
+                pq.pop();
             
+            pq.push(top*2);
+            pq.push(top*3);
+            pq.push(top*5);
         }
         
-        return *st.begin();
+        return pq.top();
     }
 };
