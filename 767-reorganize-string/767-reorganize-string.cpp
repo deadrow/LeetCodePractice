@@ -14,31 +14,29 @@ public:
         int start = 0;
         while(!pq.empty())
         {
-            int firstCharCount = pq.top().first;
-            char firstChar = pq.top().second;
+            pair<int,char> top1 = pq.top();
             pq.pop();
             
-            if(pq.empty() && firstCharCount >= 2)
+            if(pq.empty() && top1.first >= 2)
                 return "";
             
-            ret += firstChar;
-            firstCharCount--;
+            ret += top1.second;
+            top1.first--;
             
             if(pq.empty())
                 return ret;
             
-            int secondCharCount = pq.top().first;
-            char secondChar = pq.top().second;
+            pair<int,char> top2 = pq.top();
             pq.pop();
             
-            ret += secondChar;
-            secondCharCount--;
+            ret += top2.second;
+            top2.first--;
             
-            if(firstCharCount)
-                pq.push({firstCharCount, firstChar});
+            if(top1.first)
+                pq.push(top1);
             
-            if(secondCharCount)
-                pq.push({secondCharCount, secondChar});
+            if(top2.first)
+                pq.push(top2);
         }
         
         return ret;
