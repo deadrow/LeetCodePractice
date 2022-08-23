@@ -12,32 +12,39 @@ public:
     }
     
     vector<int> getNewsFeed(int userId) {
-        set<pair<int,int>, greater<pair<int,int>>> st;
+        priority_queue<pair<int,int>> pq;
         
         for(auto it : userToTweets[userId])
-            st.insert(it);
+            pq.push(it);
         
         for(auto it : followerMap[userId])
         {
             for(auto it1 : userToTweets[it])
-                st.insert(it1);
+                pq.push(it1);
         }
         
         vector<int> ret;
-        if(st.size() < 10)
+        if(pq.size() < 10)
         {
-            for(auto it : st)
-                ret.push_back(it.second);
+            while(!pq.empty())
+            {
+                auto top = pq.top();
+                ret.push_back(top.second);
+                pq.pop();
+            }
+                
         }
         else
         {
             int counter = 10;
-            auto it = st.begin();
             while(counter--)
             {
-                int val = it->second;
-                ret.push_back(val);
-                *it++;
+                if(pq.empty())
+                    break;
+                
+                auto top = pq.top();
+                ret.push_back(top.second);
+                pq.pop();
             }
         }
         
