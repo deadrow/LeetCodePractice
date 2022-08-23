@@ -24,18 +24,7 @@ public:
         }
         
         vector<int> ret;
-        if(pq.size() < 10)
-        {
-            while(!pq.empty())
-            {
-                auto top = pq.top();
-                ret.push_back(top.second);
-                pq.pop();
-            }
-                
-        }
-        else
-        {
+
             int counter = 10;
             while(counter--)
             {
@@ -46,7 +35,6 @@ public:
                 ret.push_back(top.second);
                 pq.pop();
             }
-        }
         
         return ret;
     }
