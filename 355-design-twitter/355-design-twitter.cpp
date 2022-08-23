@@ -14,9 +14,11 @@ public:
     vector<int> getNewsFeed(int userId) {
         priority_queue<pair<int,int>> pq;
         
+        // own tweets
         for(auto it : userToTweets[userId])
             pq.push(it);
         
+        // followers tweets
         for(auto it : followerMap[userId])
         {
             for(auto it1 : userToTweets[it])
@@ -24,15 +26,13 @@ public:
         }
         
         vector<int> ret;
-
         int counter = 10;
         while(counter--)
         {
             if(pq.empty())
                 break;
 
-            auto top = pq.top();
-            ret.push_back(top.second);
+            ret.push_back(pq.top().second);
             pq.pop();
         }
         
