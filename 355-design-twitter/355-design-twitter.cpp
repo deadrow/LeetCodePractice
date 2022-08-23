@@ -25,16 +25,16 @@ public:
         
         vector<int> ret;
 
-            int counter = 10;
-            while(counter--)
-            {
-                if(pq.empty())
-                    break;
-                
-                auto top = pq.top();
-                ret.push_back(top.second);
-                pq.pop();
-            }
+        int counter = 10;
+        while(counter--)
+        {
+            if(pq.empty())
+                break;
+
+            auto top = pq.top();
+            ret.push_back(top.second);
+            pq.pop();
+        }
         
         return ret;
     }
