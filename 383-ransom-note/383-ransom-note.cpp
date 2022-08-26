@@ -1,19 +1,16 @@
 class Solution {
 public:
     bool canConstruct(string ransomNote, string magazine) {
-        unordered_map<char,int>dict;
+        int dict[26] = {0};
         for(auto it : magazine)
-            dict[it]++;
+            dict[it-'a']++;
         
         for(auto it : ransomNote)
-        {
-            if(dict.find(it) == dict.end())
+        {            
+            if(dict[it-'a'] == 0)
                 return false;
             
-            if(dict[it] == 0)
-                return false;
-            
-            dict[it]--;
+            dict[it-'a']--;
         }
             
         return true;
