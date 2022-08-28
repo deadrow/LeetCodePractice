@@ -39,7 +39,7 @@ public:
             
             int k = n+1;
             
-            if(q.size() < k && pq.empty())
+            if(q.size() < k && pq.empty()) // Insert idle and count
             {
                 int diff = k-q.size();
                 while(diff--)
