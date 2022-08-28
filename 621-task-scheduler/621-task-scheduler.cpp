@@ -17,14 +17,14 @@ public:
             pq.push({it.second, it.first});
         }
         
-        vector<string> ret;
+        int counter = 0;
         
         while(!pq.empty())
         {
             pair<int,char> top = pq.top();
             pq.pop();
             
-            ret.push_back(string(1, top.second));
+            counter++;
             
             top.first--;
             
@@ -44,7 +44,7 @@ public:
                 int diff = k-q.size();
                 while(diff--)
                 {
-                    ret.push_back("IDLE");
+                    counter++;
                     k--;
                 }
             }
@@ -60,6 +60,6 @@ public:
             }
         }
         
-        return ret.size();
+        return counter;
     }
 };
