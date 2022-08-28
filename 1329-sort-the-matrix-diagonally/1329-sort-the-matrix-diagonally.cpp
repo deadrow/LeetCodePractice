@@ -1,7 +1,7 @@
 class Solution {
 public:
     vector<vector<int>> diagonalSort(vector<vector<int>>& mat) {
-        unordered_map<int, multiset<int>> dict;
+        unordered_map<int, priority_queue<int, vector<int>, greater<>>> dict;
         
         int m = mat.size();
         int n = mat[0].size();
@@ -10,7 +10,7 @@ public:
         {
             for(int j=0;j<n;j++)
             {
-                dict[i-j].insert(mat[i][j]);
+                dict[i-j].push(mat[i][j]);
             }
         }
         
@@ -18,8 +18,8 @@ public:
         {
             for(int j=0;j<n;j++)
             {
-                mat[i][j] = *dict[i-j].begin();
-                dict[i-j].erase(dict[i-j].begin());
+                mat[i][j] = dict[i-j].top();
+                dict[i-j].pop();
             }
         }
         
