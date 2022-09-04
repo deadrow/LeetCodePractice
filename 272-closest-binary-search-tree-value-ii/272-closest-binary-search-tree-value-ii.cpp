@@ -11,23 +11,28 @@
  */
 class Solution {
 public:
-    priority_queue<pair<double, int>, vector<pair<double, int>>, greater<>>pq;
-    void inorder(TreeNode* root, double target)
+    priority_queue<pair<double, int>>pq;
+    void inorder(TreeNode* root, double target, int k)
     {
         if(!root)
             return;
         
-        inorder(root->left, target);
+        inorder(root->left, target, k);
+        
         pq.push({abs(root->val-target), root->val});
-        inorder(root->right, target);
+                
+        if(pq.size() > k)
+            pq.pop();
+        
+        inorder(root->right, target, k);
     }
     
     vector<int> closestKValues(TreeNode* root, double target, int k) {
         vector<int> ret;
         
-        inorder(root, target);
+        inorder(root, target, k);
         
-        while(!pq.empty() && k--)
+        while(!pq.empty())
         {
             ret.push_back(pq.top().second);
             pq.pop();
