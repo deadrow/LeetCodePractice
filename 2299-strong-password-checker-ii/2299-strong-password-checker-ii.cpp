@@ -20,11 +20,7 @@ public:
                 else if(isdigit(password[i]))
                     oneDigit = true;
                 else
-                {
-                    string specials("!@#$%^&*()-+");
-                    if(specials.find(password[i]) != string::npos)
-                        oneSpecial = true;
-                }
+                    oneSpecial = true;
             }
             else
                 return false;
