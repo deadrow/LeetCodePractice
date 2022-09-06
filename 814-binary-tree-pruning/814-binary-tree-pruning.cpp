@@ -11,53 +11,23 @@
  */
 class Solution {
 public:
-    pair<TreeNode*, bool> helper(TreeNode* root)
+    bool helper(TreeNode* root)
     {
         if(!root)
-            return {nullptr, false};
+            return false;
         
-        auto left = helper(root->left);
-        auto right = helper(root->right);
+        bool left = helper(root->left);
+        bool right = helper(root->right);
+        if(!left)
+            root->left = nullptr;
         
-        bool hasOne = false;
-        if(left.first)
-        {
-            if(left.first->val == 1 || left.second)
-            {
-                hasOne = true;
-            }
-            else
-                root->left = nullptr;
-        }
+        if(!right)
+            root->right = nullptr;
         
-        if(right.first)
-        {
-            if(right.first->val == 1 || right.second)
-            {
-                hasOne = true;
-            }
-            else
-                root->right = nullptr;
-        }
-        
-        if(!hasOne)
-        {
-            // check if root has one
-            if(root->val == 1)
-                hasOne = true;
-        }
-        
-        return {root, hasOne};
+        return root->val == 1 || left || right;
     }
     
     TreeNode* pruneTree(TreeNode* root) {
-        TreeNode* ret = helper(root).first;
-        if(ret)
-        {
-            if(ret->val == 0 && !ret->left && !ret->right)
-                ret = nullptr;
-        }
-        
-        return ret;
+        return helper(root) ? root : nullptr;
     }
 };
