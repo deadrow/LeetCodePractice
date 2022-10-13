@@ -6,7 +6,9 @@ public:
         if(size == 1)
             return "";
         
-        set<string>ret;
+        // it is pure greedy.
+        // Just replace the first char greater than 'a'
+        // if is it palindrome, discard it
         for(int i=0;i<size;i++)
         {
             string temp = palindrome;
