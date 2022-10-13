@@ -9,16 +9,12 @@ public:
         // it is pure greedy.
         // Just replace the first char greater than 'a'
         // if is it palindrome, discard it
-        for(int i=0;i<size;i++)
+        for(int i=0;i<size/2;i++)
         {
-            string temp = palindrome;
-            if(temp[i] > 'a')
+            if(palindrome[i] != 'a')
             {
-                temp[i] = 'a';
-                string rev = temp;
-                reverse(rev.begin(), rev.end());
-                if(rev != temp)
-                    return temp;
+                palindrome[i] = 'a';
+                return palindrome;
             }
         }
         
