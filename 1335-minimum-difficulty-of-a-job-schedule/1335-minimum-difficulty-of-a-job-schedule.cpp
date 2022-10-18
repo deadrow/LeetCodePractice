@@ -4,13 +4,14 @@ public:
     int dp(vector<int>& jobDifficulty, int i, int d)
     {
         if(d < 0)
-            return 300001;
+            return INT_MAX;
         
         if(i == jobDifficulty.size())
         {
+            // if days are 0 means we finished all jobs o
             if(d == 0)
                 return 0;
-            return 300001;
+            return INT_MAX;
         }
         
         if(memo[i][d] != -1)
@@ -21,7 +22,9 @@ public:
         for(int k=i;k<jobDifficulty.size();k++)
         {
             maxJob = max(maxJob, jobDifficulty[k]);
-            minDiff = min(minDiff, maxJob + dp(jobDifficulty, k+1, d-1));
+            int temp = dp(jobDifficulty, k+1, d-1);
+            if(temp!= INT_MAX)
+                minDiff = min(minDiff, maxJob + temp);
         }
         
         return memo[i][d] = minDiff;
