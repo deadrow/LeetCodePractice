@@ -1,12 +1,6 @@
 class Solution {
 public:
     int minMutation(string start, string end, vector<string>& bank) {
-        set<char> choices;
-        choices.insert('A');
-        choices.insert('C');
-        choices.insert('G');
-        choices.insert('T');
-        
         set<string>dict(bank.begin(), bank.end());
         
         if(dict.find(end) == dict.end())
@@ -30,7 +24,7 @@ public:
                 
                 for(int i=0;i<cur.size();i++)
                 {
-                    for(auto it : choices)
+                    for(auto it : "ACGT")
                     {
                         string newString(cur);
                         if(newString[i] != it)
