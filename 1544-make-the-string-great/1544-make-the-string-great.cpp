@@ -4,26 +4,17 @@ public:
         if(s.empty())
             return s;
         
-        stack<char> st;
-        
-        st.push(s[0]);
-        
-        for(int i=1;i<s.size();i++)
+        vector<char> st;
+
+        for(int i=0;i<s.size();i++)
         {
-            if(!st.empty() && (st.top() == (s[i]+32) || st.top() == (s[i]-32)))
-                st.pop();
+            if(!st.empty() && (st.back() == (s[i]+32) || st.back() == (s[i]-32)))
+                st.pop_back();
             else
-                st.push(s[i]);
+                st.push_back(s[i]);
         }
         
-        string ret;
-        while(!st.empty())
-        {
-            ret = st.top() + ret;
-            st.pop();
-        }
-            
-        
+        string ret(st.begin(), st.end());
         return ret;
     }
 };
