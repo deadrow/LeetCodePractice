@@ -6,12 +6,6 @@ public:
     }
     
     int next(int price) {
-        if(data.empty() || data.top().first > price)
-        {
-            data.push({price, 1});
-            return 1;
-        }
-            
         int days = 1;
         while(!data.empty() && data.top().first <= price)
         {
