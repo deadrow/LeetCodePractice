@@ -11,7 +11,7 @@ public:
         for(auto it : dict)
         {
             string cur = it.first;
-            string rev(cur.rbegin(), cur.rend());
+            string rev{cur[1], cur[0]};
             if(cur == rev)
             {
                 int freq = dict[cur];
