@@ -24,7 +24,7 @@ public:
                     count += (freq/2)*4;
                     
             }
-            else if(dict.find(rev) != dict.end())
+            else if(dict.count(rev))
                 count += min(dict[cur], dict[rev])*2;            
         }
         
