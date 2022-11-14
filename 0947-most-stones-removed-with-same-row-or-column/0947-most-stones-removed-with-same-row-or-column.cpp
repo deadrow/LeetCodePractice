@@ -4,14 +4,12 @@ public:
     UnionFind(int n)
         : parent(n)
         , rank(n)
-        , size(n)
-        , root_count(n)
+        , rootCount(n)
     {
         for(int i=0;i<n;i++)
         {
             parent[i] = i;
             rank[i] = 1;
-            size[i] = 1;
         }
     }
     
@@ -32,40 +30,26 @@ public:
             if(rank[rootX] > rank[rootY])
             {
                 parent[rootY] = rootX;
-                size[rootX] += size[rootY];
             }
             else if(rank[rootX] < rank[rootY])
             {
                 parent[rootX] = rootY;
-                size[rootY] += size[rootX];
             }
             else
             {
                 parent[rootY] = rootX;
-                size[rootX] += size[rootY];
                 rank[rootX] += 1;
             }
             
-            root_count--;
+            rootCount--;
         }
     }
-    
-    int getLargetSize()
-    {
-        int maxSize = 0;
-        for(auto it : size)
-        {
-            maxSize = max(maxSize, it);
-        }
-        return maxSize;
-    }
-    
-    int getRootCount() { return root_count; }
+
+    int getRootCount() { return rootCount; }
 private:
     vector<int>parent;
     vector<int>rank;
-    vector<int>size;
-    int root_count;
+    int rootCount;
 };
 
 class Solution {
