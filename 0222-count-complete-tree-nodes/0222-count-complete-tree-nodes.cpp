@@ -11,30 +11,29 @@
  */
 class Solution {
 public:
+    int leftHeight(TreeNode* root)
+    {
+        if(!root)
+            return 0;
+        return 1 + leftHeight(root->left);
+    }
+    
+    int rightHeight(TreeNode* root)
+    {
+        if(!root)
+            return 0;
+        return 1 + rightHeight(root->right);
+    }
+    
     int countNodes(TreeNode* root) {
         if(!root) return 0;
         
-        queue<TreeNode*>bfs;
-        bfs.push(root);
+        int left = leftHeight(root);
+        int right = rightHeight(root);
         
-        int nodes = 0;
-        while(!bfs.empty())
-        {
-            int size = bfs.size();
-            nodes += size;
-            for(int i=0;i<size;i++)
-            {
-                TreeNode* cur = bfs.front();
-                bfs.pop();
-                
-                if(cur->left)
-                    bfs.push(cur->left);
-                
-                if(cur->right)
-                    bfs.push(cur->right);
-            }
-        }
+        if(left == right)
+            return pow(2, left)-1;
         
-        return nodes;
+        return 1 + countNodes(root->left) + countNodes(root->right);
     }
 };
