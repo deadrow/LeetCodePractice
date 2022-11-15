@@ -25,6 +25,7 @@ public:
         return 1 + rightHeight(root->right);
     }
     
+    // Solution from https://www.youtube.com/watch?v=4wPlA_InnGY
     int countNodes(TreeNode* root) {
         if(!root) return 0;
         
