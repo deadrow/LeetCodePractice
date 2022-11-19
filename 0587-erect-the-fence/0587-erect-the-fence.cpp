@@ -14,12 +14,7 @@ public:
         if (v > 0) return +1; // counter-clockwise
         return 0;
     }
-    
-    bool equals(pt& a , pt& b)
-    {
-        return (a.x == b.x && a.y == b.y);
-    }
-    
+
     vector<vector<int>> outerTrees(vector<vector<int>>& trees) {
         // Mix of topcoder and Cp algorithm
         // https://www.topcoder.com/thrive/articles/convex-hull
