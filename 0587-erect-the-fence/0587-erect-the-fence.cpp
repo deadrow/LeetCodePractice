@@ -7,6 +7,8 @@ public:
     
     int ccw(pt& a , pt& b , pt& c)
     {
+        // How to find orientation
+        // https://www.geeksforgeeks.org/orientation-3-ordered-points/
         double v = a.x*(b.y-c.y)+b.x*(c.y-a.y)+c.x*(a.y-b.y);
         if (v < 0) return -1; // clockwise
         if (v > 0) return +1; // counter-clockwise
@@ -19,8 +21,9 @@ public:
     }
     
     vector<vector<int>> outerTrees(vector<vector<int>>& trees) {
-        
-        // https://www.topcoder.com/thrive/articles/convex-hull?utm_source=thrive&utm_campaign=thrive-feed&utm_medium=rss-feed
+        // Mix of topcoder and Cp algorithm
+        // https://www.topcoder.com/thrive/articles/convex-hull
+        // https://cp-algorithms.com/geometry/convex-hull.html#implementation
         
         if(trees.size() <= 3)
             return trees;
@@ -31,9 +34,11 @@ public:
             points.push_back({it[0], it[1]});
         }
         
+        // Find the lowest rightmost point
         pt p0 = *min_element(points.begin(), points.end(), [](pt a, pt b) {
             return make_pair(a.y, a.x) < make_pair(b.y, b.x);
         });
+        
         
         sort(points.begin(), points.end(), [&](pt& a, pt& b){
             int v = ccw(p0, a, b);
@@ -45,6 +50,7 @@ public:
             return v < 0;
         });
           
+        
         int i = points.size()-1;
         while (i >= 0 && ccw(p0, points[i], points.back()) == 0) i--;
         reverse(points.begin()+i+1, points.end());
@@ -55,6 +61,7 @@ public:
 
         vector<vector<int>> ret;
 
+        // remove all anticlockwise combination of 3 points
         for(int k=2;k<points.size();k++)
         {
             pt top = hull.top();
