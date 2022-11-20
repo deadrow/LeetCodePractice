@@ -4,14 +4,14 @@ public:
         stack<int>st;
         
         int sign = 1;
-        long curNum = 0;
+        int curNum = 0;
         int res = 0;
         
         for(auto i : s)
         {
             if(isdigit(i))
             {
-                curNum = curNum*10 + i-'0';
+                curNum = curNum*10 + (i-'0');
             }
             else 
             {
