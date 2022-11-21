@@ -5,12 +5,11 @@ public:
         
         int m = maze.size();
         int n = maze[0].size();
-        vector<vector<bool>>visited(m, vector<bool>(n));
         
         queue<pair<int,int>>bfs;
         
         bfs.push({entrance[0], entrance[1]});
-        visited[entrance[0]][entrance[1]] = true;
+        maze[entrance[0]][entrance[1]] = '-';
             
         int steps = 0;
         while(!bfs.empty())
