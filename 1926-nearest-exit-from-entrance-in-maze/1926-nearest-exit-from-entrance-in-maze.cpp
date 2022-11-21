@@ -24,15 +24,14 @@ public:
                 if(!(cur.first == entrance[0] && cur.second == entrance[1]) && (cur.first == 0 || cur.first == m-1 || cur.second == 0 || cur.second == n-1))
                     return steps;
                 
-                // visited[cur.first][cur.second] = true;
                 for(auto it : directions)
                 {
                     int nRow = cur.first + it.first;
                     int nCol = cur.second + it.second;
-                    if(nRow >= 0 && nRow < m && nCol >= 0 && nCol < n && maze[nRow][nCol] != '+' &&  !visited[nRow][nCol])
+                    if(nRow >= 0 && nRow < m && nCol >= 0 && nCol < n && maze[nRow][nCol] == '.')
                     {
                         bfs.push({nRow, nCol});
-                        visited[nRow][nCol] = true;
+                        maze[nRow][nCol] = '-';
                     }
                 }
                 
