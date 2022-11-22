@@ -1,39 +1,37 @@
 class Solution {
 public:
-    vector<int> squares;
-    vector<vector<int>>memo;
-    int dp(int i, int target)
+    vector<int>squares;
+    vector<int>memo;
+    int dp(int target)
     {
         if(target == 0)
             return 0;
         
-        if(i < 0 || target < 0)
-            return INT_MAX;
+        if(memo[target] != -1)
+            return memo[target];
         
-        if(memo[i][target] != -1)
-            return memo[i][target];
-        
-        int take = INT_MAX;
-        if(squares[i] <= target)
+        int ret = INT_MAX;
+        for(auto it : squares)
         {
-            int ret = dp(i, target-squares[i]);
-            take = ret != INT_MAX ? ret+1: take;
+            if(target >= it)
+            {
+                ret = min(ret, dp(target-it)+1);
+            }
         }
         
-        int leave = dp(i-1, target);
-        
-        return memo[i][target] = min(take, leave);
+        return memo[target] = ret;
     }
     
     int numSquares(int n) {
-        int i = sqrt(n);
-        while(i >= 1)
+        
+        int i = 1;
+        while(i*i <= n)
         {
             squares.push_back(i*i);
-            i--;
+            i++;
         }
         
-        memo.resize(squares.size(), vector<int>(n+1,-1));
-        return dp(squares.size()-1, n);
+        memo.resize(n+1, -1);
+        return dp(n);
     }
 };
