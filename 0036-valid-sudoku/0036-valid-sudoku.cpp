@@ -33,4 +33,70 @@ public:
         
         return true;
     }
+    
+    // very old
+    bool isValidSudoku1(vector<vector<char>>& board) {
+        int hash[10] = {0};
+
+        for(int i=0;i<9;i++)
+        {
+            for(int j=0;j<9;j++)
+            {
+                if(board[i][j] == '.')
+                   continue;
+                   
+                if(hash[board[i][j] -'0'] == 1)
+                {
+                    return false;
+                }
+                else
+                    hash[board[i][j]-'0']++;
+            }
+            memset(hash, 0, sizeof(hash));
+        }
+        
+        for(int i=0;i<9;i++)
+        {
+            for(int j=0;j<9;j++)
+            {
+                if(board[j][i] == '.')
+                   continue;
+                   
+                if(hash[board[j][i] - '0'] == 1)
+                {
+                    return false;
+                }
+                else
+                    hash[board[j][i]-'0']++;
+            }
+            
+            memset(hash, 0, sizeof(hash));
+        }
+        
+
+        for(int i=0;i<9;i=i+3)
+        {
+            for(int j=0;j<9;j=j+3)
+            {
+                for(int k=i;k<i+3;k++)
+                {
+                    for(int l=j;l<j+3;l++)
+                    {
+                        if(board[k][l] == '.')
+                           continue;
+                           
+                        if(hash[board[k][l] - '0'] == 1)
+                        {
+                            return false;
+                        }
+                        else
+                            hash[board[k][l]-'0']++;
+                    }
+                }
+                memset(hash, 0, sizeof(hash));
+            }
+        }
+        
+        return true;
+    }
 };
