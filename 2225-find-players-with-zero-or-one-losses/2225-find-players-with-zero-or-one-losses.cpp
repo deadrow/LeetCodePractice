@@ -7,28 +7,27 @@ public:
         for(auto it : matches)
         {
             winners[it[0]]++;
-            
             losers[it[1]]++;
         }
         
         vector<vector<int>>ret;
         
         vector<int>wins;
+        vector<int>loses;
+        
         for(auto it : winners)
         {
             if(losers.find(it.first) == losers.end())
                 wins.push_back(it.first);
         }
-        
-        ret.push_back(wins);
-        
-        vector<int>loses;
+
         for(auto it : losers)
         {
             if(it.second == 1)
                 loses.push_back(it.first);
         }
         
+        ret.push_back(wins);
         ret.push_back(loses);
         return ret;
     }
