@@ -10,8 +10,6 @@ public:
             losers[it[1]]++;
         }
         
-        vector<vector<int>>ret;
-        
         vector<int>wins;
         vector<int>loses;
         
@@ -27,6 +25,7 @@ public:
                 loses.push_back(it.first);
         }
         
+        vector<vector<int>>ret;
         ret.push_back(wins);
         ret.push_back(loses);
         return ret;
