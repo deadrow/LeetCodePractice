@@ -1,8 +1,6 @@
 class Solution {
 public:
     bool halvesAreAlike(string s) {
-        // unordered_map<char, int> first;
-        // unordered_map<char, int> second;
         multiset<char>first;
         multiset<char>second;
         
@@ -22,16 +20,7 @@ public:
         
         if(first.size() != second.size())
             return false;
-        
-//         for(auto it : first)
-//         {
-//             if(second.find(it.first) == second.end())
-//                 return false;
-            
-//             if(it.second != second[it.first])
-//                 return false;
-//         }
-        
+
         return true;
             
     }
