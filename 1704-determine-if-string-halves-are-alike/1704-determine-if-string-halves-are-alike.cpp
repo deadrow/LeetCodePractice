@@ -13,12 +13,7 @@ public:
             if(vowels.find(s[j]) != string::npos)
                 second.push_back(s[j]);
         }
-        
-        for(int i=s.size()/2;i<s.size();i++)
-        {
-            
-        }
-        
+
         if(first.size() != second.size())
             return false;
 
