@@ -6,16 +6,17 @@ public:
         
         string vowels("aeiouAEIOU");
         
-        for(int i=0;i<s.size()/2;i++)
+        for(int i=0, j=s.size()/2;i<s.size()/2;i++,j++)
         {
             if(vowels.find(s[i]) != string::npos)
                 first.push_back(s[i]);
+            if(vowels.find(s[j]) != string::npos)
+                second.push_back(s[j]);
         }
         
         for(int i=s.size()/2;i<s.size();i++)
         {
-            if(vowels.find(s[i]) != string::npos)
-                second.push_back(s[i]);
+            
         }
         
         if(first.size() != second.size())
