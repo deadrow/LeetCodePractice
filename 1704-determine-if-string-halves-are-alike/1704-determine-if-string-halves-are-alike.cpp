@@ -1,21 +1,21 @@
 class Solution {
 public:
     bool halvesAreAlike(string s) {
-        multiset<char>first;
-        multiset<char>second;
+        vector<char>first;
+        vector<char>second;
         
         string vowels("aeiouAEIOU");
         
         for(int i=0;i<s.size()/2;i++)
         {
             if(vowels.find(s[i]) != string::npos)
-                first.insert(s[i]);
+                first.push_back(s[i]);
         }
         
         for(int i=s.size()/2;i<s.size();i++)
         {
             if(vowels.find(s[i]) != string::npos)
-                second.insert(s[i]);
+                second.push_back(s[i]);
         }
         
         if(first.size() != second.size())
