@@ -35,11 +35,8 @@ public:
         sort(countFirst.begin(), countFirst.end());
         sort(countSecond.begin(), countSecond.end());
         
-        for(int i=0;i<countFirst.size();i++)
-        {
-            if(countFirst[i] != countSecond[i])
-                return false;
-        }
+        if(countFirst != countSecond)
+            return false;
         
         return true;
     }
