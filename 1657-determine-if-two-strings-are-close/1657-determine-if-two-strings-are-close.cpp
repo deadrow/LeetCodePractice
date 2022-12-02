@@ -1,6 +1,10 @@
 class Solution {
 public:
     bool closeStrings(string word1, string word2) {
+        
+        if(word1.size() != word2.size())
+            return false;
+        
         map<char, int> first;
         map<char, int> second;
         
@@ -13,16 +17,8 @@ public:
         if(first.size() != second.size())
             return false;
         
-        // check if chars are same on not
-        auto it1 = first.begin();
-        auto it2 = second.begin();
-        while(it1 != first.end())
-        {
-            if(it1->first != it2->first)
-                return false;
-            it1++;
-            it2++;
-        }
+        if(!std::equal(first.begin(), first.end(), second.begin(), [](auto a, auto b) { return a.first == b.first;}))
+            return false;
         
         vector<int>countFirst;
         for(auto it : first)
