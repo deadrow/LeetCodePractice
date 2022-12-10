@@ -13,7 +13,7 @@ class Solution {
 public:
     int MOD = 1000000007;
     long maxProd = 0;
-    int totalSum = 0;
+    long totalSum = 0;
 
     int dfs(TreeNode* root)
     {
@@ -24,7 +24,7 @@ public:
         int right = dfs(root->right);
         
         int curSum = left+root->val+right;
-        maxProd = max(maxProd, (long)curSum*(totalSum-curSum));
+        maxProd = max(maxProd, curSum*(totalSum-curSum));
         return curSum;
     }
     
