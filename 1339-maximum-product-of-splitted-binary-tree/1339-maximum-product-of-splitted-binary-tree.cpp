@@ -14,15 +14,7 @@ public:
     int MOD = 1000000007;
     long maxProd = 0;
     int totalSum = 0;
-    
-    int inorderSum(TreeNode* root)
-    {
-        if(!root)
-            return 0;
-        
-        return root->val + inorderSum(root->left) + inorderSum(root->right);
-    }
-    
+
     int dfs(TreeNode* root)
     {
         if(!root)
@@ -37,7 +29,7 @@ public:
     }
     
     int maxProduct(TreeNode* root) {
-        totalSum = inorderSum(root);
+        totalSum = dfs(root);
         dfs(root);
         return maxProd% MOD;
     }
