@@ -12,13 +12,9 @@ public:
         int idx = 0;
         while(idx < n && additionalRocks >= remaining[idx])
         {
-            if(remaining[idx] == 0)
-                idx++;
-            else
-            {
+            if(remaining[idx] != 0)
                 additionalRocks -= remaining[idx];
-                idx++;
-            }
+            idx++;
         }
         
         return idx;
