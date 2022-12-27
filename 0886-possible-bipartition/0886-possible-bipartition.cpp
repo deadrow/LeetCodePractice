@@ -2,6 +2,8 @@ class Solution {
 public:
     set<pair<int,int>> edges;
     
+    // Graph coloring algorithm. Assign colors to vertexes
+    // 1 and 0 to nodes
     bool bfs(int u, vector<vector<int>>& adjList, vector<int>& color)
     {
         queue<int>bfs;
