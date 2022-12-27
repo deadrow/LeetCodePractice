@@ -26,4 +26,19 @@ public:
         memo.resize(nums.size(), -1);
         return dp(nums, 0);
     }
+    
+    // Greedy from solutions
+    bool canJump1(vector<int>& nums)
+    {
+        int n = (int)nums.size();
+        
+        int leftReachableIndex = n-1;
+        for(int i=n-2;i>=0;i--)
+        {
+            if(i+ nums[i] >= leftReachableIndex)
+                leftReachableIndex = i;
+        }
+
+        return leftReachableIndex == 0;
+    }
 };
