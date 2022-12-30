@@ -23,7 +23,7 @@ public:
                 
                 for(auto it : graph[top.back()])
                 {
-                    vector cur(top);
+                    vector<int> cur(top);
                     cur.push_back(it);
                     bfs.push(cur);
                 }
