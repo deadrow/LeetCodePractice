@@ -4,7 +4,7 @@ public:
         sort(points.begin(), points.end());
 
         int minEnd = INT_MAX;
-        int arrows = 0;
+        int arrows = 1;
         for(int i=0;i<points.size();i++)
         {
             if(points[i][0] > minEnd)
@@ -16,6 +16,6 @@ public:
                 minEnd = min(minEnd, points[i][1]);
         }
         
-        return arrows+1;
+        return arrows;
     }
 };
