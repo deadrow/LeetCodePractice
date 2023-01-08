@@ -11,7 +11,7 @@ public:
             return 1;
         
         unordered_map<double, int> slopeMap;
-		
+        
 		int maxPoints = 0;
 		
 		for(int i=0;i<points.size();i++)
