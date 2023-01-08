@@ -12,33 +12,33 @@ public:
         
         unordered_map<double, int> slopeMap;
         
-		int maxPoints = 0;
-		
-		for(int i=0;i<points.size();i++)
-		{
-			int curMax = 0;
-			int verticalPoints = 0;
-			for(int j=i+1;j<points.size();j++)
-			{
-				if(points[i][0] == points[j][0])
-					verticalPoints++;
-				else
-				{
-					double curSlope = slope(points[i], points[j]);
-					slopeMap[curSlope]++;
-				}
-			}
-			
-			for(auto it : slopeMap)
+        int maxPoints = 0;
+        
+        for(int i=0;i<points.size();i++)
+        {
+            int curMax = 0;
+            int verticalPoints = 0;
+            for(int j=i+1;j<points.size();j++)
+            {
+                if(points[i][0] == points[j][0])
+                    verticalPoints++;
+                else
+                {
+                    double curSlope = slope(points[i], points[j]);
+                    slopeMap[curSlope]++;
+                }
+            }
+            
+            for(auto it : slopeMap)
             {
                 curMax = max(curMax, it.second);
             }
-			
+            
             curMax = max(curMax+1, verticalPoints+1);
-			maxPoints = max(maxPoints, curMax);
-			slopeMap.clear();
-		}
-		
-		return maxPoints;
+            maxPoints = max(maxPoints, curMax);
+            slopeMap.clear();
+        }
+        
+        return maxPoints;
     }
 };
