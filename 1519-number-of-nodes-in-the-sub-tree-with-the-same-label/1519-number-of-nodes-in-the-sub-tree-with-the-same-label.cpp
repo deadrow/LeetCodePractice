@@ -13,9 +13,7 @@ public:
                 vector<int> child = dfs(adjList, it, labels);
                 
                 for(int i=0;i<26;i++)
-                {
                     cur[i] += child[i];
-                }
                 
                 cur[labels[it]-'a']++;
             }
