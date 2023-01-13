@@ -19,7 +19,7 @@ public:
             }
         }
         
-        result[src] += cur[labels[src]-'a']+1;
+        result[src] = cur[labels[src]-'a']+1;
     
         return cur;
     }
