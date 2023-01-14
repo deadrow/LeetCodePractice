@@ -5,17 +5,13 @@ public:
         : root(size)
     {
         for(int i=0;i<size;i++)
-        {
             root[i] = i;
-        }
     }
     
     int find(int x)
     {
         if(x == root[x])
-        {
             return x;
-        }
         
         return root[x] = find(root[x]);
     }
@@ -31,13 +27,7 @@ public:
             else
                 root[rootX] = rootY;
         }
-    }
-    
-    bool connected(int x, int y)
-    {
-        return find(x) == find(y);
-    }
-    
+    }    
 private:
     vector<int> root;
 };
