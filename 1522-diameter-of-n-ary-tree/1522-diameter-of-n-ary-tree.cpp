@@ -26,7 +26,7 @@ public:
         priority_queue<int> paths;
         for(auto it : root->children)
         {
-            int childPaths = dfs(it);
+            int childPaths = dfs(it)+1;
             paths.push(childPaths);
         }
         
@@ -43,7 +43,7 @@ public:
             curMax += paths.top();
         
         treeDiameter = max(treeDiameter, curMax);
-        return maxPath+1;
+        return maxPath;
     }
     
     int diameter(Node* root) {
