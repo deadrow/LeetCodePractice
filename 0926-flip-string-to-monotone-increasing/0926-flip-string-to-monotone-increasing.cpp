@@ -27,10 +27,31 @@ public:
         }
     }
     
-    int minFlipsMonoIncr(string s) {
+    int minFlipsMonoIncr1(string s) {
         // check how many 0s and 1s when 1 is started
         
         memo.resize(s.size(), vector<int>(2, -1));
         return dp(s, 0, false);
+    }
+    
+    int minFlipsMonoIncr(string s) {
+        // neetcode io solution
+        
+        int ones =0;
+        int res =0;
+        for(int i=0;i<s.size();i++)
+        {
+            if(s[i] == '0')
+            {
+                // till this point string is monotonic.
+                // now decide if we want to flip all the previous
+                // ones to 0 or flip this o to 1
+                res = min(1+res, ones);
+            }
+            else
+                ones++;
+        }
+        
+        return res;
     }
 };
