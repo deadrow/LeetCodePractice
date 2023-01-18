@@ -1,6 +1,13 @@
 class Solution {
 public:
     int maxSubarraySumCircular(vector<int>& nums) {
+        
+        // neetcode io solution
+        
+        // for circular array
+        // if we find min subarray somewhere in the middle,
+        // then the remaining array must be max subarray sum
+        
         int curMax = 0;
         int bestMax = nums[0];
         int curMin = 0;
