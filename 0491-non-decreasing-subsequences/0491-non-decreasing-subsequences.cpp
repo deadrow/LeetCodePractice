@@ -1,12 +1,11 @@
 class Solution {
 public:
-    
-    set<vector<int>> ures;
+    set<vector<int>> uniqueSets;
     void backtrack(vector<int>& nums, vector<int>cur, int cur_i)
     {
         if(cur.size() >= 2)
         {
-            ures.insert(cur);
+            uniqueSets.insert(cur);
         }
                 
         for(int i=cur_i;i<nums.size();i++)
@@ -22,7 +21,7 @@ public:
         vector<int>cur;
         backtrack(nums, cur, 0);
         
-        vector<vector<int>>res(ures.begin(), ures.end());
+        vector<vector<int>>res(uniqueSets.begin(), uniqueSets.end());
         return res;
     }
 };
