@@ -1,19 +1,25 @@
 class Solution {
 public:
-    set<vector<int>> uniqueSets;
-    void backtrack(vector<int>& nums, vector<int>cur, int cur_i)
+    vector<vector<int>> res;
+    
+    void backtrack(vector<int>& nums, vector<int>&cur, int cur_i)
     {
-        if(cur.size() >= 2)
-        {
-            uniqueSets.insert(cur);
-        }
+        if(cur.size() > 1)
+            res.push_back(cur);
                 
+        set<int> curNums;
         for(int i=cur_i;i<nums.size();i++)
         {
+            if(curNums.find(nums[i]) != curNums.end())
+                continue;
+            
             if(cur.empty() || nums[i] >= cur.back())
+            {
+                curNums.insert(nums[i]);
                 cur.push_back(nums[i]);
-            backtrack(nums, cur, i+1);
-            cur.pop_back();
+                backtrack(nums, cur, i+1);
+                cur.pop_back();
+            }
         }
     }
     
@@ -21,7 +27,7 @@ public:
         vector<int>cur;
         backtrack(nums, cur, 0);
         
-        vector<vector<int>>res(uniqueSets.begin(), uniqueSets.end());
+        // vector<vector<int>>res(uniqueSets.begin(), uniqueSets.end());
         return res;
     }
 };
