@@ -17,14 +17,17 @@ public:
 
         for(int steps=1;steps<=3;steps++)
         {
-            if(cur_i+steps > s.size())
-                break;
+//             if(cur_i+steps > s.size())
+//                 break;
             
-            string sub = s.substr(cur_i, steps);
-            if(sub.size() > 1 && ((sub[0] == '0') || (stoi(sub) > 255)))
-                continue;
+            if(cur_i + steps <= s.size())
+            {
+                string sub = s.substr(cur_i, steps);
+                if(sub.size() > 1 && ((sub[0] == '0') || (stoi(sub) > 255)))
+                    continue;
 
-            backtrack(s, cur + sub + ((dots == 3) ? "" : "."), cur_i+steps, dots+1);
+                backtrack(s, cur + sub + ((dots == 3) ? "" : "."), cur_i+steps, dots+1);
+            }
         }
     }
 
