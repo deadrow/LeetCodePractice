@@ -17,9 +17,6 @@ public:
 
         for(int steps=1;steps<=3;steps++)
         {
-//             if(cur_i+steps > s.size())
-//                 break;
-            
             if(cur_i + steps <= s.size())
             {
                 string sub = s.substr(cur_i, steps);
