@@ -23,11 +23,48 @@ public:
         }
     }
     
-    vector<vector<int>> findSubsequences(vector<int>& nums) {
+    vector<vector<int>> findSubsequences1(vector<int>& nums) {
         vector<int>cur;
         backtrack(nums, cur, 0);
-        
-        // vector<vector<int>>res(uniqueSets.begin(), uniqueSets.end());
         return res;
+    }
+    
+    vector<vector<int>> findSubsequences(vector<int>& nums) {
+        // bitmasking solution
+        // basically we can represent vector of n size
+        // 2^n numbers
+        
+        int n = nums.size();
+        set<vector<int>> unique;
+        
+        for(int i=0;i<(1<<n);i++)
+        {
+            vector<int>sequence;
+            for(int j=0;j<n;j++)
+            {
+                if(i & (1 << j))
+                    sequence.push_back(nums[j]);
+            }
+            
+            if(sequence.size() > 1)
+            {
+                bool increasing = true;
+            
+                for(int k=1;k<sequence.size();k++)
+                {
+                    if(sequence[k] < sequence[k-1])
+                    {
+                        increasing = false;
+                        break;
+                    }
+                }
+
+                if(increasing)
+                    unique.insert(sequence);
+            }
+
+        }
+        
+        return vector(unique.begin(), unique.end());
     }
 };
