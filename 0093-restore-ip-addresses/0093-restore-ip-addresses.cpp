@@ -6,13 +6,9 @@ public:
     {
         if(dots > 3)
         {
-            if(cur_i != s.size())
-                return;
-            else
-            {
+            if(cur_i == s.size())
                 res.push_back(cur);
-                return;
-            }
+            return;
         }
 
         for(int steps=1;steps<=3;steps++)
