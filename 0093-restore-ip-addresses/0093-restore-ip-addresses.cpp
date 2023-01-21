@@ -6,9 +6,9 @@ public:
     {
         if(dots > 3)
         {
-            if(cur_i == s.size())
+            if(cur_i == s.size()) // we reached end of string
                 res.push_back(cur);
-            return;
+            return; // return in other cases
         }
 
         for(int steps=1;steps<=3;steps++)
