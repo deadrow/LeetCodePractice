@@ -1,36 +1,21 @@
 class Solution {
 public:
     int findJudge(int n, vector<vector<int>>& trust) {
-        if(n == 1)
-            return 1;
-        
-        unordered_map<int, unordered_set<int>>dict;
+        vector<int>indegree(n+1);
+        vector<int>outdegree(n+1);
         
         for(auto it : trust)
-            dict[it[1]].insert(it[0]);
-        
-        int counts = 0;
-        
-        int ret = -1;
-        for(auto it : dict)
         {
-            // check if any dict has n-1 size
-            // it should be only one dict
-            if(it.second.size() == n-1)
-            {
-                for(auto it1 : it.second)
-                {
-                    if(dict.find(it1) != dict.end())
-                    {
-                        if(dict[it1].find(it.first) != dict[it1].end())
-                            return -1;
-                    }  
-                }
-                
-                ret = it.first;
-            }
+            indegree[it[1]]++;
+            outdegree[it[0]]++;
         }
         
-        return ret;
+        for(int i=1;i<=n;i++)
+        {
+            if(indegree[i] == n-1 && outdegree[i] == 0)
+                return i;
+        }
+        
+        return -1;
     }
 };
