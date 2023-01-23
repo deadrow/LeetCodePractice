@@ -4,7 +4,7 @@ public:
         if(n == 1)
             return 1;
         
-        map<int, set<int>>dict;
+        unordered_map<int, unordered_set<int>>dict;
         
         for(auto it : trust)
             dict[it[1]].insert(it[0]);
