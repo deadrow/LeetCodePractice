@@ -1,6 +1,6 @@
 class Solution {
 public:
-    void bfs(vector<vector<int>>& adjList, vector<int>& dist, int start)
+    void bfs(vector<int>& edges, vector<int>& dist, int start)
     {
         dist[start] = 0;
         
@@ -12,7 +12,9 @@ public:
             int u = bfs.front();
             bfs.pop();
             
-            for(auto v : adjList[u])
+            int v = edges[u];
+            
+            if(v != -1)
             {
                 if(dist[v] > dist[u]+1)
                 {
@@ -25,19 +27,12 @@ public:
     
     int closestMeetingNode(vector<int>& edges, int node1, int node2) {
         int n = edges.size();
-        vector<vector<int>>adjList(n);
-        
-        for(int i=0;i<n;i++)
-        {
-            if(edges[i] != -1)
-                adjList[i].push_back(edges[i]);
-        }
-        
+
         vector<int>dist1(n, INT_MAX);
         vector<int>dist2(n, INT_MAX);
         
-        bfs(adjList, dist1, node1);
-        bfs(adjList, dist2, node2);
+        bfs(edges, dist1, node1);
+        bfs(edges, dist2, node2);
         
         int curMin = INT_MAX;
         
