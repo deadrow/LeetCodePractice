@@ -12,10 +12,8 @@ public:
             int u = bfs.front();
             bfs.pop();
             
-            for(auto it : adjList[u])
+            for(auto v : adjList[u])
             {
-                int v = it;
-                
                 if(dist[v] > dist[u]+1)
                 {
                     dist[v] = dist[u]+1;
