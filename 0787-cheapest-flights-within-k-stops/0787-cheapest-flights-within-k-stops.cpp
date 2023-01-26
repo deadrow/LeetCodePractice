@@ -8,38 +8,35 @@ public:
             adjList[it[0]].push_back({it[1], it[2]});
         }
         
-        queue<pair<int,int>>bfs;
-        bfs.push({src,0});
+        queue<vector<int>>bfs;
+        bfs.push({src, 0, 0});
         
         vector<bool>visited(n);
         
         vector<int>dist(n, INT_MAX);
         dist[src] = 0;
         
-        int stops=0;
-        while(!bfs.empty() && stops<=k)
+        while(!bfs.empty())
         {
-            int size = bfs.size();
-            for(int i=0;i<size;i++)
+            int u = bfs.front()[0];
+            int distance = bfs.front()[1];
+            int stops = bfs.front()[2];
+            bfs.pop();
+
+            if(stops > k)
+                continue;
+            
+            for(auto it : adjList[u])
             {
-                int u = bfs.front().first;
-                int distance = bfs.front().second;
-                bfs.pop();
+                int v = it.first;
+                int weight = it.second;
 
-                for(auto it : adjList[u])
+                if(dist[v] > distance+weight)
                 {
-                    int v = it.first;
-                    int weight = it.second;
-
-                    if(dist[v] > (distance+weight))
-                    {
-                        dist[v] = distance+weight;
-                        bfs.push({v, dist[v]});
-                    }
+                    dist[v] = distance+weight;
+                    bfs.push({v, dist[v], stops+1});
                 }
             }
-
-            stops++;
         }
         
         
