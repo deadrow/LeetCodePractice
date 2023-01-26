@@ -45,7 +45,8 @@ public:
     
     // Bellman ford
     int findCheapestPrice(int n, vector<vector<int>>& flights, int src, int dst, int k) {
-        // Distance from source to all other nodes.
+        // Distance from source to all other nodes by using n edges
+        // Bellman ford calculates min distance with 1,2,3,4,.... n edges
         vector<int> dist(n, INT_MAX);
         dist[src] = 0;
 
