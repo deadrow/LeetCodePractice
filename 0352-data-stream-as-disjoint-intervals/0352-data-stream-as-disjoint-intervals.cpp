@@ -1,38 +1,48 @@
 class SummaryRanges {
 public:
-    vector<vector<int>>intervals;
     set<int>track;
     SummaryRanges() {
         
     }
     
     void addNum(int value) {
-        if(track.find(value) == track.end())
-        {
-            track.insert(value);
-            intervals.push_back({value,value});
-        }
-            
+        track.insert(value);
     }
     
     vector<vector<int>> getIntervals() {
         
         vector<vector<int>> res;
         
-        sort(intervals.begin(), intervals.end());
+        int prev = -1;
         
-        res.push_back(intervals[0]);
-        for(int j=1;j<intervals.size();j++)
+        for(auto it : track)
         {
-            if(intervals[j][0]-1 == res.back()[1])
+            if(prev == -1)
             {
-                res.back()[1] = max(intervals[j][1],res.back()[1]);
+                res.push_back({it,it});
+            }
+            else if(it-1 == prev)
+            {
+                res.back()[1] = it;
             }
             else
-                res.push_back(intervals[j]);
+                res.push_back({it,it});
+            
+            prev = it;
         }
         
-        return intervals = res;
+//         res.push_back(intervals[0]);
+//         for(int j=1;j<intervals.size();j++)
+//         {
+//             if(intervals[j][0]-1 == res.back()[1])
+//             {
+//                 res.back()[1] = max(intervals[j][1],res.back()[1]);
+//             }
+//             else
+//                 res.push_back(intervals[j]);
+//         }
+        
+        return res;
     }
 };
 
