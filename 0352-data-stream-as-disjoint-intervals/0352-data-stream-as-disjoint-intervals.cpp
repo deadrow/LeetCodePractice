@@ -18,13 +18,9 @@ public:
         for(auto it : track)
         {
             if(prev == -1)
-            {
                 res.push_back({it,it});
-            }
             else if(it-1 == prev)
-            {
                 res.back()[1] = it;
-            }
             else
                 res.push_back({it,it});
             
