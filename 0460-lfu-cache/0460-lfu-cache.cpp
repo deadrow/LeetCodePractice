@@ -7,7 +7,6 @@ public:
     map<int, pair<int, list<int>::iterator> > keyToCountItrAddress;
     LFUCache(int capacity) {
         this->capacity = capacity;
-        
     }
     
     int get(int key) {
@@ -15,18 +14,7 @@ public:
         if(it ==  keyToCountItrAddress.end())
             return -1;
         
-        int curCount = keyToCountItrAddress[key].first;
-        auto countMapItr = keyToCountItrAddress[key].second;
-        
-        int newCount = curCount+1;
-        countMapToList[curCount].erase(countMapItr);
-        
-        if(countMapToList[curCount].empty())
-            countMapToList.erase(curCount);
-        
-        countMapToList[newCount].push_front(key);
-                
-        keyToCountItrAddress[key] = {newCount, countMapToList[newCount].begin()};
+        incrementCount(key);
         
         return keyToValueMap[key];
     }
@@ -64,21 +52,25 @@ public:
         }
         else
         {
-            int curCount = keyToCountItrAddress[key].first;
-            auto countMapItr = keyToCountItrAddress[key].second;
-            
-            int newCount = curCount+1;
-            countMapToList[curCount].erase(countMapItr);
-            
-            if(countMapToList[curCount].empty())
-                countMapToList.erase(curCount);
-            
-            countMapToList[newCount].push_front(key);
+            incrementCount(key);
             
             keyToValueMap[key] = value;
-            
-            keyToCountItrAddress[key] = {newCount, countMapToList[newCount].begin()};
         }
+    }
+    
+    void incrementCount(int key){
+        int curCount = keyToCountItrAddress[key].first;
+        auto countMapItr = keyToCountItrAddress[key].second;
+        
+        int newCount = curCount+1;
+        countMapToList[curCount].erase(countMapItr);
+        
+        if(countMapToList[curCount].empty())
+            countMapToList.erase(curCount);
+        
+        countMapToList[newCount].push_front(key);
+        
+        keyToCountItrAddress[key] = {newCount, countMapToList[newCount].begin()};
     }
 };
 
