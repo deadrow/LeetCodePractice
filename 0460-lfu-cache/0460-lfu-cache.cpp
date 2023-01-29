@@ -43,19 +43,16 @@ public:
             int newCount = 1;
             countMapToList[newCount].push_front(key);
             
-            keyToValueMap[key] = value;
-            
             keyToCountItrAddress[key] = {newCount, countMapToList[newCount].begin()};
             
-
             curSize++;
         }
         else
         {
             incrementCount(key);
-            
-            keyToValueMap[key] = value;
         }
+        
+        keyToValueMap[key] = value;
     }
     
     void incrementCount(int key){
