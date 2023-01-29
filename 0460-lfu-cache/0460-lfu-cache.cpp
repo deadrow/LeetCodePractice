@@ -3,8 +3,8 @@ public:
     int capacity{0};
     int curSize{0};
     map<int, list<int>> countMapToList;
-    map<int,int> keyToValueMap;
-    map<int, pair<int, list<int>::iterator> > keyToCountItrAddress;
+    unordered_map<int,int> keyToValueMap;
+    unordered_map<int, pair<int, list<int>::iterator> > keyToCountItrAddress;
     LFUCache(int capacity) {
         this->capacity = capacity;
     }
