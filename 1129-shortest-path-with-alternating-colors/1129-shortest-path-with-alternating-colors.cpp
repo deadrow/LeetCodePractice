@@ -33,7 +33,6 @@ public:
             {
                 if(color != prevColor && dist[v][color] > steps+1)
                 {
-                    // visited[v][color] = true;
                     bfs.push({v, steps+1, color});
                     dist[v][color] = steps+1;
                 }
