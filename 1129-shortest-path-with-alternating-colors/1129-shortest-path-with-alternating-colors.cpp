@@ -14,11 +14,8 @@ public:
             adjList[it[0]].push_back({it[1], 1});
         }
         
-        vector<int>dist(n,-1);
-        dist[0] = 0;
-        
-        vector<vector<bool>>visited(n, vector<bool>(2));
-        visited[0][0] = visited[0][1] = true;
+        vector<vector<int>>dist(n, vector<int>(2, INT_MAX));
+        dist[0][0] = dist[0][1] = 0;
         
         queue<vector<int>>bfs;
         bfs.push({0,0,-1}); // initial color with -1
@@ -34,17 +31,23 @@ public:
             
             for(auto [v, color] : adjList[u])
             {
-                if(!visited[v][color] && color != prevColor)
+                if(color != prevColor && dist[v][color] > steps+1)
                 {
-                    visited[v][color] = true;
+                    // visited[v][color] = true;
                     bfs.push({v, steps+1, color});
-                    
-                    // if dist not filled, fill it
-                    if(dist[v] == -1)
-                        dist[v] = steps+1;
+                    dist[v][color] = steps+1;
                 }
             }
         }
-        return dist;
+        
+        vector<int>ret(n);
+        
+        for(int i=0;i<n;i++)
+        {
+            ret[i] = min(dist[i][0], dist[i][1]);
+            if(ret[i] == INT_MAX)
+                ret[i] = -1;
+        }
+        return ret;
     }
 };
