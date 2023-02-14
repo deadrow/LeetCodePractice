@@ -14,19 +14,12 @@ public:
             if(j >=0)
                 carry += b[j--] - '0';
 
-            if(carry < 2)
-            {
-                res += carry + '0';
-                carry = 0;
-            }
+            if(carry % 2 == 0)
+                res += '0';
             else
-            {
-                if(carry == 3)
-                    res += '1';
-                else
-                    res += '0';
-                carry = 1;
-            }
+                res += '1';
+            
+            carry /= 2;
         }
         
         if(carry == 1)
