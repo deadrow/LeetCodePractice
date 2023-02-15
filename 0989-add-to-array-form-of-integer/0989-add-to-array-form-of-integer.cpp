@@ -7,14 +7,9 @@ public:
         int carry = 0;
         while(i>=0 || k)
         {
-            
             if(i >= 0)
-            {
-                carry += num[i];
-                i--;
-            }
+                carry += num[i--];
                 
-            
             if(k)
             {
                 carry += (k%10);   
@@ -22,7 +17,6 @@ public:
             }
 
             ret.push_back(carry % 10);
-            
             carry = carry/10;
         }
         
