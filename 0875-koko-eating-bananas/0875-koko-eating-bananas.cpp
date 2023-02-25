@@ -12,9 +12,12 @@ public:
 					days += 1;
 				else
 					days += ceil((double)it/capacity);
+                
+                if(days > h)
+                    return false;
 			}
 			
-			return days <= h;
+			return true;
 		};
         
 		int left = 1;
