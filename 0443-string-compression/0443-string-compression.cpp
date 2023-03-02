@@ -17,10 +17,8 @@ public:
                     string num = to_string(curCount);
                     for(auto it : num)
                         temp.push_back(it);
+                    curCount = 1;
                 }
-
-
-                curCount = 1;
             }
         }
         
