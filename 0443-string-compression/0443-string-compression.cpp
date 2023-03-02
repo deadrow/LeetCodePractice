@@ -14,16 +14,12 @@ public:
                 temp.push_back(chars[i-1]);
                 if(curCount > 1)
                 {
-                    if(curCount < 10)
-                        temp.push_back(curCount + '0');
-                    else
-                    {
-                        string num = to_string(curCount);
-                        for(auto it : num)
-                            temp.push_back(it);
-                    }
+                    string num = to_string(curCount);
+                    for(auto it : num)
+                        temp.push_back(it);
                 }
- 
+
+
                 curCount = 1;
             }
         }
@@ -33,14 +29,9 @@ public:
             temp.push_back(chars[n-1]);
             if(curCount > 1)
             {
-                if(curCount < 10)
-                    temp.push_back(curCount + '0');
-                else
-                {
-                    string num = to_string(curCount);
-                    for(auto it : num)
-                        temp.push_back(it);
-                }
+                string num = to_string(curCount);
+                for(auto it : num)
+                    temp.push_back(it);
             }
         }
         
