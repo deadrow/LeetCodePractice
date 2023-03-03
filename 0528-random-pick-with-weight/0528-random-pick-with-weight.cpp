@@ -1,16 +1,20 @@
 class Solution {
 public:
-    vector<double>weights;
-    int size = 0;
-    std::discrete_distribution<> dist;
-    std::random_device rd;
-    std::mt19937 gen;
-    Solution(vector<int>& w) : gen(rd()) , dist(w.begin(), w.end())
-    {
+    vector<int>prefix;
+    Solution(vector<int>& w) {
+        prefix = w;
+        
+        for(int i=1;i<prefix.size();i++)
+        {
+            prefix[i] += prefix[i-1];
+        }
     }
     
     int pickIndex() {
-        return dist(gen);
+        int idx = rand()% prefix.back();
+        
+        auto it = upper_bound(prefix.begin(), prefix.end(), idx);
+        return it-prefix.begin();
     }
 };
 
