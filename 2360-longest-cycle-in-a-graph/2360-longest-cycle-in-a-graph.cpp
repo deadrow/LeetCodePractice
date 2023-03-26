@@ -14,6 +14,7 @@ public:
 
         dist[src] = curDist;
         
+        // we must visit any node 2 times if it is part of the cycle
         if(!visited[src])
         {
             visited[src] = true;
