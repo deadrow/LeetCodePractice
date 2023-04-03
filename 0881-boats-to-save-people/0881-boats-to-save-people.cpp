@@ -10,23 +10,13 @@ public:
         int boats = 0;
         int i = 0;
         int j = n-1;
-        
-        if(people[i] >= limit)
-            return n;
-        
+                
         while(i<=j)
         {
-            if(people[j]>= limit || people[i]+people[j] > limit)
-            {
-                boats++;
-                j--;
-            }
-            else
-            {
-                boats++;
+            if(people[i]+people[j] <= limit)
                 i++;
-                j--;
-            }
+            j--;
+            boats++;
         }
         return boats;
     }
