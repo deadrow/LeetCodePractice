@@ -63,12 +63,14 @@ private:
 class Solution {
 public:
     vector<bool> distanceLimitedPathsExist(int n, vector<vector<int>>& edgeList, vector<vector<int>>& queries) {
+        vector<vector<int>>quriesWithIdx(queries.size());
         for(int i=0;i<queries.size();i++)
         {
-            queries[i].push_back(i);
+            quriesWithIdx[i] = queries[i];
+            quriesWithIdx[i].push_back(i);
         }
 
-        sort(queries.begin(), queries.end(), [](const auto& a, const auto& b){
+        sort(quriesWithIdx.begin(), quriesWithIdx.end(), [](const auto& a, const auto& b){
             return a[2] < b[2];
         });
 
@@ -77,18 +79,18 @@ public:
         });
 
         UnionFind uf(n);
-        vector<bool>ret(queries.size());
+        vector<bool>ret(quriesWithIdx.size());
 
         int j = 0;
-        for(int i=0;i<queries.size();i++)
+        for(int i=0;i<quriesWithIdx.size();i++)
         {
-            while(j < edgeList.size() && edgeList[j][2] < queries[i][2])
+            while(j < edgeList.size() && edgeList[j][2] < quriesWithIdx[i][2])
             {
                 uf.unionSet(edgeList[j][0], edgeList[j][1]);
                 j++;
             }
             
-            ret[queries[i][3]] = uf.connected(queries[i][0], queries[i][1]);
+            ret[quriesWithIdx[i][3]] = uf.connected(quriesWithIdx[i][0], quriesWithIdx[i][1]);
         }
 
         return ret;
