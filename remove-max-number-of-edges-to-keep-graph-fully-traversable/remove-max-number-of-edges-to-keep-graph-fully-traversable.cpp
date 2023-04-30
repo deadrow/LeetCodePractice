@@ -77,7 +77,7 @@ public:
         UnionFind uf(n+1);
 
         int maxEdges = 0;
-        for(auto it : edges)
+        for(const auto& it : edges)
         {
             if(it[0] == 3)
             {
@@ -88,7 +88,7 @@ public:
             }
         }
 
-        for(auto it : edges)
+        for(const auto& it : edges)
         {
             if(it[0] != 3)
             {
