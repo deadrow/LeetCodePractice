@@ -76,17 +76,27 @@ public:
     int maxNumEdgesToRemove(int n, vector<vector<int>>& edges) {
         UnionFind uf(n+1);
 
-        sort(edges.begin(), edges.end(), [](const auto& a, const auto& b){
-            return a[0] > b[0];
-        });
-
         int maxEdges = 0;
         for(auto it : edges)
         {
-            if(!uf.connected(it[1], it[2], it[0]))
-                uf.unionSet(it[1], it[2], it[0]);
-            else
-                maxEdges++;
+            if(it[0] == 3)
+            {
+                if(!uf.connected(it[1], it[2], it[0]))
+                    uf.unionSet(it[1], it[2], it[0]);
+                else
+                    maxEdges++;
+            }
+        }
+
+        for(auto it : edges)
+        {
+            if(it[0] != 3)
+            {
+                if(!uf.connected(it[1], it[2], it[0]))
+                    uf.unionSet(it[1], it[2], it[0]);
+                else
+                    maxEdges++;
+            }
         }
 
         if(uf.countRoots(1) != 2 || uf.countRoots(2) != 2)
