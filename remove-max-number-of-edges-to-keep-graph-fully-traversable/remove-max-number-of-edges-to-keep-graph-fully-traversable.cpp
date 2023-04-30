@@ -2,99 +2,73 @@ class UnionFind
 {
 public:
     UnionFind(int n)
-        : parentAlice(n)
-        , parentBob(n)
-        , rootsAlice(n)
-        , rootsBob(n)
     {
-        for(int i=0;i<n;i++)
+        for(int i=0;i<2;i++)
         {
-            parentAlice[i] = i;
-            parentBob[i] = i;
+            for(int j=0;j<n;j++)
+            {
+                parent[i].push_back(j);
+            }
         }
+
+        roots[0] = n; // alice parents
+        roots[1] = n; // bob parents
     }
 
-    int findAlice(int x)
+    int find(int x, int type)
     {
-        if(x == parentAlice[x])
+        if(x == parent[type-1][x])
             return x;
 
-        return parentAlice[x] = findAlice(parentAlice[x]);
-    }
-
-    int findBob(int x)
-    {
-        if(x == parentBob[x])
-            return x;
-
-        return parentBob[x] = findBob(parentBob[x]);
+        return parent[type-1][x] = find(parent[type-1][x], type);
     }
 
     void unionSet(int x, int y, int type)
     {
-        if(type == 1)
+        if(type == 1 || type == 2)
         {
-            int rootX = findAlice(x);
-            int rootY = findAlice(y);
+            int rootX = find(x, type);
+            int rootY = find(y, type);
             if(rootX != rootY)
             {
-                rootsAlice--;
-                parentAlice[rootY] = rootX;
+                roots[type-1]--;
+                parent[type-1][rootY] = rootX;
             }
-        }
-        else if(type == 2)
-        {
-            int rootX = findBob(x);
-            int rootY = findBob(y);
-            if(rootX != rootY)
-            {
-                rootsBob--;
-                parentBob[rootY] = rootX;
-            } 
         }
         else
         {
-            int rootX = findAlice(x);
-            int rootY = findAlice(y);
+            int rootX = find(x, 1);
+            int rootY = find(y, 1);
             if(rootX != rootY)
             {
-                rootsAlice--;
-                parentAlice[rootY] = rootX;
+                roots[0]--;
+                parent[0][rootY] = rootX;
             }
 
-            rootX = findBob(x);
-            rootY = findBob(y);
+            rootX = find(x, 2);
+            rootY = find(y, 2);
             if(rootX != rootY)
             {
-                rootsBob--;
-                parentBob[rootY] = rootX;
+                roots[1]--;
+                parent[1][rootY] = rootX;
             }
         }
     }
 
     bool connected(int x, int y , int type)
     {
-        if(type == 1)
-            return findAlice(x) == findAlice(y);
-        else if(type == 2)
-            return findBob(x) == findBob(y);
-        return (findAlice(x) == findAlice(y) && findBob(x) == findBob(y));
+        if(type == 1 || type == 2)
+            return find(x, type) == find(y, type);
+        return (find(x, 1) == find(y, 1) && find(x, 2) == find(y, 2));
     }
 
-    int countRootsAlice()
+    int countRoots(int type)
     {
-        return rootsAlice;
-    }
-
-    int countRootsBob()
-    {
-        return rootsBob;
+        return roots[type-1];
     }
 private:
-    vector<int>parentAlice;
-    vector<int>parentBob;
-    int rootsAlice;
-    int rootsBob;
+    vector<int> parent[2];
+    int roots[2];
 };
 
 class Solution {
@@ -115,7 +89,7 @@ public:
                 maxEdges++;
         }
 
-        if(uf.countRootsAlice() != 2 || uf.countRootsBob() != 2)
+        if(uf.countRoots(1) != 2 || uf.countRoots(2) != 2)
             return -1;
 
         return maxEdges;
