@@ -12,8 +12,7 @@ public:
             maxSalary = max(it, maxSalary);
         }
 
-        totalSum -= minSalary;
-        totalSum -= maxSalary;
+        totalSum -= minSalary + maxSalary;
         return (double)totalSum / (salary.size()-2);
         
     }
