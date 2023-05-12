@@ -1,6 +1,6 @@
 class Solution {
 public:
-    vector<vector<int>> generateMatrix(int n) {
+    vector<vector<int>> generateMatrix1(int n) {
         vector<vector<int>>mat(n, vector<int>(n));
 
         int r1 = 0;
@@ -26,6 +26,37 @@ public:
             c1++;
             r2--;
             c2--;
+        }
+
+        return mat;
+    }
+
+    // official solution
+    vector<vector<int>> generateMatrix(int n) 
+    {
+        vector<vector<int>>mat(n, vector<int>(n));
+
+        vector<vector<int>>dir{{0,1},{1,0},{0,-1},{-1,0}};
+
+        int counter = 1;
+        int row = 0;
+        int col = 0;
+        int d = 0;
+
+        auto floorMod = [](int x, int y) {
+            return ((x % y) + y) % y;
+        };
+
+        while(counter <= n*n)
+        {
+            mat[row][col] = counter++;
+            int r = floorMod(row + dir[d][0], n);
+            int c = floorMod(col + dir[d][1], n);
+            if(mat[r][c] != 0)
+                d = (d+1) % 4;
+            
+            row += dir[d][0];
+            col += dir[d][1];
         }
 
         return mat;
