@@ -1,5 +1,9 @@
 class Solution {
 public:
+    // This is coin change problem
+    // Basically n is given and there are 2 ways(or coins)
+    // given. Find how many ways. For e.g if n = 5;
+    // coins are 1, 2. So how many ways to make 5
     vector<int>memo;
     int MOD = 1000000007;
     int dp(int len, int zero, int one)
