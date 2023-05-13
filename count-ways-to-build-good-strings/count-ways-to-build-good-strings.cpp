@@ -22,7 +22,8 @@ public:
         int total = 0;
         for(int i=low;i<=high;i++)
         {
-            total = (total + dp(i, zero, one)) % MOD;
+            total += dp(i, zero, one);
+            total %= MOD;
         }
 
         return total;
