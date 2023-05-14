@@ -6,10 +6,10 @@ public:
 	}
 
 	string shiftingLetters(string s, vector<int>& shifts) {
-		long sum = 0;
+		int sum = 0;
         for(auto& it : shifts)
         {
-            sum += it;
+            sum = (sum + it) % 26;
         }
 
 		string ret(s);
