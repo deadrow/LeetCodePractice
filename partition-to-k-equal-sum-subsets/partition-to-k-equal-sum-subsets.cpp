@@ -15,16 +15,13 @@ public:
 
         for(int i=0;i<nums.size();i++)
         {
-            if(target-nums[i] < 0)
+            if(((mask >> i) & 1) == 1 || target-nums[i] < 0)
                 continue;
 
-            if(((mask >> i) & 1) == 0)
-            {
-                mask = mask | (1 << i);
-                if(dfs(nums, mask, k, target-nums[i]))
-                    return memo[mask] = true;
-                mask = mask ^ (1 << i);
-            }
+            mask = mask | (1 << i);
+            if(dfs(nums, mask, k, target-nums[i]))
+                return memo[mask] = true;
+            mask = mask ^ (1 << i);
         }
 
         return memo[mask] = false;
