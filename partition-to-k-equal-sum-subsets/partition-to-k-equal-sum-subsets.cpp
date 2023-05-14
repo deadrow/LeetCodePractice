@@ -2,7 +2,7 @@ class Solution {
 public:
     vector<int>memo;
     int targetSum = 0;
-    bool dfs(vector<int>& nums, int& mask, int cur_i, int k, int target)
+    bool dfs(vector<int>& nums, int& mask, int k, int target)
     {
         if(k == 1)
             return true;
@@ -11,9 +11,9 @@ public:
             return memo[mask];
             
         if(target == 0)
-            return dfs(nums, mask, 0, k-1, targetSum);
+            return dfs(nums, mask, k-1, targetSum);
 
-        for(int i=cur_i;i<nums.size();i++)
+        for(int i=0;i<nums.size();i++)
         {
             if(target-nums[i] < 0)
                 continue;
@@ -21,7 +21,7 @@ public:
             if(((mask >> i) & 1) == 0)
             {
                 mask = mask | (1 << i);
-                if(dfs(nums, mask, i+1, k, target-nums[i]))
+                if(dfs(nums, mask, k, target-nums[i]))
                     return memo[mask] = true;
                 mask = mask ^ (1 << i);
             }
@@ -40,6 +40,6 @@ public:
         
         int mask = 0;
         memo.resize(1<<n, -1);
-        return dfs(nums, mask, 0, k, targetSum);
+        return dfs(nums, mask, k, targetSum);
     }
 };
