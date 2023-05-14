@@ -15,6 +15,7 @@ public:
 
         for(int i=0;i<nums.size();i++)
         {
+            // If the number is already picked or target has become less than 0
             if(((mask >> i) & 1) == 1 || target-nums[i] < 0)
                 continue;
 
