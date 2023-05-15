@@ -2,8 +2,6 @@ class Solution {
 public:
     vector<int>memo;
     int targetSum = 0;
-    vector<int>sides;
-
     bool dfs(vector<int>& matchsticks, int mask, int target, int k)
     {
         if(k == 1)
@@ -17,10 +15,7 @@ public:
 
         for(int i=0;i<matchsticks.size();i++)
         {
-            if((mask >> i) & 1)
-                continue;
-            
-            if(target - matchsticks[i] < 0)
+            if((mask >> i) & 1 || target - matchsticks[i] < 0)
                 continue;
 
             mask = mask | (1 << i);
@@ -41,7 +36,6 @@ public:
         targetSum = totalSum/4;
 
         int mask = 0;
-        sides.resize(4, 0);
         memo.resize(1 << matchsticks.size(), -1);
         return dfs(matchsticks, mask, targetSum, 4);
     }
