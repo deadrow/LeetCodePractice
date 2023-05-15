@@ -1,10 +1,13 @@
 class Solution {
 public:
+    vector<int>memo;
     int dfs(int mask, int cur_i, int n)
     {
         if(cur_i > n)
             return 1;
 
+        if(memo[mask] != -1)
+            return memo[mask];
         int count = 0;
         for(int i=1;i<=n;i++)
         {
@@ -18,11 +21,12 @@ public:
                 mask = mask ^ (1 << i);
             }
         }
-        return count;
+        return memo[mask] = count;
     }
 
     int countArrangement(int n) {
         int mask = 0;
+        memo.resize(1<<(n+1), -1);
         return dfs(mask, 1, n);
     }
 };
