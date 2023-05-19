@@ -1,7 +1,8 @@
 class Solution {
 public:
-// Graph coloring algorithm. Assign colors to vertexes
+    // Graph coloring algorithm. Assign colors to vertexes
     // 1 and 0 to nodes
+    // Similiar to https://leetcode.com/problems/possible-bipartition/description/
     bool bfs(int u, vector<vector<int>>& adjList, vector<int>& color)
     {
         queue<int>bfs;
