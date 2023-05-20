@@ -65,11 +65,11 @@ public:
         result.resize(queries.size());
 
         // floyed warshall
-        for(auto k : adjMap)
+        for(auto& k : adjMap)
         {
-            for(auto i : adjMap[k.first])
+            for(auto& i : adjMap[k.first])
             {
-                for(auto j : adjMap[k.first])
+                for(auto& j : adjMap[k.first])
                 {
                     adjMap[i.first][j.first] = adjMap[i.first][k.first]* adjMap[k.first][j.first];
                 }
