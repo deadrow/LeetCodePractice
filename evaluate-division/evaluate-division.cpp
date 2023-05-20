@@ -1,7 +1,7 @@
 class Solution {
 public:
     vector<double>result;
-    double dfs(map<string, vector<pair<string, double>>>& adjMap, string src, string dst, unordered_set<string>& visited, double curVal, int i)
+    bool dfs(map<string, vector<pair<string, double>>>& adjMap, string src, string dst, unordered_set<string>& visited, double curVal, int i)
     {
         if(src == dst)
         {
