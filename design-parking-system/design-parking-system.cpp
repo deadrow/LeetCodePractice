@@ -8,11 +8,7 @@ public:
     }
     
     bool addCar(int carType) {
-        if(parking[carType] <= 0)
-            return false;
-
-        parking[carType]--;
-        return true;
+        return parking[carType]-- > 0;
     }
 };
 
