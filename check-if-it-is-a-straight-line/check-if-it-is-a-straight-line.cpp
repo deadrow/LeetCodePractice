@@ -1,19 +1,22 @@
 class Solution {
 public:
-    float slope(const vector<int>& a, const vector<int>& b)
+    int getXDiff(vector<int>& a, vector<int>& b)
     {
-        return float(b[1]-a[1])/(b[0]-a[0]);
+        return a[0] - b[0];
     }
-    bool checkStraightLine(vector<vector<int>>& coordinates) {
-        float curSlope = slope(coordinates[0], coordinates[1]);
+    int getYDiff(vector<int>& a, vector<int>& b)
+    {
+        return a[1] - b[1];
+    }
 
-        for(int i=0;i<coordinates.size();i++)
+    bool checkStraightLine(vector<vector<int>>& coordinates) {
+        int deltaX = getXDiff(coordinates[1], coordinates[0]);
+        int deltaY = getYDiff(coordinates[1], coordinates[0]);
+
+        for(int i=2;i<coordinates.size();i++)
         {
-            for(int j=i+1;j<coordinates.size();j++)
-            {
-                if(abs(slope(coordinates[i], coordinates[j])) != abs(curSlope))
-                    return false;
-            }
+            if(deltaX* getYDiff(coordinates[i], coordinates[0]) != deltaY* getXDiff(coordinates[i], coordinates[0]))
+            return false;
         }
 
         return true;
