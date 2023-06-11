@@ -17,7 +17,6 @@ public:
                 count += dfs(adjList, v, visited);
         }
 
-        // visited[src] = false;
         return count;
     }
 
