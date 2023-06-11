@@ -2,7 +2,7 @@ class Solution {
 public:
     bool intersects(const vector<int>& a, const vector<int>& b)
     {
-        double r1 = a[2];
+        long r1 = a[2];
         long d = (pow(a[0] - b[0], 2) + pow(a[1] - b[1], 2));
         return r1*r1 >= d;
     }
