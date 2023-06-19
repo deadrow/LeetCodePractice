@@ -6,7 +6,6 @@ public:
         for(int i=0;i<gain.size();i++)
         {
             ret[i+1] = ret[i] + gain[i];
-            cout << ret[i+1] << " ";
             maxAlt = max(maxAlt, ret[i+1]);
         }
 
