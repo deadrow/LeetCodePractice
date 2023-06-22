@@ -8,16 +8,17 @@ public:
 
         if(memo[cur_i][buy] != -1)
             return memo[cur_i][buy];
+
+        int leave = dp(prices, fee, cur_i+1, buy);
+
         if(buy)
         {
             int bought = -prices[cur_i] + dp(prices, fee, cur_i+1, 0);
-            int leave = dp(prices, fee, cur_i+1, 1);
             return memo[cur_i][buy] = max(bought, leave);
         }
         else
         {
             int sell = prices[cur_i] - fee + dp(prices, fee, cur_i+1, 1);
-            int leave = dp(prices, fee, cur_i+1, 0);
             return memo[cur_i][buy] = max(sell, leave);
         }
 
