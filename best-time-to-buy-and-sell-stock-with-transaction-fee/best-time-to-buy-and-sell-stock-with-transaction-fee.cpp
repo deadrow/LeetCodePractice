@@ -10,19 +10,13 @@ public:
             return memo[cur_i][buy];
 
         int leave = dp(prices, fee, cur_i+1, buy);
-
+        int ans = 0;
         if(buy)
-        {
-            int bought = -prices[cur_i] + dp(prices, fee, cur_i+1, 0);
-            return memo[cur_i][buy] = max(bought, leave);
-        }
+            ans = -prices[cur_i] + dp(prices, fee, cur_i+1, 0);
         else
-        {
-            int sell = prices[cur_i] - fee + dp(prices, fee, cur_i+1, 1);
-            return memo[cur_i][buy] = max(sell, leave);
-        }
+            ans = prices[cur_i] - fee + dp(prices, fee, cur_i+1, 1);
 
-        return 0;
+        return memo[cur_i][buy] = max(ans, leave);
     }
 
     int maxProfit(vector<int>& prices, int fee) {
