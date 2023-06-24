@@ -17,7 +17,7 @@ public:
         // leave
         int leave = solve(rods, i+1, leftSum, rightSum);
         // add to left
-        int toLeft = solve(rods, i+1, leftSum + rods[i], rightSum) + rods[i];
+        int toLeft = solve(rods, i+1, leftSum + rods[i], rightSum) + rods[i]; // count the result only 1 time
         // add to right
         int toRight = solve(rods, i+1, leftSum , rightSum + rods[i]);
         return memo[i][leftSum-rightSum + MaxSum] = max({leave, toLeft, toRight});
