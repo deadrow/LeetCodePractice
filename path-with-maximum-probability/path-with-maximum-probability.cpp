@@ -15,7 +15,6 @@ public:
         vector<bool>visited(n);
         
         vector<double>dist(n, 0.0);
-        // dist[start] = 1.0;
         
         while(!bfs.empty())
         {
