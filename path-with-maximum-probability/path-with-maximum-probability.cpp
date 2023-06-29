@@ -9,19 +9,20 @@ public:
             ajdList[edges[i][1]].push_back({edges[i][0], succProb[i]});
         }
 
-        queue<pair<int, double>>bfs;
-        bfs.push({start, 1.0});
-        
-        vector<bool>visited(n);
+        priority_queue<pair<double, int>>pq;
+        pq.push({1.0, start});
         
         vector<double>dist(n, 0.0);
         dist[start] = 1.0;
         
-        while(!bfs.empty())
+        while(!pq.empty())
         {
-            int u = bfs.front().first;
-            double distance = bfs.front().second;
-            bfs.pop();
+            double distance = pq.top().first;
+            int u = pq.top().second;
+            pq.pop();
+
+            if(u == end)
+                return distance;
 
             for(auto it : ajdList[u])
             {
@@ -31,11 +32,11 @@ public:
                 if(dist[v] < distance*weight)
                 {
                     dist[v] = distance*weight;
-                    bfs.push({v, dist[v]});
+                    pq.push({dist[v], v});
                 }
             }
         }
 
-        return dist[end];
+        return 0.0;
     }
 };
