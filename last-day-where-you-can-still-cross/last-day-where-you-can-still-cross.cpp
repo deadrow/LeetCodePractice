@@ -4,8 +4,10 @@ public:
     int c = 0;
     vector<pair<int,int>> directions{{1,0},{-1,0},{0,1},{0,-1}};
 
-    bool canCross(vector<vector<int>>& cells, int right, vector<vector<int>>& grid, vector<vector<bool>>& visited)
+    bool canCross(vector<vector<int>>& cells, int right)
     {
+        vector<vector<int>> grid(r, vector<int>(c));
+
         for(int i=0; i<=right; i++)
             grid[cells[i][0]-1][cells[i][1]-1] = 1;
 
@@ -15,7 +17,7 @@ public:
             if(grid[0][i] == 0)
             {
                 bfs.push({0, i});
-                visited[0][i] = true;
+                grid[0][i] = -1;
             }
 
         }
@@ -33,9 +35,9 @@ public:
             {
                 int nRow = curRow + it.first;
                 int nCol = curCol + it.second;
-                if(nRow >=0 && nRow < r && nCol >=0 && nCol < c && grid[nRow][nCol] != 1 && !visited[nRow][nCol])
+                if(nRow >=0 && nRow < r && nCol >=0 && nCol < c && grid[nRow][nCol] == 0)
                 {
-                    visited[nRow][nCol] = true;
+                    grid[nRow][nCol] = -1;
                     bfs.push({nRow, nCol});
                 }
             }
@@ -54,9 +56,8 @@ public:
         while(left < right)
         {
             int mid = left + (right-left)/2;
-            vector<vector<int>> grid(row, vector<int>(col));
-            vector<vector<bool>> visited(r, vector<bool>(c));
-            if(!canCross(cells, mid, grid, visited))
+            
+            if(!canCross(cells, mid))
                 right = mid;
             else
                 left = mid+1;
