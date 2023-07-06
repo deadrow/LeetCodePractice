@@ -13,12 +13,7 @@ public:
 
             if(curSum < target)
                 j++;
-            else if(curSum == target)
-            {
-                minLen = min(j-i+1, minLen);
-                j++;
-            }
-            else
+            else if(curSum >= target)
             {
                 while(curSum >= target)
                 {
@@ -30,10 +25,6 @@ public:
                 j++;
             }
         }
-
-        // cout << i;
-        // if(i != n-1)
-        //     minLen = min(n-i, minLen);
 
         return minLen == INT_MAX ? 0 : minLen;
     }
