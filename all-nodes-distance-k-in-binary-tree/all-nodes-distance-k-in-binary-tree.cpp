@@ -36,44 +36,31 @@ public:
         inorder(root);
 
         unordered_set<TreeNode*>visited;
-        queue<TreeNode*>bfs;
-        bfs.push(target);
+        queue<pair<TreeNode*, int>>bfs;
+        bfs.push({target, 0});
         visited.insert(target);
 
         vector<int>ret;
-        int steps = 0;
-        
-        while(!bfs.empty())
-        {
-            if(steps == k)
-            {
-                break;
-            }
-
-            int size = bfs.size();
-            for(int i=0;i<size;i++)
-            {
-                auto cur = bfs.front();
-                bfs.pop();
-
-                for(auto v : adjMap[cur])
-                {
-                    if(!visited.count(v))
-                    {
-                        bfs.push(v);
-                        visited.insert(v);
-                    }
-                }
-            }
-
-            steps++;
-        }
 
         while(!bfs.empty())
         {
             auto cur = bfs.front();
             bfs.pop();
-            ret.push_back(cur->val);
+
+            if(cur.second == k)
+            {
+                ret.push_back(cur.first->val);
+                continue;
+            }
+
+            for(auto v : adjMap[cur.first])
+            {
+                if(!visited.count(v))
+                {
+                    bfs.push({v, cur.second+1});
+                    visited.insert(v);
+                }
+            }
         }
 
         return ret;
