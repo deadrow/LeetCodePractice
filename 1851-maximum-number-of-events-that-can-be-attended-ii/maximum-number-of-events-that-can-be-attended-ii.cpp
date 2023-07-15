@@ -19,8 +19,6 @@ public:
         return memo[hash] = max(take, leave);
     }
     int maxValue(vector<vector<int>>& events, int k) {
-        int n = events.size();
-        // memo.resize(n+1, vector<vector<int>>(n+1, vector<int>(k+1, -1)));
         sort(events.begin(), events.end());
         return dp(events, k, 0, -1);
     }
