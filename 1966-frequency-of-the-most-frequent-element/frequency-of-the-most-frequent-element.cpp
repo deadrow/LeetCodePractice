@@ -6,31 +6,21 @@ public:
 
         int n = nums.size();
         int i = 0;
-        int j = 0;
 
         long curSum = 0;
         int ret = 0;
-        while(j<n)
+        for(int j=0;j<n;j++)
         {
             curSum += nums[j];
             long target = nums[j];
 
-            if((j-i+1)*target - curSum <= k)
+            while((j-i+1)*target - curSum > k)
             {
-                ret = max(ret, j-i+1);
-                j++;
+                curSum -= nums[i];
+                i++;
             }
-            else
-            {
-                while((j-i+1)*target - curSum > k)
-                {
-                    curSum -= nums[i];
-                    i++;
-                }
 
-                ret = max(ret, j-i+1);
-                j++;
-            }
+            ret = max(ret, j-i+1);
         }
 
         return ret;
