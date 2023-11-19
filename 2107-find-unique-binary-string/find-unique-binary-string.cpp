@@ -10,7 +10,6 @@ public:
             bitset<16> b{i};
             string num = b.to_string();
             ret = num.substr(16-n);
-            cout << ret;
             if(dict.find(ret) == dict.end())
             {
                 break;
