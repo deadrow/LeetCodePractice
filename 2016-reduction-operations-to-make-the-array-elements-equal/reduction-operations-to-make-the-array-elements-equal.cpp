@@ -20,33 +20,5 @@ public:
         }
 
         return ops;
-
-        // priority_queue<int>pq;
-        // for(auto it : nums)
-        //     pq.push(it);
-
-        // int sameCount = 0;
-        // int ops = 0;
-        // while(!pq.empty())
-        // {
-        //     int top = pq.top();
-        //     pq.pop();
-
-        //     while(pq.top() == top)
-        //     {
-        //         sameCount++;
-        //         if(sameCount == n)
-        //             return ops;
-        //         pq.pop();
-        //     }
-
-        //     if(!sameCount)
-        //     {
-        //         ops++;
-        //         sameCount++;
-        //     }
-        // }
-
-        // return -1;
     }
 };
