@@ -7,8 +7,6 @@ public:
         int j = piles.size()-1;
         for(int i=1;i<=j;i+=2)
         {
-            // if(j-i < 2)
-            //     break;
             total += piles[i];
             j--;
         }
