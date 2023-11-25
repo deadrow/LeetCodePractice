@@ -13,15 +13,15 @@ public:
             {
                 if(grid[i][j] < 'a')
                     continue;
-                queue<vector<int>>bfs;
+                queue<pair<int,int>>bfs;
                 char ch = grid[i][j];
                 bfs.push({i,j});
 
                 while(!bfs.empty())
                 {
                     auto v = bfs.front();
-                    int r = v[0];
-                    int c = v[1];
+                    int r = v.first;
+                    int c = v.second;
                     bfs.pop();
 
                     if(grid[r][c] < 'a') return true;
