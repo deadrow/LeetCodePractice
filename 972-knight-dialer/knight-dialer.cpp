@@ -16,10 +16,10 @@ public:
     vector<vector<int>>memo;
     int dfs(int n, int cur_i)
     {
-        if(n == 1)
+        if(n == 0)
             return 1;
 
-        if(memo[n][cur_i] != -1)
+        if(memo[n][cur_i] != 0)
             return memo[n][cur_i];
 
         int sum = 0;
@@ -33,15 +33,13 @@ public:
     }
 
     int knightDialer(int n) {
-        if(n == 1) return 10;
-
         int count = 0;
         vector<int>nums{0,1,2,3,4,6,7,8,9};
-        memo.resize(n+1, vector<int>(11,-1));
+        memo.resize(n+1, vector<int>(10,0));
 
-        for(auto it : nums)
+        for(int i=0;i<10;i++)
         {
-            count = (count + dfs(n, it)) % MOD;
+            count = (count + dfs(n-1, i)) % MOD;
         }
             
         return count;
