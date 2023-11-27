@@ -19,7 +19,7 @@ public:
         if(n == 0)
             return 1;
 
-        if(memo[n][cur_i] != 0)
+        if(memo[n][cur_i] != -1)
             return memo[n][cur_i];
 
         int sum = 0;
@@ -35,7 +35,7 @@ public:
     int knightDialer(int n) {
         int count = 0;
         vector<int>nums{0,1,2,3,4,6,7,8,9};
-        memo.resize(n+1, vector<int>(10,0));
+        memo.resize(n+1, vector<int>(10,-1));
 
         for(int i=0;i<10;i++)
         {
