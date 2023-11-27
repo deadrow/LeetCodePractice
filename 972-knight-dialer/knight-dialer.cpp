@@ -23,7 +23,7 @@ public:
             return memo[n][cur_i];
 
         int sum = 0;
-        for(auto it : jumps[cur_i])
+        for(const auto& it : jumps[cur_i])
         {
             sum = (sum + dfs(n-1, it)) % MOD;
         }
