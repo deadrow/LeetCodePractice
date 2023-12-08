@@ -22,10 +22,10 @@ public:
         if(left.empty() and right.empty())
             return val;
 
-        val += "(" + left + ")";
+        val += '(' + left + ')';
 
         if(!right.empty())
-            val += "(" + right + ")";
+            val += '(' + right + ')';
 
         return val;
     }
