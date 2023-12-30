@@ -2,7 +2,7 @@ class Solution {
 public:
     vector<int> fullBloomFlowers(vector<vector<int>>& flowers, vector<int>& people) {
         map<int,int>sweep;
-        for(auto it : flowers)
+        for(auto& it : flowers)
         {
             sweep[it[0]] += 1;
             sweep[it[1]+1] -= 1;
@@ -16,7 +16,7 @@ public:
         }
 
         vector<int>ret;
-        for(auto it : people)
+        for(auto& it : people)
         {
             auto itr = sweep.upper_bound(it);
             if(itr == sweep.begin())
