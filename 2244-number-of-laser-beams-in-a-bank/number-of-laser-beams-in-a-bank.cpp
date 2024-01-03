@@ -1,6 +1,7 @@
 class Solution {
 public:
     int numberOfBeams(vector<string>& bank) {
+        ios_base::sync_with_stdio(false);
         int prev = 0;
         int total = 0;
         for(auto& it : bank)
