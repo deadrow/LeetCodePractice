@@ -12,10 +12,12 @@ public:
                 return -1;
             else if(it.second % 3 == 0)
                 ops += it.second/3;
-            else if(it.second % 3 == 1)
+            else
                 ops += it.second/3+1;
-            else if(it.second % 3 == 2)
-                ops += it.second/3+1;
+            // else if(it.second % 3 == 1)
+            //     ops += it.second/3+1;
+            // else if(it.second % 3 == 2)
+            //     ops += it.second/3+1;
         }
 
         return ops;
