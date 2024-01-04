@@ -2,7 +2,7 @@ class Solution {
 public:
     int minOperations(vector<int>& nums) {
         unordered_map<int,int>dict;
-        for(auto it : nums)
+        for(auto& it : nums)
             dict[it]++;
 
         int ops = 0;
@@ -14,10 +14,6 @@ public:
                 ops += it.second/3;
             else
                 ops += it.second/3+1;
-            // else if(it.second % 3 == 1)
-            //     ops += it.second/3+1;
-            // else if(it.second % 3 == 2)
-            //     ops += it.second/3+1;
         }
 
         return ops;
