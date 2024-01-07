@@ -9,14 +9,14 @@ public:
     {
         // get sum of [1....idx]
         int sum = 0;
-        for(;idx>0;idx -= (idx&-idx))
+        for(++idx;idx>0;idx -= (idx&-idx))
             sum += bit[idx];
         return sum;
     }
 
     void update(int idx, int val)
     {
-        for(;idx<bit.size();idx += (idx & -idx))
+        for(++idx;idx<bit.size();idx += (idx & -idx))
             bit[idx] += val;
     }
 };
@@ -28,16 +28,16 @@ public:
         this->bit = BIT(nums.size());
         this->nums = nums;
         for(int i=0;i<nums.size();i++)
-            bit.update(i+1, nums[i]);
+            bit.update(i, nums[i]);
     }
     
     void update(int index, int val) {
-        bit.update(index+1, val - nums[index]);
+        bit.update(index, val - nums[index]);
         nums[index] = val;
     }
     
     int sumRange(int left, int right) {
-        return bit.getSum(right+1)-bit.getSum(left);
+        return bit.getSum(right)-bit.getSum(left-1);
     }
 };
 
