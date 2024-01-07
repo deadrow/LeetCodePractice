@@ -1,0 +1,49 @@
+class BIT{
+private:
+    vector<int> bit;
+public:
+    BIT(int size=0){
+        bit.resize(size+1, 0);
+    }
+    int getSum(int idx)
+    {
+        // get sum of [1....idx]
+        int sum = 0;
+        for(;idx>0;idx -= (idx&-idx))
+            sum += bit[idx];
+        return sum;
+    }
+
+    void update(int idx, int val)
+    {
+        for(;idx<bit.size();idx += (idx & -idx))
+            bit[idx] += val;
+    }
+};
+class NumArray {
+public:
+    BIT bit;
+    vector<int> nums;
+    NumArray(vector<int>& nums) {
+        this->bit = BIT(nums.size());
+        this->nums = nums;
+        for(int i=0;i<nums.size();i++)
+            bit.update(i+1, nums[i]);
+    }
+    
+    void update(int index, int val) {
+        bit.update(index+1, val - nums[index]);
+        nums[index] = val;
+    }
+    
+    int sumRange(int left, int right) {
+        return bit.getSum(right+1)-bit.getSum(left);
+    }
+};
+
+/**
+ * Your NumArray object will be instantiated and called as such:
+ * NumArray* obj = new NumArray(nums);
+ * obj->update(index,val);
+ * int param_2 = obj->sumRange(left,right);
+ */
