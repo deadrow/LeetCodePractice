@@ -10,7 +10,8 @@
  */
 class Solution {
 public:
-    ListNode* mergeKLists(vector<ListNode*>& lists) {
+    // Heap solution
+    ListNode* mergeKLists1(vector<ListNode*>& lists) {
         auto comp = [](const ListNode* a, const ListNode* b) {
             return a->val > b->val;
         };
@@ -37,5 +38,45 @@ public:
         }
 
         return newList->next;
+    }
+
+    // divide and concur solution
+    ListNode* mergeKLists(vector<ListNode*>& lists) {
+        auto retListFn = [&](ListNode* a, ListNode* b) {
+            ListNode* ret = new ListNode(0);
+            ListNode* ptr = ret;
+            while(a && b) {
+                if(a->val <= b->val) {
+                    ptr->next = a;
+                    a = a->next;
+                } else {
+                    ptr->next = b;
+                    b = b->next;
+                }
+                ptr = ptr->next;
+            }
+
+            if(!a)
+                ptr->next = b;
+            else
+                ptr->next = a;
+
+            return ret->next;
+        };
+
+        if(lists.empty())
+            return nullptr;
+
+        int interval = 1;
+        while(interval < lists.size()) {
+            for(int i=0;i+interval<lists.size();i+= interval*2) {
+                lists[i] = retListFn(lists[i], lists[i+interval]);
+            }
+
+            interval *= 2;
+        }
+
+        return lists[0];
+
     }
 };
