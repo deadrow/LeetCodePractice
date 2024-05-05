@@ -1,6 +1,7 @@
 class Solution {
 public:
-    int minMeetingRooms(vector<vector<int>>& intervals) {
+    // Line sweep
+    int minMeetingRooms1(vector<vector<int>>& intervals) {
         map<int,int> sweep;
         for(auto it : intervals) {
             sweep[it[0]] += 1;
@@ -15,5 +16,24 @@ public:
         }
 
         return curMax;
+    }
+
+    // Heap solution
+    int minMeetingRooms(vector<vector<int>>& intervals) {
+        // sort the array by start time
+        sort(intervals.begin(), intervals.end());
+
+        // Use min heap. Idea is to find out the earliest 
+        // ending meeting room.
+        priority_queue<int, vector<int>, greater<int>>pq;
+
+        for(auto it : intervals) {
+            if(!pq.empty() and it[0] >= pq.top())
+                pq.pop();
+
+            pq.push(it[1]);
+        }
+
+        return pq.size();
     }
 };
