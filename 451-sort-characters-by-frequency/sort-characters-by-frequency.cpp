@@ -2,10 +2,10 @@ class Solution {
 public:
     string frequencySort(string s) {
         unordered_map<char,int>dict;
-        for(auto it : s) dict[it]++;
+        for(auto& it : s) dict[it]++;
 
         priority_queue<pair<int, char>, vector<pair<int,char>>>pq;
-        for(auto it : dict) pq.push({it.second, it.first});
+        for(auto& it : dict) pq.push({it.second, it.first});
 
         string ret;
         while(!pq.empty()) {
