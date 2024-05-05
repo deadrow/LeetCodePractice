@@ -27,7 +27,7 @@ public:
         // ending meeting room.
         priority_queue<int, vector<int>, greater<int>>pq;
 
-        for(auto it : intervals) {
+        for(const auto& it : intervals) {
             if(!pq.empty() and it[0] >= pq.top())
                 pq.pop();
 
