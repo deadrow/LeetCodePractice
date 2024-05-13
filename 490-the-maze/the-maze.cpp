@@ -36,11 +36,8 @@ public:
                 nRow -= x;
                 nCol -= y;
 
-bfs.push({nRow, nCol});
-                // if(visited.count({nRow, nCol}) == 0) {
-                //     visited.insert({nRow, nCol});
-                //     bfs.push({nRow, nCol});
-                // }
+                bfs.push({nRow, nCol});
+
             }
         }
 
