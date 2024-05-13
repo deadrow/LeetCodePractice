@@ -9,7 +9,7 @@ public:
         bfs.push({start[0], start[1]});
 
         set<pair<int,int>>visited;
-        visited.insert({start[0], start[1]});
+        // visited.insert({start[0], start[1]});
 
         while(!bfs.empty()) {
             int row = bfs.front().first;
@@ -17,6 +17,10 @@ public:
             bfs.pop();
 
             if(row == destination[0] and col == destination[1]) return true;
+            if(visited.count({row, col}))
+                continue;
+            visited.insert({row,col});
+
 
             for(auto& [x,y] : directions) {
                 int nRow = row + x;
@@ -32,10 +36,11 @@ public:
                 nRow -= x;
                 nCol -= y;
 
-                if(visited.find({nRow, nCol}) == visited.end()) {
-                    visited.insert({nRow, nCol});
-                    bfs.push({nRow, nCol});
-                }
+bfs.push({nRow, nCol});
+                // if(visited.count({nRow, nCol}) == 0) {
+                //     visited.insert({nRow, nCol});
+                //     bfs.push({nRow, nCol});
+                // }
             }
         }
 
