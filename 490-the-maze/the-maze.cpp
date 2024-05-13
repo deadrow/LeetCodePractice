@@ -32,7 +32,7 @@ public:
                 nRow -= x;
                 nCol -= y;
 
-                if(visited.find({nRow, nCol}) == visited.end() && !maze[nRow][nCol]) {
+                if(visited.find({nRow, nCol}) == visited.end()) {
                     visited.insert({nRow, nCol});
                     bfs.push({nRow, nCol});
                 }
