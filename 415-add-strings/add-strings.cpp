@@ -2,35 +2,16 @@ class Solution {
 public:
     string addStrings(string num1, string num2) {
         string ret;
-        reverse(num1.begin(), num1.end());
-        reverse(num2.begin(), num2.end());
-
-        int len1 = num1.size();
-        int len2 = num2.size();
-        int i=0, j=0;
+        int len1 = num1.size()-1;
+        int len2 = num2.size()-1;
         int carry = 0;
         // 11  and 321
-        while(i < len1 && j < len2) {
-            int num = num1[i]-'0' + num2[j]-'0' + carry;
-            ret += (num % 10 + '0');
-            carry = num/10;
-            i++;j++;
-        }
-
-        if(i == len1) {
-            while( j < len2) {
-                int num = num2[j]-'0' + carry;
-                ret += (num % 10 + '0');
-                carry = num/10;
-                j++;
-            }
-        } else {
-            while( i < len1) {
-                int num = num1[i]-'0' + carry;
-                ret += (num % 10 + '0');
-                carry = num/10;
-                i++;
-            }
+        while(len1 >= 0 || len2 >= 0) {
+            int n1 = len1 >=0 ? num1[len1]-'0' : 0;
+            int n2 = len2 >=0 ? num2[len2]-'0' : 0;
+            ret += ((n1 + n2 + carry) % 10 + '0');
+            carry = (n1 + n2 + carry)/10;
+            len1--;len2--;
         }
 
         if(carry)
