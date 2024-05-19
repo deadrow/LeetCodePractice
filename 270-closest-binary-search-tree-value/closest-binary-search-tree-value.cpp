@@ -21,9 +21,7 @@ public:
         // If the diff is same, select the lowest node
         if(abs(target-root->val) == min_diff) {
             min_node = min(root->val,min_node);
-        }
-
-        if(abs(target-root->val) < min_diff) {
+        } else if(abs(target-root->val) < min_diff) {
             min_diff = abs(target-root->val);
             min_node = root->val;
         }
