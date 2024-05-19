@@ -13,37 +13,29 @@ class Solution {
 public:
     double min_diff = std::numeric_limits<double>::max();
     int min_node = INT_MAX;
-    void helper(TreeNode* root, double target)
+    void dfs(TreeNode* root, double target)
     {
         if(!root)
             return;
         
-        if(abs(target-root->val) == min_diff)
-        {
-            min_diff = abs(target-root->val);
+        if(abs(target-root->val) == min_diff) {
             min_node = min(root->val,min_node);
         }
 
-        if(abs(target-root->val) < min_diff)
-        {
+        if(abs(target-root->val) < min_diff) {
             min_diff = abs(target-root->val);
             min_node = root->val;
         }
         
         if(target < (double)root->val)
-        {
-            helper(root->left, target);
-        }
+            dfs(root->left, target);
         else
-        {
-            helper(root->right, target);
-        }
+            dfs(root->right, target);
     }
     
     int closestValue(TreeNode* root, double target)
     {
-        helper(root, target);
-        
+        dfs(root, target);
         return min_node;
     }
 };
