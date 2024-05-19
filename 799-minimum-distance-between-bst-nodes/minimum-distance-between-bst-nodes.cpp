@@ -15,10 +15,10 @@ public:
     int curNode = INT_MAX;
     void inorder(TreeNode* root) {
         if(!root) return;
-        minDiffInBST(root->left);
+        inorder(root->left);
         minDist = min(abs(root->val-curNode), minDist);
         curNode = root->val;
-        minDiffInBST(root->right);
+        inorder(root->right);
     }
     int minDiffInBST(TreeNode* root) {
         inorder(root);
