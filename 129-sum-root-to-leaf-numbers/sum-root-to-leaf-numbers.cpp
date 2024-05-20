@@ -15,12 +15,13 @@ public:
     void traverse(TreeNode* root, string cur) {
         if(!root) return;
         if(!root->left and !root->right) {
-            cout << cur + to_string(root->val) << endl;
-            sum += stoi(cur + to_string(root->val));
+            char digit =  root->val + '0';
+            sum += stoi(cur + digit);
             return;
         }
-        traverse(root->left, cur + to_string(root->val));
-        traverse(root->right, cur + to_string(root->val));
+        char digit =  root->val + '0';
+        traverse(root->left, cur + digit);
+        traverse(root->right, cur + digit);
     }
     int sumNumbers(TreeNode* root) {
         traverse(root, "");
