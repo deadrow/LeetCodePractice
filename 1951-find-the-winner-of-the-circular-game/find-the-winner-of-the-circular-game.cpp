@@ -1,6 +1,6 @@
 class Solution {
 public:
-    int findTheWinner(int n, int k) {
+    int findTheWinner1(int n, int k) {
         // Josephus problem
         queue<int>q;
         for(int i=1;i<=n;i++) q.push(i);
@@ -16,4 +16,14 @@ public:
         }
         return q.front();
     }
+
+    int find(int n, int k) {
+        if(n == 1) return 0;
+        return (find(n-1, k)+k)%n;
+    }
+    int findTheWinner(int n, int k) {
+        // through recursion
+        return find(n,k)+1;
+    }
+
 };
