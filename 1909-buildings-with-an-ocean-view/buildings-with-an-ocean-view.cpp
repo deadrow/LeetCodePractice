@@ -2,7 +2,6 @@ class Solution {
 public:
     vector<int> findBuildings(vector<int>& heights) {
         int n = heights.size();
-        stack<int>st;
         vector<int>ret;
         int max = INT_MIN;
         for(int i=n-1;i>=0;i--) {
