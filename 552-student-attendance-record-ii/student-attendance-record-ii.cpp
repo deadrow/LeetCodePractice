@@ -10,7 +10,12 @@ public:
             return memo[n][numAbsents][numLates];
 
         int count = 0;
-        // select P
+        // Since we have already checked numAbsents and
+        // numLates in the beginning, Selecting P or A will
+        // reset numLates because if numLates ==2 and if
+        // we select P or A, PP doesn't make ineligible.
+
+        // select P.
         count = dfs(n-1, numAbsents, 0) % MOD;
         //select A
         count = (count + dfs(n-1, numAbsents+1, 0)) % MOD;
