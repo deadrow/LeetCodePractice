@@ -24,10 +24,9 @@ public:
                 sum += l2->val;
                 l2 = l2->next;
             }
-            if(sum >= 10) {
-                carry = 1;
-                sum %= 10;
-            } else carry = 0;
+
+            carry = sum/10;
+            sum %= 10;
 
             cur->next = new ListNode(sum);
             cur = cur->next;
