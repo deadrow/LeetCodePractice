@@ -27,6 +27,8 @@ public:
     }
 
     vector<vector<int>> threeSum(vector<int>& nums) {
+        // sorting method
+        // O(n2) + O(nlogn) ~= O(n) complexity
         int n = nums.size();
         sort(nums.begin(), nums.end());
 
