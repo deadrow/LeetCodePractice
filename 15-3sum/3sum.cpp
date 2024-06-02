@@ -34,7 +34,7 @@ public:
 
         vector<vector<int>> ret;
         for(int i=0;i<n;i++){
-            if(i==0 or nums[i]!=nums[i-1]) {
+            if(i==0 or nums[i]!=nums[i-1]) { // skip duplicates in outer loop
                 int low = i+1;
                 int high = n-1;
                 while(low<high) {
@@ -43,7 +43,7 @@ public:
                         ret.push_back({nums[i],nums[low],nums[high]});
                         low++;
                         high--;
-                        while(low<high and nums[low]==nums[low-1])low++;
+                        while(low<high and nums[low]==nums[low-1])low++;  // skip duplicates in inner loop
                     } 
                     else if(sum < 0) low++;
                     else high--;
