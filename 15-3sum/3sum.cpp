@@ -32,21 +32,24 @@ public:
         int n = nums.size();
         sort(nums.begin(), nums.end());
 
-        set<vector<int>>ret;
+        vector<vector<int>> ret;
         for(int i=0;i<n;i++){
-            int low = i+1;
-            int high = n-1;
-            while(low<high) {
-                int sum = nums[i]+nums[low]+nums[high];
-                if(sum == 0){
-                    ret.insert({nums[i],nums[low],nums[high]});
-                    low++;
-                    high--;
-                } 
-                else if(sum < 0) low++;
-                else high--;
+            if(i==0 or nums[i]!=nums[i-1]) {
+                int low = i+1;
+                int high = n-1;
+                while(low<high) {
+                    int sum = nums[i]+nums[low]+nums[high];
+                    if(sum == 0){
+                        ret.push_back({nums[i],nums[low],nums[high]});
+                        low++;
+                        high--;
+                        while(low<high and nums[low]==nums[low-1])low++;
+                    } 
+                    else if(sum < 0) low++;
+                    else high--;
+                }
             }
         }
-        return vector<vector<int>>(ret.begin(), ret.end());
+        return ret;
     }
 };
