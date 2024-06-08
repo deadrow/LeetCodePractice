@@ -3,11 +3,11 @@ public:
     vector<pair<int,int>>directions{{0,1},{0,-1},{1,0},{-1,0},{-1,1},{1,1},{1,-1},{-1,-1}};
     int shortestPathBinaryMatrix(vector<vector<int>>& grid) {
         int n = grid.size();
-        
+        if(grid[0][0] || grid[n-1][n-1])
+            return -1;
         queue<pair<int,int>>bfs;
         set<pair<int,int>>visited;
-        if(!grid[0][0])
-            bfs.push({0,0});
+        bfs.push({0,0});
 
         int steps=1;
         while(!bfs.empty()){
