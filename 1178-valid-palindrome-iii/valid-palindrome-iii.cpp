@@ -1,5 +1,6 @@
 class Solution {
 public:
+    // 1st approach
     unordered_map<string, int> dict;
     bool palindrome(string& s, int i, int j, int k){
         if(k<0) return false;
@@ -35,11 +36,29 @@ public:
         return memo[i][j] = max(lcs(s1, s2, i-1, j), lcs(s1, s2, i, j-1));
     }
 
-    bool isValidPalindrome(string s, int k) {
+    bool isValidPalindrome2(string s, int k) {
         string rev(s);
         reverse(rev.begin(), rev.end());
 
         memo.resize(s.size(), vector<int>(s.size(), -1));
         return lcs(s, rev, s.size()-1, s.size()-1) + k >= s.size();
+    }
+
+    // 3rd approach
+    int minReplaces(string& s, int i, int j) {
+        if(i > j) return 0;
+
+        if(memo[i][j] != -1)
+            return memo[i][j];
+
+        if(s[i] == s[j])
+            return memo[i][j] = minReplaces(s, i+1, j-1);
+        return memo[i][j] = 1 + min(minReplaces(s, i+1, j) , minReplaces(s, i, j-1));
+    }
+
+    bool isValidPalindrome(string s, int k) {
+        // Find min deletes to make string pallindrom
+        memo.resize(s.size(), vector<int>(s.size(), -1));
+        return minReplaces(s, 0, s.size()-1) <=k;
     }
 };
