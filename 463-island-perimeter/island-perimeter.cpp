@@ -23,16 +23,11 @@ public:
             for(auto [row, col] : directions){
                 int nRow = row + cur.first;
                 int nCol = col + cur.second;
-                if(nRow <0 or nRow>=m or nCol<0 or nCol>=n){
+                if(nRow <0 or nRow>=m or nCol<0 or nCol>=n)
                     sides++;
-                    cout << "edges"<<nRow<<","<<nCol<<endl;
-                }
-                    
                 else if(nRow>=0 and nRow<m and nCol>=0 and nCol<n) {
-                    if(grid[nRow][nCol] == 0){
+                    if(grid[nRow][nCol] == 0)
                         sides++;
-                        cout << "sides"<< nRow<<","<<nCol<<endl;
-                    }
                     else if(grid[nRow][nCol]==1){
                         bfs.push({nRow, nCol});
                     }
