@@ -18,7 +18,7 @@ public:
         preorder(root->left);
         preorder(root->right);
     }
-    void flatten(TreeNode* root) {
+    void flatten1(TreeNode* root) {
         preorder(root);
         TreeNode* dummy = new TreeNode(0);
         TreeNode* cur = dummy;
@@ -29,5 +29,16 @@ public:
         }
         root = nullptr;
         root = dummy->right;
+    }
+
+    TreeNode* head=nullptr;
+    void flatten(TreeNode* root) {
+        if(!root) return;
+
+        flatten(root->right);
+        flatten(root->left);
+        root->right=head;
+        head=root;
+        root->left=nullptr;
     }
 };
