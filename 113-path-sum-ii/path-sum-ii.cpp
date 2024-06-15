@@ -24,7 +24,6 @@ public:
         path.push_back(root->val);
         traverse(root->left, targetSum-root->val, path);
         traverse(root->right, targetSum-root->val, path);
-        path.pop_back();
     }
     vector<vector<int>> pathSum(TreeNode* root, int targetSum) {
         vector<int> path;
