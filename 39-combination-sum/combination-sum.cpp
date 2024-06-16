@@ -1,7 +1,7 @@
 class Solution {
 public:
     vector<vector<int>> ret;
-    void backtrack(vector<int>& candidates, vector<int> cur, int target, int cur_i){
+    void backtrack(vector<int>& candidates, vector<int>& cur, int target, int cur_i){
         if(target<0) return;
         if(target == 0) {
             ret.push_back(cur);
