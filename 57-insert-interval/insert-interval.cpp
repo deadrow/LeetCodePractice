@@ -23,15 +23,11 @@ public:
         // Binary search for the position which is greater than newInterval
         int idx = upper_bound(intervals.begin(), intervals.end(), newInterval)-intervals.begin();
 
-        vector<vector<int>>ret(intervals.begin(), intervals.begin()+idx);
-
-        if(ret.empty() or newInterval[0] > ret.back()[1])
-            ret.push_back(newInterval);
-        else
-            ret.back()[1] = max(ret.back()[1], newInterval[1]);
+        vector<vector<int>>ret;
+        intervals.insert(intervals.begin()+idx, newInterval);
 
         // now merge
-        for(int i=idx;i<intervals.size();i++){
+        for(int i=0;i<intervals.size();i++){
             if(ret.empty() or ret.back()[1] < intervals[i][0])
                 ret.push_back(intervals[i]);
             else
