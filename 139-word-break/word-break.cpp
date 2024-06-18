@@ -32,7 +32,6 @@ public:
         if(memo1[i] != -1) return memo1[i];
         for(int cur=i+1;cur<=s.size();cur++){
             string first = s.substr(i, cur-i);
-            cout << first << endl;
             if(dict.count(first) && dp(s, cur)) return memo1[i]=true;
         }
         return memo1[i]=false;
