@@ -6,11 +6,11 @@ public:
         if(s.empty() || dict.count(s)) return true;
 
         if(memo.count(s)) return memo[s];
-        
+
         for(int i=0;i<s.size();i++){
             string first = s.substr(0, i);
             string next = s.substr(i);
-            if(dict.count(first) && dp(next)) return true;
+            if(dict.count(first) && dp(next)) return memo[s]=true;
         }
         return memo[s]=false;
     }
