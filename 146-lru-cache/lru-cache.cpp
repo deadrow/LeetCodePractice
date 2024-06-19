@@ -1,44 +1,51 @@
 class LRUCache {
 public:
-    unordered_map<int,pair<list<int>::iterator,int>>dict;
-    list<int>vals;
+    list<int>keys;
+    unordered_map<int,list<int>::iterator>keyToIter;
+    unordered_map<int,int>keyToValue;
     int capacity;
     LRUCache(int capacity) : capacity(capacity) {
         
     }
     
     int get(int key) {
-        if(!dict.count(key))
-            return -1;
-        
-        auto itr = dict[key].first;
-        int val = dict[key].second;
-        vals.erase(itr);
-        vals.push_front(key);
-        dict[key] = {vals.begin(), val};
-        return val;
+        auto it = keyToValue.find(key);
+        if(it == keyToValue.end()) return -1;
+
+        // if present
+        // get the iterator and move it to front
+        auto curIter = keyToIter[key];
+        keys.erase(curIter);
+        keys.push_front(key);
+        keyToIter[key] = keys.begin();
+        return keyToValue[key];
     }
     
     void put(int key, int value) {
-        // if key is present
-        if(dict.count(key))
-        {
-            auto itr = dict[key].first;
-            vals.erase(itr);
-            vals.push_front(key);
-            dict[key] = {vals.begin(), value};
-        }
-        else // if key not present
-        {
-            if(capacity == vals.size()) // already full, evict
-            {
-                auto val = vals.back();
-                vals.pop_back();
-                dict.erase(val);
+        // check is already present
+        // if present, put it in front
+        auto it = keyToValue.find(key);
+        if(it != keyToValue.end()) {
+            // get the iterator
+            auto curIter = keyToIter[key];
+            keys.erase(curIter);
+            keys.push_front(key);
+            keyToIter[key] = keys.begin();
+            keyToValue[key] = value;
+        } else {
+            // check if full capacity
+            if(capacity == keys.size()) {
+                // remove last
+                int lastKey = keys.back();
+                keyToIter.erase(lastKey);
+                keyToValue.erase(lastKey);
+                keys.pop_back();
             }
 
-            vals.push_front(key);
-            dict[key] = {vals.begin(), value};
+            keys.push_front(key);
+            auto newIter = keys.begin();
+            keyToIter[key] = newIter;
+            keyToValue[key] = value;
         }
     }
 };
