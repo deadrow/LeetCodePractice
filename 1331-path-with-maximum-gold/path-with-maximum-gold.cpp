@@ -4,18 +4,21 @@ public:
     int dfs(vector<vector<int>>& grid, int row, int col) {
         int m = grid.size();
         int n = grid[0].size();
-        if(row>=0 and row<m and col>=0 and col<n and grid[row][col]) {
-            int cur = grid[row][col];
-            grid[row][col] = 0;
-            int left = cur + dfs(grid, row, col-1);
-            int right = cur + dfs(grid, row, col+1);
-            int up = cur + dfs(grid, row-1, col);
-            int down = cur + dfs(grid, row+1, col);
-            grid[row][col] = cur;
-            return max({left, right, up, down});
+
+        int cur = grid[row][col];
+        grid[row][col] = 0;
+
+        int curMax = 0;
+        for(auto it : directions) {
+            int nRow = row + it.first;
+            int nCol = col + it.second;
+            if(nRow>=0 and nRow<m and nCol>=0 and nCol<n and grid[nRow][nCol]) {
+                curMax = max(curMax, dfs(grid, nRow, nCol));
+            }
         }
 
-        return 0;
+        grid[row][col] = cur;
+        return cur + curMax;
     }
     int getMaximumGold(vector<vector<int>>& grid) {
         int m = grid.size();
