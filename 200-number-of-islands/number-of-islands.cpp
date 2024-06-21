@@ -6,20 +6,20 @@ public:
     void bfs(vector<vector<char>>& grid, int i, int j){
         queue<pair<int,int>>bfs;
         bfs.push({i,j});
-        // grid[i][j] = '0';
+        grid[i][j] = '0';
 
         while(!bfs.empty()){
             auto cur = bfs.front();
             bfs.pop();
 
-            if(grid[cur.first][cur.second] == '0') continue;
-            grid[cur.first][cur.second] = '0';
+            // if(grid[cur.first][cur.second] == '0') continue;
+            // grid[cur.first][cur.second] = '0';
 
             for(auto [row,col] : directions){
                 int nRow = cur.first + row;
                 int nCol = cur.second + col;
                 if(nRow>=0 and nRow< m and nCol>=0 and nCol<n and grid[nRow][nCol] == '1'){
-                    // grid[nRow][nCol] = '0';
+                    grid[nRow][nCol] = '0';
                     bfs.push({nRow, nCol});
                 }
             }
