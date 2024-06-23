@@ -1,7 +1,7 @@
 class Solution {
 public:
     int findKthPositive(vector<int>& arr, int k) {
-        vector<bool>nums(5002);
+        vector<bool>nums(2000);
         for(auto it : arr){
             nums[it] = true;
         }
