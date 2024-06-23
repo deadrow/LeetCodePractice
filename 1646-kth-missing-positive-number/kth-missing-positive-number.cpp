@@ -33,11 +33,13 @@ public:
                 high = mid;
         }
 
+        cout << low << "," << high;
         // What to return
-        // Here is the logic. For above example low stops at index 3
-        // At index 3 there are 3 elements missing. So we add k-3 that is
-        // 2 to arr[low] =  7 + 2 so 9 becomes our 5th missing element
-        // So arr[low] + (k - (arr[low] - low)) which becomes low+k
+        // Here is the logic. For above example low and high both stops 
+        // at index 4. This is upper bound. So we take low-1
+        // At index 3 there are  elements missing. So we add k-3 that is
+        // 2 to arr[low-1] =  7 + 2 so 9 becomes our 5th missing element
+        // So arr[low-1] + (k - (arr[low-1] - low)) which becomes low+k
 
         return low+k; // here is logic for this
 
