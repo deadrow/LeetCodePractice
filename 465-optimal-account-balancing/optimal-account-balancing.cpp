@@ -21,8 +21,8 @@ public:
     int minTransfers(vector<vector<int>>& transactions) {
         unordered_map<int,int>balanceDict;
         for(auto it : transactions){
-            balanceDict[it[0]] -= it[2];
-            balanceDict[it[1]] += it[2];
+            balanceDict[it[0]] += it[2];
+            balanceDict[it[1]] -= it[2];
         }
 
         for(auto it : balanceDict) {
