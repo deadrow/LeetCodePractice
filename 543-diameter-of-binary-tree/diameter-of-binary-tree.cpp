@@ -16,11 +16,11 @@ public:
         if(!root) return 0;
         int left = traverse(root->left);
         int right = traverse(root->right);
-        maxDiameter = max(maxDiameter, left+right+1);
-        return max(left+1, right+1);
+        maxDiameter = max(maxDiameter, left+right);
+        return max(left, right)+1;
     }
     int diameterOfBinaryTree(TreeNode* root) {
         traverse(root);
-        return maxDiameter-1;
+        return maxDiameter;
     }
 };
