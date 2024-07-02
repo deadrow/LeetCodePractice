@@ -11,6 +11,7 @@
  */
 class Solution {
 public:
+    // dfs solution
     map<int,map<int,vector<int>>>dict;
     void traverse(TreeNode* root, int row, int col){
         if(!root) return;
@@ -21,10 +22,10 @@ public:
     vector<vector<int>> verticalOrder(TreeNode* root) {
         traverse(root, 0,0);
         vector<vector<int>> ret;
-        for(auto row : dict){
+        for(auto col : dict){
             vector<int> cur;
-            for(auto col : row.second){
-                for(auto it : col.second)
+            for(auto row : col.second){
+                for(auto it : row.second)
                     cur.push_back(it);
             }
             ret.push_back(cur);
