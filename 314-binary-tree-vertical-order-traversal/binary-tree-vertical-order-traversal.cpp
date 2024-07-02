@@ -19,7 +19,7 @@ public:
         traverse(root->left, row+1, col-1);
         traverse(root->right, row+1, col+1);
     }
-    vector<vector<int>> verticalOrder(TreeNode* root) {
+    vector<vector<int>> verticalOrder1(TreeNode* root) {
         traverse(root, 0,0);
         vector<vector<int>> ret;
         for(auto col : dict){
@@ -29,6 +29,35 @@ public:
                     cur.push_back(it);
             }
             ret.push_back(cur);
+        }
+        return ret;
+    }
+
+    // bfs solution
+    vector<vector<int>> verticalOrder(TreeNode* root) {
+        vector<vector<int>> ret;
+        if(!root) return ret;
+        queue<pair<TreeNode*,int>>bfs;
+        bfs.push({root, 0});
+
+        map<int, vector<int>>mp;
+
+        while(!bfs.empty()){
+            auto cur = bfs.front();
+            bfs.pop();
+            mp[cur.second].push_back(cur.first->val);
+
+            if(cur.first->left){
+                bfs.push({cur.first->left, cur.second-1});
+            }
+            if(cur.first->right){
+                bfs.push({cur.first->right, cur.second+1});
+            }
+        }
+
+        
+        for(auto it : mp){
+            ret.push_back(it.second);
         }
         return ret;
     }
