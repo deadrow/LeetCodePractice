@@ -11,7 +11,7 @@ public:
     // Return the dotProduct of two sparse vectors
     int dotProduct(SparseVector& vec) {
         int sum=0;
-        for(auto it : idxToVal){
+        for(auto& it : idxToVal){
             if(vec.idxToVal.count(it.first))
                 sum += it.second * vec.idxToVal[it.first];
         }
