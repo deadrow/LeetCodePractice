@@ -33,7 +33,7 @@ public:
         if(nestedList.empty()) return 0;
 
         int sum = 0;
-        for(auto it : nestedList){
+        for(auto& it : nestedList){
             if(!it.isInteger()){
                 sum += traverse(it.getList(), depth+1);
             } else{
