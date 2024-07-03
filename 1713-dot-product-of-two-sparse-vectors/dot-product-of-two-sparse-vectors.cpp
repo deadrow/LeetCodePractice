@@ -1,6 +1,6 @@
 class SparseVector {
 public:
-    map<int,int>idxToVal;
+    unordered_map<int,int>idxToVal;
     SparseVector(vector<int> &nums) {
         for(int i=0;i<nums.size();i++){
             if(nums[i] != 0)
