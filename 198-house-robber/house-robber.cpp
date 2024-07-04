@@ -16,12 +16,15 @@ public:
     int rob(vector<int>& nums) {
         int n = nums.size();
         if(n < 2) return nums[0];
-        vector<int>dp(n);
-        dp[0]= nums[0];
-        dp[1] = max(nums[0],nums[1]);
+        int prev_2 = nums[0];
+        int prev_1 = max(nums[0],nums[1]);
+        int cur = prev_1;
         for(int i=2;i<nums.size();i++){
-            dp[i] = max(nums[i]+dp[i-2], dp[i-1]);
+            // dp[i] = max(nums[i]+dp[i-2], dp[i-1]);
+            cur = max(nums[i]+prev_2, prev_1);
+            prev_2 = prev_1;
+            prev_1 = cur;
         }
-        return dp[nums.size()-1];
+        return cur;
     }
 };
