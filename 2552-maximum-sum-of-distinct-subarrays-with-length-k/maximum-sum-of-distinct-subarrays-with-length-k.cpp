@@ -13,7 +13,6 @@ public:
                     curSum -= nums[j];
                     j++;
                 }
-                // j=i;
             }
 
             last[nums[i]] = i;
