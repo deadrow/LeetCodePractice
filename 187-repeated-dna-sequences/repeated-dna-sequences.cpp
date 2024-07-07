@@ -2,17 +2,17 @@ class Solution {
 public:
     vector<string> findRepeatedDnaSequences(string s) {
         if(s.size() < 10) return {};
+
+        vector<string>ret;
         unordered_map<string,int>dict;
         int rollingHash=0;
         for(int j=0;j<=s.size()-10;j++){
-            dict[s.substr(j, 10)]++;
+            string cur = s.substr(j, 10);
+            dict[cur]++;
+            if(dict[cur] == 2)
+                ret.push_back(cur);
         }
 
-        vector<string>ret;
-        for(auto it : dict){
-            if(it.second>1)
-                ret.push_back(it.first);
-        }
         return ret;
     }
 };
