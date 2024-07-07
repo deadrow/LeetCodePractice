@@ -8,6 +8,8 @@ public:
         int j=0;
         for(int i=0;i<n;i++){
             if(last.count(nums[i])){
+                // if element is found remove all the element till last occurance as
+                // they won't be included in the window
                 while(j<=last[nums[i]]){
                     last.erase(nums[j]);
                     curSum -= nums[j];
