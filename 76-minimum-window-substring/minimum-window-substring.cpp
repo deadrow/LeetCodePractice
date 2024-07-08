@@ -19,16 +19,11 @@ public:
             }
 
             if(count == 0){
-                // we found one window
-                // save and find smaller
-                if(j-i+1 < minWindow){
-                    minWindow = j-i+1;
-                    idx = i;
-                }
-
                 // shrink window till count is 0
                 while(count == 0)
                 {
+                    // we found one window
+                    // save and find smaller
                     if(j-i+1 < minWindow){
                         minWindow = j-i+1;
                         idx = i;
