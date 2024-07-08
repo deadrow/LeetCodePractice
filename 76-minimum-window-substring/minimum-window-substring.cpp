@@ -35,6 +35,6 @@ public:
             }
         }
 
-        return idx ==-1 ? "" : s.substr(idx, minWindow);
+        return minWindow == INT_MAX ? "" : s.substr(idx, minWindow);
     }
 };
