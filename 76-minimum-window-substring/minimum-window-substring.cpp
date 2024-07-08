@@ -16,8 +16,7 @@ public:
 
             if(count == 0){
                 // shrink window till count is 0
-                while(count == 0)
-                {
+                while(count == 0) {
                     // we found one window
                     // save and find smaller
                     if(j-i+1 < minWindow){
@@ -28,7 +27,6 @@ public:
                     remaining[s[i]]++;
                     if(remaining[s[i]] > 0)
                         count++;
-                    
                     i++;
                 }
             }
