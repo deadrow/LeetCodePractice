@@ -4,7 +4,7 @@ public:
         // int idx = lower_bound(intervals.begin(), intervals.end(), toBeRemoved)-intervals.begin();
         
         vector<vector<int>>ret;
-        for(auto it : intervals){
+        for(auto& it : intervals){
             if(it[1] < toBeRemoved[0] or it[0] > toBeRemoved[1])
                 ret.push_back(it);
             else {
