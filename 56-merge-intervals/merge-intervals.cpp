@@ -41,27 +41,26 @@ public:
     
     // merge with map
     vector<vector<int>> merge(vector<vector<int>>& intervals) {
-        sort(intervals.begin(), intervals.end());
         vector<vector<int>>ret;
-        map<int,int>dict;
-        for(auto it : intervals){
-            auto end = dict.lower_bound(it[0]);
-            if(end != dict.end()){
-                int s = end->second;
-                int e = end->first;
-                if(it[0] > e){
-                    dict[it[1]]=it[0];
-                } else{
-                    dict.erase(e);
-                    dict[max(it[1], e)] = min(it[0], s);
-                }
-            } else {
-                dict[it[1]]=it[0];
+        set<pair<int, int>> st;
+        for(auto itr : intervals){
+            int left = itr[0], right = itr[1];
+            auto it = st.upper_bound({left, INT_MIN});
+            if(it != st.begin() && (--it)->second < left) {
+                ++it;
             }
+            
+            while(it != st.end() && it->first <= right) {
+                left = min(left, it->first);
+                right = max(right, it->second);
+                it = st.erase(it);
+            }
+            
+            st.insert({ left, right });
         }
 
-        for(auto it : dict){
-            ret.push_back({it.second, it.first});
+        for(auto it : st){
+            ret.push_back({it.first, it.second});
         }
         return ret;
     }
