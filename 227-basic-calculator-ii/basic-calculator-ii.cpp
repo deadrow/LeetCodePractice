@@ -1,6 +1,6 @@
 class Solution {
 public:
-    int calculate(string s) {
+    int calculate1(string s) {
         stack<int>st;
         int num =0;
         char op='+';
@@ -33,5 +33,34 @@ public:
             st.pop();
         }
         return ret;
+    }
+    
+    int calculate(string s) {
+        int prev=0;
+        int num=0;
+        char op='+';
+        int ret=0;
+        for(int i=0;i<s.size();i++){
+            if(isdigit(s[i])){
+                num = num*10 + (s[i]-'0');
+            }
+            if((!isdigit(s[i]) and !isspace(s[i])) or i == s.size()-1){
+                if(op == '+'){
+                    ret += prev;
+                    prev = num;
+                } else if(op == '-'){
+                    ret += prev;
+                    prev = -num;  
+                } else if(op == '*'){
+                    prev = prev*num;
+                } else if(op == '/'){
+                    prev = prev/num;
+                }
+                op = s[i];
+                num = 0;
+            }
+        }
+
+        return ret + prev;
     }
 };
