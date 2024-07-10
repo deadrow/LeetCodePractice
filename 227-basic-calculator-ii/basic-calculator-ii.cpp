@@ -61,6 +61,6 @@ public:
             }
         }
 
-        return ret + prev;
+        return ret+prev;
     }
 };
