@@ -12,15 +12,19 @@
 class Solution {
 public:
     int sum = 0;
-    int rangeSumBST(TreeNode* root, int low, int high) {
-        if(!root) return 0;
-        int left = rangeSumBST(root->left, low, high);
-        int right = rangeSumBST(root->right, low, high);
+    void traverse(TreeNode* root, int low, int high){
+        if(!root) return;
         if(root->val >= low and root->val <= high){
-            cout << root->val << ",";
             sum += root->val;
         }
-            
+        if(low < root->val)
+            traverse(root->left, low, high);
+
+        if(high > root->val)
+            traverse(root->right, low, high);
+    }
+    int rangeSumBST(TreeNode* root, int low, int high) {
+        traverse(root, low, high);
         return sum;
     }
 };
