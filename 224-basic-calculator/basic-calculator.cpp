@@ -13,7 +13,7 @@ public:
             st.push(num);
         } else if(op == '-'){
             st.push(-num);  
-        } else if(op == '('){
+        } else if(op == '*'){
             int num1 = st.top();
             st.pop();
             st.push(num1*num);
