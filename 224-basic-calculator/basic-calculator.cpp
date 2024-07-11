@@ -23,7 +23,7 @@ public:
             st.push(num1/num);
         }
     }
-    pair<int,int> helper(string s){
+    pair<int,int> helper(string& s){
         int num = 0;
         char op='+';
         stack<int>st;
@@ -36,7 +36,8 @@ public:
                 op = s[i];
                 num = 0;
             } else if(s[i] == '('){
-                pair<int,int> curRes = helper(s.substr(i+1));
+                string str = s.substr(i+1);
+                pair<int,int> curRes = helper(str);
                 num = curRes.first;
                 i += curRes.second;
             } else if(s[i] == ')'){
