@@ -4,7 +4,7 @@ public:
         int n = prerequisites.size();
         vector<int>indegree(numCourses);
         vector<vector<int>>adjMatrix(numCourses); 
-        for(auto it : prerequisites){
+        for(auto& it : prerequisites){
             indegree[it[0]]++;
             adjMatrix[it[1]].push_back(it[0]);
         }
@@ -21,7 +21,7 @@ public:
             auto cur = bfs.front();
             bfs.pop();
             ret.push_back(cur);
-            for(auto v : adjMatrix[cur]){
+            for(auto& v : adjMatrix[cur]){
                 indegree[v]--;
                 if(indegree[v] == 0)
                     bfs.push(v);
