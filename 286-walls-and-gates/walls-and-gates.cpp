@@ -14,18 +14,15 @@ public:
         }
 
         while(!bfs.empty()){
-            int size = bfs.size();
-            for(int i=0;i<size;i++){
-                auto cur = bfs.front();
-                bfs.pop();
-                            
-                for(auto& it : directions){
-                    int nRow = it.first + cur[0];
-                    int nCol = it.second + cur[1];
-                    if(nRow>=0 and nRow<m and nCol>=0 and nCol<n and rooms[nRow][nCol] == INF){
-                        rooms[nRow][nCol] = cur[2]+1;
-                        bfs.push({nRow, nCol, cur[2]+1});
-                    }
+            auto cur = bfs.front();
+            bfs.pop();
+                        
+            for(auto& it : directions){
+                int nRow = it.first + cur[0];
+                int nCol = it.second + cur[1];
+                if(nRow>=0 and nRow<m and nCol>=0 and nCol<n and rooms[nRow][nCol] == INF){
+                    rooms[nRow][nCol] = cur[2]+1;
+                    bfs.push({nRow, nCol, cur[2]+1});
                 }
             }
         }
