@@ -8,9 +8,8 @@ public:
         char prev;
         string ret;
         for(int i=0;i<cur.size();i++){
-            if(i==0 or cur[i]==cur[i-1]){
+            if(i==0 or cur[i]==cur[i-1])
                 freq++;
-            }
             else {
                 ret += to_string(freq) + prev;
                 freq = 1;
