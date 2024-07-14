@@ -45,7 +45,6 @@ public:
                      bfs.push({it, cur.second+1});
                      visited.insert(it);
                 }
-                   
             }
         }
 
