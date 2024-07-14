@@ -10,17 +10,17 @@ public:
 
         if(tokens.size() != pattern.size()) return false;
 
-        unordered_map<char, string>charToWord;
-        unordered_map<string, char>wordToChar;
+        unordered_map<char, string>cToW;
+        unordered_map<string, char>wToC;
         for(int i=0;i<pattern.size();i++){
-            if(charToWord.count(pattern[i])){
-                if(wordToChar.count(charToWord[pattern[i]]) and tokens[i] != charToWord[pattern[i]])
+            if(cToW.count(pattern[i])){
+                if(wToC.count(cToW[pattern[i]]) and tokens[i] != cToW[pattern[i]])
                     return false;
             }
-            if(wordToChar.count(tokens[i]) and wordToChar[tokens[i]] != pattern[i])
+            if(wToC.count(tokens[i]) and wToC[tokens[i]] != pattern[i])
                 return false;
-            charToWord[pattern[i]] = tokens[i];
-            wordToChar[tokens[i]] = pattern[i];
+            cToW[pattern[i]] = tokens[i];
+            wToC[tokens[i]] = pattern[i];
         }
         return true;
     }
