@@ -1,6 +1,8 @@
 class Solution {
 public:
     vector<int> findPeakGrid(vector<vector<int>>& mat) {
+        ios::sync_with_stdio(0);
+        cin.tie(0);
         int m=mat.size();
         int n = mat[0].size();
         int low = 0, high=n;
