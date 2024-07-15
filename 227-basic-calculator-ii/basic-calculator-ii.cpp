@@ -34,15 +34,15 @@ public:
                 evaulate(st, op, num);
                 op = s[i];
                 num = 0;
-            } else if(s[i] == '('){
-                auto ret = helper(s.substr(i+1));
-                num += ret.first;
-                i += ret.second;
-            } else if(s[i] == ')'){
-                evaulate(st, op, num);
-                return {sum(st), i+1};
             }
-                
+            // } else if(s[i] == '('){
+            //     auto ret = helper(s.substr(i+1));
+            //     num += ret.first;
+            //     i += ret.second;
+            // } else if(s[i] == ')'){
+            //     evaulate(st, op, num);
+            //     return {sum(st), i+1};
+            // }
         }
         evaulate(st, op, num);
         return {sum(st), s.size()};
