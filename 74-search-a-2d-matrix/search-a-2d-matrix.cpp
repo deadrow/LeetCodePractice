@@ -11,7 +11,6 @@ public:
                 low = mid+1;
             else high = mid;
         }
-        // return matrix[low/n][low%n] == target ? true : false;
         return false;
     }
 };
