@@ -38,7 +38,7 @@ public:
         int totalDepth=0;
         int curDepth;
         int found=0;
-        while(!bfs.empty()){
+        while(!bfs.empty() and found != 2){
             auto cur = bfs.front();
             bfs.pop();
 
@@ -51,7 +51,6 @@ public:
                 found++;
                 totalDepth += cur.second;
             }
-            if(found == 2) break;
 
             if(cur.first->left)
                 bfs.push({cur.first->left, cur.second+1});
