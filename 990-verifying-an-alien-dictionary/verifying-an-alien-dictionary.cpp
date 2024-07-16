@@ -1,7 +1,7 @@
 class Solution {
 public:
     bool isAlienSorted(vector<string>& words, string order) {
-        vector<int>orderMap(26);
+        unordered_map<int,int>orderMap;
         for(int i=0;i<order.size();i++) orderMap[order[i]-'a']=i;
 
         for(int i=0;i<words.size()-1;i++){
