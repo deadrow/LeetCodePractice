@@ -1,7 +1,7 @@
 class Solution {
 public:
     vector<vector<int>>memo;
-    bool backtrack(string s, int open, int i){
+    bool backtrack(string& s, int open, int i){
         if(i >= s.size()){
             return open == 0;
         }
