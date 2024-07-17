@@ -14,6 +14,7 @@ public:
                 high.erase(high.begin());
             }
             if(j-i+1 == k){
+                // window is matched. Find median and shrink it
                 if(k&1)
                     medians.push_back(*low.begin());
                 else
