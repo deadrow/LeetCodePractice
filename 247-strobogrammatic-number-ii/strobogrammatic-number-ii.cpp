@@ -15,10 +15,28 @@ public:
             backtrack(n, i+1, cur);
         }
     }
-    vector<string> findStrobogrammatic(int n) {
+    vector<string> findStrobogrammatic1(int n) {
         if(n==1) ret.push_back("0");
         string cur(n, ' ');
         backtrack(n, 0, cur);
         return ret;
+    }
+
+    vector<string> backtrack(int n, int final){
+        if(n == 0) return {""};
+        if(n == 1) return {"0","1","8"};
+
+        vector<string> words = backtrack(n-2, final);
+        vector<string> ret;
+        for(auto word : words){
+            for(auto it : dict){
+                if(it.first != '0' or final != n) 
+                    ret.push_back(it.first + word + it.second);
+            } 
+        }
+        return ret;
+    }
+    vector<string> findStrobogrammatic(int n) {
+        return backtrack(n, n);
     }
 };
