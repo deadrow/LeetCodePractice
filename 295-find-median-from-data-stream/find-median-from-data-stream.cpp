@@ -13,8 +13,8 @@ public:
 
         if(maxHeap.size() < minHeap.size()){
             // find min from low and put it to high
-            int top = minHeap.top(); minHeap.pop();
-            maxHeap.push(top);
+            maxHeap.push(minHeap.top());
+            minHeap.pop();
         }
     }
     
