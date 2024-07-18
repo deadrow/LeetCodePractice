@@ -11,18 +11,21 @@
  */
 class Solution {
 public:
-    map<int, vector<int>>mp;
-    void traverse(TreeNode* root, int height){
-        if(!root) return;
-        mp[height].push_back(root->val);
-        traverse(root->left, height+1);
-        traverse(root->right, height+1);
-    }
     vector<int> rightSideView(TreeNode* root) {
-        traverse(root, 0);
-        vector<int> ret;
-        for(auto it : mp){
-            ret.push_back(it.second.back());
+        if(!root) return {};
+        vector<int>ret;
+        queue<TreeNode*>bfs;
+        bfs.push(root);
+        while(!bfs.empty()){
+            int size = bfs.size();
+            for(int i=0;i<size;i++){
+                TreeNode* cur = bfs.front(); bfs.pop();
+                if(i==0) ret.push_back(cur->val);
+                if(cur->right)
+                    bfs.push(cur->right);
+                if(cur->left)
+                    bfs.push(cur->left);
+            }
         }
         return ret;
     }
