@@ -8,7 +8,7 @@ public:
             }
         }
         vector<int> ret;
-        for(auto it : mp){
+        for(auto& it : mp){
             if(it.first%2!=0)
                 ret.insert(ret.end(), it.second.begin(), it.second.end());
             else
