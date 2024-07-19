@@ -9,13 +9,10 @@ public:
         }
         vector<int> ret;
         for(auto it : mp){
-            if(it.first%2!=0){
-                for(auto v : it.second)
-                    ret.push_back(v);
-            } else {
-                for(auto v=it.second.rbegin();v!=it.second.rend();v++)
-                    ret.push_back(*v);
-            }
+            if(it.first%2!=0)
+                ret.insert(ret.end(), it.second.begin(), it.second.end());
+            else
+                ret.insert(ret.end(), it.second.rbegin(), it.second.rend());
         }
         return ret;
     }
