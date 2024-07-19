@@ -1,8 +1,7 @@
 class Solution {
 public:
     vector<int>prefix;
-    Solution(vector<int>& w) {
-        prefix = w;
+    Solution(vector<int>& w):prefix(w) {
         for(int i=1;i<prefix.size();i++){
             prefix[i] += prefix[i-1];
         }
