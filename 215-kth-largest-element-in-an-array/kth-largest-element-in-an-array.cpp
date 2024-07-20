@@ -1,34 +1,35 @@
 class Solution {
 public:
-    // 1st approach
-    int findKthLargest1(vector<int>& nums, int k) {
-        priority_queue<int, vector<int>, greater<int>>pq;
+    int findKthLargest(vector<int>& nums, int k) {
+        return quickSelect(nums, k);
+    }
+    
+    int quickSelect(vector<int>& nums, int k) {
+        int pivot = nums[rand() % nums.size()];
         
-        for(int i=0;i<k;i++)
-            pq.push(nums[i]);
+        vector<int> left;
+        vector<int> mid;
+        vector<int> right;
         
-        for(int i=k;i<nums.size();i++)
-        {
-            if(nums[i] > pq.top())
-            {
-                pq.pop();
-                pq.push(nums[i]);
+        for (int num: nums) {
+            if (num > pivot) {
+                left.push_back(num);
+            } else if (num < pivot) {
+                right.push_back(num);
+            } else {
+                mid.push_back(num);
             }
         }
         
-        return pq.top();
-    }
-
-    // 2nd approach
-    int findKthLargest(vector<int>& nums, int k) {
-        priority_queue<int>pq;
+        if (k <= left.size()) {
+            return quickSelect(left, k);
+        }
         
-        for(int i=0;i<nums.size();i++)
-            pq.push(nums[i]);
+        if (left.size() + mid.size() < k) {
+            return quickSelect(right, k - left.size() - mid.size());
+        }
         
-        for(int i=0;i<k-1;i++)
-            pq.pop();
-
-        return pq.top();
+        return pivot;
+        
     }
 };
