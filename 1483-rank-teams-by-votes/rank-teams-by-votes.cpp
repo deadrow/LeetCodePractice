@@ -2,10 +2,10 @@ class Solution {
 public:
     string rankTeams(vector<string>& votes) {
         unordered_map<char, vector<int>>mp;
-        for(int i=0;i<votes[0].size();i++)
-            mp[votes[0][i]] = vector<int>(votes[0].size());
+        for(auto& c : votes[0])
+            mp[c] = vector<int>(votes[0].size());
 
-        for(auto word : votes){
+        for(auto& word : votes){
             for(int i=0;i<word.size();i++){
                 mp[word[i]][i]++;
             }
