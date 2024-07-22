@@ -3,11 +3,11 @@ public:
     string rankTeams(vector<string>& votes) {
         unordered_map<char, vector<int>>mp;
         for(int i=0;i<votes[0].size();i++)
-            mp[votes[0][i]] = vector<int>(votes[0].size()+1);
+            mp[votes[0][i]] = vector<int>(votes[0].size());
 
         for(auto word : votes){
             for(int i=0;i<word.size();i++){
-                mp[word[i]][i+1]++;
+                mp[word[i]][i]++;
             }
         }
 
