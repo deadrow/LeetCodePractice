@@ -12,8 +12,8 @@ public:
     string get(string key, int timestamp) {
         if(!mp.count(key)) return "";
         auto& val = mp[key];
-        if(timestamp < val.begin()->first) return "";
         auto it = val.upper_bound(timestamp);
+        if(it == val.begin()) return "";
         return prev(it)->second;
     }
 };
