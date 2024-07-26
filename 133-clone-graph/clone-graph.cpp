@@ -29,10 +29,7 @@ public:
         Node* newNode = new Node(node->val);
         visited[node] = newNode;
         for(const auto& it : node->neighbors){
-            if(it->neighbors.empty())
-                newNode->neighbors.push_back(new Node(it->val));
-            else
-                newNode->neighbors.push_back(cloneGraph(it));
+            newNode->neighbors.push_back(cloneGraph(it));
         }
         return newNode;
     }
