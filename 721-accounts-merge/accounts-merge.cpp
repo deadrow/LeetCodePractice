@@ -4,7 +4,6 @@ public:
     unordered_set<string>visited;
 
     void dfs(const string& email, vector<string>& mergedData){
-        // visited.insert(email);
         mergedData.push_back(email);
         for(auto& v : adjMap[email]){
             if(!visited.count(v)) {
