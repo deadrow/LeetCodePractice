@@ -2,7 +2,7 @@ class Solution {
 public:
     vector<string> splitWordsBySeparator(vector<string>& words, char separator) {
         vector<string>ret;
-        for(auto it : words){
+        for(const auto& it : words){
             stringstream ss(it);
             string token;
             while(getline(ss, token, separator)){
