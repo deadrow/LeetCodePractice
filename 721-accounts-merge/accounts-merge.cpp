@@ -31,15 +31,6 @@ public:
         }
     }
 
-    int roots(){
-        int count=0;
-        for(int i=0;i<root.size();i++)
-            if(root[i] == i)
-                count++;
-
-        return count;
-    }
-
 private:
     vector<int>root;
     vector<int>rank;
