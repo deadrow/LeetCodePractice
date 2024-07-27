@@ -28,9 +28,11 @@ public:
             mergedData.push_back(data[0]);
             if(!visited.count(data[1]))
                 dfs(data[1], mergedData);
-            sort(mergedData.begin()+1, mergedData.end());
-            if(mergedData.size()>1)
+            
+            if(mergedData.size()>1){
+                sort(mergedData.begin()+1, mergedData.end());
                 ret.push_back(mergedData);
+            }
         }
         return ret;
     }
