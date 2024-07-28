@@ -31,6 +31,13 @@ public:
         }
     }
 
+    int roots(){
+        int count=0;
+        for(int i=0;i<root.size();i++)
+            count += root[i]==i;
+        return count;
+    }
+
 private:
     vector<int>root;
     vector<int>rank;
@@ -42,9 +49,6 @@ public:
         for(auto& it : edges)
             uf.unionSet(it[0], it[1]);
 
-        unordered_set<int>roots;
-        for(int i=0;i<n;i++)
-            roots.insert(uf.find(i));
-        return roots.size();
+        return uf.roots();
     }
 };
