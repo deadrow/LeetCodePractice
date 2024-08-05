@@ -15,7 +15,7 @@ public:
         }
 
         vector<string> ret;
-        for(auto it : mp){
+        for(auto& it : mp){
             ret.push_back(to_string(it.second) + " " + it.first);
         }
         return ret;
