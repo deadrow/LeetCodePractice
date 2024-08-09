@@ -8,7 +8,7 @@ public:
         if(row==m-1 and col==n-1) return grid[m-1][n-1];
         if(memo[row][col] != -1) return memo[row][col];
         int res=INT_MAX;
-        for(auto it : directions){
+        for(auto& it : directions){
             int nRow = it.first + row;
             int nCol = it.second + col;
             if(row>=0 and row < m and col>=0 and col<n){
