@@ -6,7 +6,7 @@ public:
         if(target == 0) return 0;
         if(memo[target] != -1) return memo[target];
         int count = INT_MAX;
-        for(auto it : nums){
+        for(auto& it : nums){
             if(target-it >=0) {
                 count = min(count, 1+dp(target-it));
             }
