@@ -12,7 +12,6 @@ public:
     int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid) {
         int m = obstacleGrid.size();
         int n = obstacleGrid[0].size();
-        // if(obstacleGrid[0][0] or obstacleGrid[m-1][n-1]) return 0;
         memo.resize(m+1, vector<int>(n+1, -1));
         return dp(obstacleGrid, 0, 0);
     }
