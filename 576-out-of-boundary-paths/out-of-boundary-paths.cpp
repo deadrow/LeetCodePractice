@@ -8,7 +8,7 @@ public:
         if(row>=m or row<0 or col >=n or col<0) return 1;
         if(memo[row][col][maxMove]!= -1) return memo[row][col][maxMove];
         int count=0;
-        for(auto& it : directions){
+        for(const auto& it : directions){
             count = (count + dp(m, n, maxMove-1, row+it.first, col+it.second))%MOD;
         }
         return memo[row][col][maxMove] = count;
