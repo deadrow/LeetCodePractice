@@ -17,7 +17,7 @@ public:
             if(visited[cur[1]][cur[2]]) continue;
             visited[cur[1]][cur[2]] = true;
             int time = cur[0];
-            for(auto& it : directions){
+            for(const auto& it : directions){
                 int nRow = it.first + cur[1];
                 int nCol = it.second + cur[2];
                 if(nRow>=0 and nRow<m and nCol>=0 and nCol<n){
