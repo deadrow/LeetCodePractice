@@ -25,7 +25,7 @@ public:
                         bfs.push({time+1, nRow, nCol});
                     else if(grid[nRow][nCol] > time+1){
                         int diff = grid[nRow][nCol]-time;
-                        if(diff & 1)
+                        if(diff & 1) // if the diff is even we need one more step
                             bfs.push({time+diff, nRow, nCol});
                         else
                             bfs.push({time+diff+1, nRow, nCol});
