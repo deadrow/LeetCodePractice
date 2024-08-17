@@ -1,7 +1,6 @@
 class StockPrice {
 public:
-    unordered_map<int,int>timestamps;
-    int latestTime=0;
+    map<int,int>timestamps;
     priority_queue<pair<int,int>>maxHeap;
     priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>>minHeap;
     StockPrice() {
@@ -9,14 +8,13 @@ public:
     }
     
     void update(int timestamp, int price) {
-        latestTime = max(latestTime, timestamp);
         timestamps[timestamp]=price;
         maxHeap.push({price, timestamp});
         minHeap.push({price, timestamp});
     }
     
     int current() {
-        return timestamps[latestTime];
+        return timestamps.rbegin()->second;
     }
     
     int maximum() {
