@@ -18,10 +18,7 @@ public:
             }
         }
 
-        int maxTime=0;
-        for(int i=1;i<=n;i++){
-            maxTime = max(dist[i], maxTime);
-        }
+        int maxTime = *max_element(dist.begin()+1, dist.end());
         return maxTime == INT_MAX? -1 : maxTime;
     }
 };
