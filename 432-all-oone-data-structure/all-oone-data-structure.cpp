@@ -1,6 +1,6 @@
 class AllOne {
 public:
-    unordered_map<string,int>keys;
+    map<string,int>keys;
     multiset<pair<int,string>>sorted;
     AllOne() {
         
