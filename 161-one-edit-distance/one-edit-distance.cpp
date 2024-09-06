@@ -10,7 +10,7 @@ public:
             } else {
                 if((s.substr(i+1) == t.substr(j)) or (s.substr(i) == t.substr(j+1)) or s.substr(i+1)==t.substr(j+1))
                     return true;
-                else return false;
+                return false;
             }
         }
         return false;
