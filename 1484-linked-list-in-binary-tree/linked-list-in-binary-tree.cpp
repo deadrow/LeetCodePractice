@@ -30,7 +30,6 @@ public:
                 isSame(head->next, root->right)));
     }
     bool isSubPath(ListNode* head, TreeNode* root) {
-        if(!head) return true;
         if(!root) return false;
         if(isSame(head, root)) return true;
         return isSubPath(head, root->left) ||  isSubPath(head, root->right);
