@@ -31,6 +31,6 @@ public:
     bool isSubPath(ListNode* head, TreeNode* root) {
         if(!root) return false;
         if(isSame(head, root)) return true;
-        return isSubPath(head, root->left) ||  isSubPath(head, root->right);
+        return isSubPath(head, root->left) or isSubPath(head, root->right);
     }
 };
