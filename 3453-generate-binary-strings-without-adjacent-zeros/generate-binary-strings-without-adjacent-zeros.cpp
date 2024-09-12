@@ -1,6 +1,5 @@
 class Solution {
 public:
-    vector<string> valid{"01", "10", "11"};
     vector<string> backtrack(int n){
         if(n == 1) return {"0", "1"};
         if(n == 2) return {"01", "10", "11"};
