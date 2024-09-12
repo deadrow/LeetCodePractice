@@ -21,8 +21,7 @@
  */
 class Solution {
 public:
-    bool isSame(ListNode* head, TreeNode* root)
-    {
+    bool isSame(ListNode* head, TreeNode* root) {
         if(!head) return true;
         if(!root) return false;
         return ((head->val == root->val) &&
