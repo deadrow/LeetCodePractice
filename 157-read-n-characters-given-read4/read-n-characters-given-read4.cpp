@@ -5,14 +5,14 @@
 
 class Solution {
 public:
-    int offset=0;
-    bool allRead=false;
     /**
      * @param buf Destination buffer
      * @param n   Number of characters to read
      * @return    The number of actual characters read
      */
     int read(char *buf, int n) {
+        int offset=0;
+        bool allRead=false;
         while(!allRead){
             int curBytes = read4(buf+offset);
             offset += curBytes;
