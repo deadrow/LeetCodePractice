@@ -23,7 +23,7 @@ public:
     vector<int>ret;
     void helper(Node* root){
         if(!root) return;
-        for(auto it : root->children)
+        for(auto& it : root->children)
             helper(it);
         ret.push_back(root->val);
     }
