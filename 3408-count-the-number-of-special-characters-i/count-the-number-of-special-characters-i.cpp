@@ -1,14 +1,14 @@
 class Solution {
 public:
     int numberOfSpecialChars(string word) {
-        vector<int>lower(26),upper(26);
-        for(auto it : word){
-            if(islower(it)) lower[it-'a']++;
-            else upper[it-'A']++;
+        int lower=0,upper=0; // store data in bit
+        for(char c : word){
+            if(islower(c)) lower |= (1 << (c-'a'));
+            else upper |= (1 << (c-'A'));
         }
         int count=0;
-        for(int i=0;i<26;i++)
-            count += lower[i] and upper[i];
+        for(int i=26;i>=0;i--)
+            count += (lower & (1 << i)) and (upper & (1 << i));
         return count;
     }
 };
